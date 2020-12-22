@@ -2,7 +2,6 @@ FNAME "ZombiesHordesColeco.ROM"
 cpu z80
 
 include "Vendor/ColecoVision/Coleco-Include.ASM"
-include "src/ColecoVision/Librairies.asm"
 
 ; Set ROM header
            ORG        8000h
@@ -43,7 +42,7 @@ rst_38:
 
        jp NMI
 
-        db "ZOMBIE'S HORDES /SIMON'S PRESENTS/2021"
+       db "ZOMBIE'S HORDES /SIMON'S PRESENTS/2021"
         
 START:
 ; set stack pointer
@@ -91,6 +90,8 @@ Len_SoundDataArea: EQU	10*SoundDataCount+1	;7 data areas
 SoundAddrs:
 	DW	bounce,SoundDataArea     ; 1  ball bounce sound
 	DW  0,0
+
+include "src/ColecoVision/Librairies.asm"
 
 ; Sound Data area - 7 songs
 SoundDataArea: DS Len_SoundDataArea
