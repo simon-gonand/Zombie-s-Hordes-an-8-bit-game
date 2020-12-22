@@ -2,7 +2,7 @@
 Zombie's Hordes is an 8-bit game that is created using old 8- bit technologies. This project is link to my Honour's Year in BSc Computer Games Technology at the University of the West of Scotland.
 
 The game is build with the Z80 language, it will be developed on ColecoVision and MSX (using blueMSX) and by using the Macro assembler tniASM:
-https://www.electricadventures.net/Pages/Article/108 
+http://www.tni.nl/products/tniasm.html
 
 Also, to  to create sprites and backgrounds, this project will use the MSX/Coleco Sprite & Tile Set Editor from Electric Adventure:
 https://www.electricadventures.net/Pages/Article/108
