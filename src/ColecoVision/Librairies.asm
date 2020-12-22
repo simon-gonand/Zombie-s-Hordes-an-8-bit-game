@@ -16,3 +16,13 @@ SET_SCREEN_MODE_2_2:
     LD BC,01c2h	;Reg 1: Mode 2, 16k, no interrupts, 16x16 sprites
     CALL WRITE_REGISTER
     RET
+
+;   Seed Random numbers
+SEED:    DS 4
+;   Seed in HL
+SEED_RANDOM:
+    LD (SEED),HL
+    RR H
+    RL L
+    LD (SEED+2),HL
+    RET

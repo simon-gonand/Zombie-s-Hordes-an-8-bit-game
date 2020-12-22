@@ -46,26 +46,28 @@ rst_38:
         
 START:
 ; set stack pointer
-        LD SP,StackTop	;128 bytes in length at 737fh
+    LD SP,StackTop	;128 bytes in length at 737fh
         
 ; Initialise sound
-	LD B,SoundDataCount	;Max number of active voices+effects
-	LD HL,SoundAddrs
-	CALL SOUND_INIT
+    LD B,SoundDataCount	;Max number of active voices+effects
+    LD HL,SoundAddrs
+    CALL SOUND_INIT
 	
 ; initialise clock
-        LD HL,TIMER_TABLE
-        LD DE,TIMER_DATA_BLOCK
-        CALL INIT_TIMER
+    LD HL,TIMER_TABLE
+    LD DE,TIMER_DATA_BLOCK
+    CALL INIT_TIMER
 
 ; Set screen mode 2,2
-        CALL SET_SCREEN_MODE_2_2
+    CALL SET_SCREEN_MODE_2_2
 
 ;Enable both joysticks, buttons, keypads
-        LD HL,09b9bh
-        LD (CONTROLLER_BUFFER),HL
+    LD HL,09b9bh
+    LD (CONTROLLER_BUFFER),HL
 
 ; Set a fixed number to generate a seed number
+    LD HL, 1982
+    CALL SEED_RANDOM
 
 ;Enable timers
 
