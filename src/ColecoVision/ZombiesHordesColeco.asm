@@ -47,3 +47,37 @@ rst_38:
 START:
 ; set stack pointer
         LD SP,StackTop	;128 bytes in length at 737fh
+        
+; Initialise sound
+	LD B,SoundDataCount	;Max number of active voices+effects
+	LD HL,SoundAddrs
+	CALL SOUND_INIT
+	
+; initialise clock
+        LD HL,TIMER_TABLE
+        LD DE,TIMER_DATA_BLOCK
+        CALL INIT_TIMER
+
+; Set screen mode 2,2
+
+;Enable both joysticks, buttons, keypads
+        LD HL,09b9bh
+        LD (CONTROLLER_BUFFER),HL
+
+; Set a fixed number to generate a seed number
+
+;Enable timers
+
+
+
+;**************************************************************************************************
+; Sound settings
+;**************************************************************************************************
+SoundDataCount:	  EQU	7
+Len_SoundDataArea: EQU	10*SoundDataCount+1	;7 data areas
+SoundAddrs:
+	DW	bounce,SoundDataArea     ; 1  ball bounce sound
+	DW  0,0
+
+; Sound Data area - 7 songs
+SoundDataArea: DS Len_SoundDataArea
