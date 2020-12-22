@@ -9,7 +9,7 @@ https://www.electricadventures.net/Pages/Article/108
 
 
 ## Game Design Document
-Here's the GDD of the game to help to understand what kind of game it will be developed.
+Here's a small GDD of the game to help to understand what kind of game it will be developed. The purpose of this project isn't to create a great game with a revolutionary game design and level design but to use the development of a game to explore old technologies and assemblers. 
 
 ### Zombie’s Hordes – Game Design Document
 
