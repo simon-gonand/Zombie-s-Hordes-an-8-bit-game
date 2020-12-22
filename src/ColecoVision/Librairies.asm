@@ -1,3 +1,9 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;    NMI Routine
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+NMI:
+;    TODO Later
+
 SET_SCREEN_MODE_2_2:
     LD BC,0002h	;Reg 0: Mode 2
     CALL WRITE_REGISTER
