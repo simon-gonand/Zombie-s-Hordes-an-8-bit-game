@@ -1,11 +1,12 @@
 FNAME "ZombiesHordesColeco.ROM"
 cpu z80
 
-include "Vendor/ColecoVision/Coleco-Include.ASM"
+include "../../Vendor/ColecoVision/Coleco-Include.ASM"
+include "Librairies.asm"
 
 ; Set ROM header
            ORG        8000h
-           
+
 ;** CARTRIDGE SOFTWARE POINTERS 8000H **
 ;        --------------------------------------------
 
@@ -70,7 +71,7 @@ START:
     CALL SEED_RANDOM
 
 ;Enable timers
-
+    CALL CREATE_TIMERS
 
 
 ;**************************************************************************************************

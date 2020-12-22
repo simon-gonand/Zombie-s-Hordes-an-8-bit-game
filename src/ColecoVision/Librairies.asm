@@ -26,3 +26,28 @@ SEED_RANDOM:
     RL L
     LD (SEED+2),HL
     RET
+
+;     Signals for timers
+TickTimer:    DS 1 ; Signal that 3 frames has elapsed
+HalfSecTimer: DS 1 ; Signal that 1/2 second has elapsed
+QtrSecTimer:  DS 1 ; Signal that 1/4 second has elapsed
+;    Create and enable standard timers to keep the framerate
+CREATE_TIMERS:
+	LD	HL,(AMERICA)	;How long a second is (beetween 50 and 60 ticks per second)
+	SRA L
+	LD	H,0
+	LD	A,1	;set to repeating
+	CALL	REQUEST_SIGNAL
+	LD	(HalfSecTimer),A		;Happens once per half second
+	LD	HL,(AMERICA)	;How long a second is
+	SRA L
+	SRA L
+	LD	H,0
+	LD	A,1	;set to repeating
+	CALL	REQUEST_SIGNAL
+	LD	(QtrSecTimer),A		;Happens once per quarter second
+	LD	HL,1
+	LD	A,1	;set to repeating
+	CALL	REQUEST_SIGNAL
+	LD	(TickTimer),A		;Happens once per tick
+    RET
