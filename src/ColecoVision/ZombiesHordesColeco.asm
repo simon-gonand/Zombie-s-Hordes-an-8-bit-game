@@ -1,8 +1,8 @@
 FNAME "ZombiesHordesColeco.ROM"
 cpu z80
 
-include "../../Vendor/ColecoVision/Coleco-Include.ASM"
-include "Librairies.asm"
+include "Vendor/ColecoVision/Coleco-Include.ASM"
+include "src/ColecoVision/Librairies.asm"
 
 ; Set ROM header
            ORG        8000h
