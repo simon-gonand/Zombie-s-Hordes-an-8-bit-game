@@ -95,11 +95,11 @@ SPRITE_ORDER:	    EQU	7080h	;Pointer to sprite order table
 	; max 32 sprites
 WORK_BUFFER:	    EQU	70a0h	;Pointer to graphics work area
 	; up to around 300h max usage
-;CONTROLLER_BUFFER:	EQU	72a0h	;Pointer to hand controller input area
+CONTROLLER_BUFFER:	EQU	72a0h	;Pointer to hand controller input area
 	;12 bytes
-;TIMER_TABLE:	    EQU	72ach	;Pointer to timers table
+TIMER_TABLE:	    EQU	72ach	;Pointer to timers table
 	;16 timers
-;TIMER_DATA_BLOCK:	EQU	72dch	;Pointer to timers table for long timers
+TIMER_DATA_BLOCK:	EQU	72dch	;Pointer to timers table for long timers
 	;4 bytes * 16 longer than 3 sec timers
 
 ; Any system values
