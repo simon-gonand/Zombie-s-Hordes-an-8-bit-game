@@ -59,6 +59,7 @@ START:
         CALL INIT_TIMER
 
 ; Set screen mode 2,2
+        CALL SET_SCREEN_MODE_2_2
 
 ;Enable both joysticks, buttons, keypads
         LD HL,09b9bh
