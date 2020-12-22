@@ -42,7 +42,7 @@ rst_38:
 
        jp NMI
 
-        db "ZOMBIE'S HORDEDS /SIMON'S PRESENTS/2021"
+        db "ZOMBIE'S HORDES /SIMON'S PRESENTS/2021"
         
 START:
 ; set stack pointer
