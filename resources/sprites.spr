@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Sprites animation="" animationtiming="0" displaymarkers="True">
+<Sprite name="zombie_front" groupname="" layer1="070B09080E0F484C67E0F0F050005800E0D0901070F21233E7050000001C3E14" colour1="12" layer2="0004025171703433181F0F0F2F3F27000020408A8E0C2CCC18FAFEFEFCE0C02A" colour2="1" />
+<Sprite name="zombie_left" groupname="" layer1="0F1B33030E060E3C1800000000001C0E80C0C0C0C00070703878703000007838" colour1="2" layer2="0004083031093103070F0F07070703100000000020F0888CC4848CCCFCF88040" colour2="1" />
+<Sprite name="zombie_right" groupname="" layer1="0103030303000E0E1C1E0E0C00001E1CF0D8CCC07060703C1800000000003870" colour1="2" layer2="00000000040F1131232131333F1F01020020100C8C908CC0E0F0F0E0E0E0C008" colour2="1" />
+<Sprite name="zombie_back" groupname="" layer1="070F0F0F0763E0E0E0E0000000103C3CE0F0F0F0E0C60F0F0F060000000C3C00" colour1="2" layer2="00000050781C1F1F1F1F1F1F1F0F00000000000A1E38F0F0F0F8F8F8F8F00000" colour2="1" />
+<Sprite name="player_front" groupname="" layer1="000F1F3E3F000003103F0F2F27270C1C00F0F87CFC0000C008FCFCF0E0F03800" colour1="4" layer2="00000001001D1F0C0F003000000000000000008000B8F830F000000C04000000" colour2="11" />
+<Sprite name="player_right" groupname="" layer1="001F3F7F7F000000001F3F3F3F3F181000E0F0E8F800001000E0EFF0F0C06070" colour1="4" layer2="00000000003F3F3F1F000000000000000000001000A0F0E0E000000C08000000" colour2="11" />
+<Sprite name="player_left" groupname="" layer1="00070F171F0000080007F70F0F03060E00F8FCFEFE00000000F8FCFCFCFC1808" colour1="4" layer2="0000000800050F0707000030100000000000000000FCFCFCF800000000000000" colour2="11" />
+<Sprite name="player_back" groupname="" layer1="000F1F3F3F070300103F3F0F07070C1C04F4FCF8FCE4C40C0CF8F0E0E0F03800" colour1="4" layer2="0000000000181C0F0F0000302000000000000004001838F0F000000000000000" colour2="11" />
+<TileSets>
+<Tileset name="tileset_1">
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+<Tile pattern="0000000000000000" colour="1010101010101010" name="" />
+</Tileset>
+</TileSets>
+<ScreenLayouts>
+<ScreenLayout name="">
+<ScreenLayoutLine y="0" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="1" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="2" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="3" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="4" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="5" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="6" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="7" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="8" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="9" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="10" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="11" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="12" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="13" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="14" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="15" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="16" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="17" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="18" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="19" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="20" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="21" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="22" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+<ScreenLayoutLine y="23" data="-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1" />
+</ScreenLayout>
+</ScreenLayouts>
+</Sprites>
