@@ -1,0 +1,42 @@
+0.5:
+	-First release.
+
+0.6:
+	-Added --verbose option and changed default behaviour to silent.
+	-Autoconfiscated.
+	-Improved help.
+
+0.11:
+	-Removed --black option. Use --monochrome instead.
+
+0.12:
+	-Optimized RGB mode color table output for RLE compression.
+
+0.13:
+	-Optimized RGB mode pattern table output for RLE compression.
+
+0.14:
+	-Fixed include of stdint.h.
+	-Use PKG_CHECK_MODULES for libpng12 and to build reliably on Cygwin.
+	-Removed obsolete RLE support thorugh --rle option.
+	-Removed leftover --black option in usage message output.
+
+0.15:
+	-Fixed help message.
+	-configure.ac cleanup.
+
+0.16:
+	-Fixed help message option text.
+	-Renamed --monochrome option to --bitmap-text.
+	-Added --bitmap option.
+	-Added support for SMS mode 4.
+	-Fixed RGBA support.
+
+0.17:
+	-Fixed autotools stuff.
+	-Update for libpng 1.6 (vs. old 1.2).
+	-Fix missing include.
+	-Improved error messages.
+
+CHANGE VERSION NUMBERS IN configure.ac WHEN RELEASING A NEW VERSION!
+

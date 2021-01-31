@@ -1,0 +1,20 @@
+XL2
+H 1 areas 2 global symbols
+M cv_vmemset_fast
+S .__.ABS. Def0000
+A _CODE size 19 flags 0 addr 0
+S _cv_vmemset_fast Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 E1 D1 C1 C5 D5 78 41 4F B0 28 0D 78 B7 7B
+R 00 00 00 00
+T 0E 00 28 01 0C
+R 00 00 00 00
+T 11 00
+R 00 00 00 00
+T 11 00 D3 BE 10 FC 0D 20 F9
+R 00 00 00 00
+T 18 00
+R 00 00 00 00
+T 18 00 E9
+R 00 00 00 00

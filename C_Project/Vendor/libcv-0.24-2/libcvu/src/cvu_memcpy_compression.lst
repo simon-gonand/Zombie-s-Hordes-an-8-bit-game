@@ -1,0 +1,144 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_memcpy_compression
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_get_rle
+                             12 	.globl _cvu_memcpy_compression
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cvu_memcpy_compression.c:5: void *cvu_memcpy_compression(void *restrict dest, struct cvu_compression_state *state, size_t n)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cvu_memcpy_compression
+                             50 ; ---------------------------------
+                             51 ;	Register assignment might be sub-optimal.
+                             52 ; Stack space usage: 2 bytes.
+   0000                      53 _cvu_memcpy_compression::
+   0000 CDr00r00      [17]   54 	call	___sdcc_enter_ix
+   0003 F5            [11]   55 	push	af
+                             56 ;src/cvu_memcpy_compression.c:8: _common_state = state;
+                             57 ;	genAssign
+                             58 ;	AOP_STK for 
+                             59 ;fetchPairLong
+   0004 DD 6E 06      [19]   60 	ld	l, 6 (ix)
+   0007 DD 66 07      [19]   61 	ld	h, 7 (ix)
+   000A 22r00r00      [16]   62 	ld	(__common_state), hl
+                             63 ;	genAssign
+                             64 ;fetchPairLong
+                             65 ;fetchLitPair
+   000D 01 00 00      [10]   66 	ld	bc, #0x0000
+                             67 ;	genAssign
+                             68 ;	AOP_STK for 
+                             69 ;fetchPairLong
+   0010 DD 5E 08      [19]   70 	ld	e, 8 (ix)
+   0013 DD 56 09      [19]   71 	ld	d, 9 (ix)
+                             72 ;	genLabel
+   0016                      73 00103$:
+                             74 ;src/cvu_memcpy_compression.c:9: for(; n > 0; n--)
+                             75 ;	genIfx
+   0016 7A            [ 4]   76 	ld	a, d
+   0017 B3            [ 4]   77 	or	a, e
+   0018 28 22         [12]   78 	jr	Z,00101$
+                             79 ; peephole 163 changed absolute to relative conditional jump.
+                             80 ;src/cvu_memcpy_compression.c:10: ((uint8_t *restrict)(dest))[i++] = cvu_get_rle(&_common_state->rle);
+                             81 ;	genCast
+                             82 ;	AOP_STK for 
+                             83 ;fetchPairLong
+   001A DD 6E 04      [19]   84 	ld	l, 4 (ix)
+   001D DD 66 05      [19]   85 	ld	h, 5 (ix)
+                             86 ;	genPlus
+                             87 ;	AOP_STK for _cvu_memcpy_compression_sloc0_1_0
+   0020 09            [11]   88 	add	hl, bc
+   0021 E3            [19]   89 	ex	(sp), hl
+                             90 ;	genPlus
+   0022 03            [ 6]   91 	inc	bc
+                             92 ;	genAssign
+                             93 ;fetchPairLong
+   0023 2Ar00r00      [16]   94 	ld	hl, (__common_state)
+                             95 ;	genPlus
+   0026 D5            [11]   96 	push	de
+                             97 ;fetchPairLong
+                             98 ;fetchLitPair
+   0027 11 0A 00      [10]   99 	ld	de, #0x000a
+   002A 19            [11]  100 	add	hl, de
+   002B D1            [10]  101 	pop	de
+                            102 ;	genIpush
+   002C C5            [11]  103 	push	bc
+   002D D5            [11]  104 	push	de
+   002E E5            [11]  105 	push	hl
+                            106 ;	genCall
+   002F CDr00r00      [17]  107 	call	_cvu_get_rle
+   0032 F1            [10]  108 	pop	af
+                            109 ;	genMove_o
+   0033 7D            [ 4]  110 	ld	a, l
+                            111 ;	genMove_o
+   0034 D1            [10]  112 	pop	de
+   0035 C1            [10]  113 	pop	bc
+                            114 ;	genAssign (pointer)
+                            115 ;	AOP_STK for _cvu_memcpy_compression_sloc0_1_0
+                            116 ;	isBitvar = 0
+                            117 ;fetchPairLong
+   0036 E1            [10]  118 	pop	hl
+   0037 E5            [11]  119 	push	hl
+   0038 77            [ 7]  120 	ld	(hl), a
+                            121 ;src/cvu_memcpy_compression.c:9: for(; n > 0; n--)
+                            122 ;	genMinus
+   0039 1B            [ 6]  123 	dec	de
+                            124 ;	genGoto
+   003A 18 DA         [12]  125 	jr	00103$
+                            126 ; peephole 162 changed absolute to relative unconditional jump.
+                            127 ;	genLabel
+   003C                     128 00101$:
+                            129 ;src/cvu_memcpy_compression.c:12: return(dest);
+                            130 ;	genRet
+                            131 ;	AOP_STK for 
+                            132 ;fetchPairLong
+   003C DD 6E 04      [19]  133 	ld	l, 4 (ix)
+   003F DD 66 05      [19]  134 	ld	h, 5 (ix)
+                            135 ;	genLabel
+                            136 ; peephole 158 removed unused label 00105$.
+                            137 ;src/cvu_memcpy_compression.c:13: }
+                            138 ;	genEndFunction
+   0042 F1            [10]  139 	pop	af
+   0043 DD E1         [14]  140 	pop	ix
+   0045 C9            [10]  141 	ret
+                            142 	.area _CODE
+                            143 	.area _INITIALIZER
+                            144 	.area _CABS (ABS)

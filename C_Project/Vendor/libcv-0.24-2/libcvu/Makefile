@@ -4,7 +4,7 @@ CFLAGS = --std-c99 -mz80 -c -Iinclude/ -I../libcv/include --opt-code-size --fver
 CFLAGSS = $(CFLAGS) -DCV_SMS
 AS = sdasz80
 AFLAGS = -plosgff
-SDCCLIB = sdcclib
+SDCCLIB = sdar
 .PHONY: clean all
 
 srcdir = ./src
@@ -22,9 +22,9 @@ CVOBJ = $(CVU_INOBJ) $(CVU_GRAOBJ) $(CVU_SOOBJ) $(CVU_COMOBJ) $(CVU_FOBJ) $(CVU_
 SMSOBJ = $(CVU_GRAOBJ:.rel=-sms.rel) $(CVU_SOOBJ) $(CVU_COMOBJ) $(CVU_FOBJ) $(CVU_COBJ) src/cvu_set_sprite_x.rel src/cvu_get_sprite_x.rel src/cvu_set_sprite_y.rel src/cvu_get_sprite_y.rel src/cvu_get_sprite_color.rel src/cvu_memtocmemcpy-sms.rel
 
 bin/libcvu.lib: $(CVOBJ)
-	rm -rf bin/libcvu.lib; $(SDCCLIB) bin/libcvu.lib $(CVOBJ)
+	rm -rf bin/libcvu.lib; $(SDCCLIB) -rc bin/libcvu.lib $(CVOBJ)
 bin/libcvu-sms.lib: $(SMSOBJ)
-	rm -rf bin/libcvu-sms.lib; $(SDCCLIB) bin/libcvu-sms.lib $(SMSOBJ)
+	rm -rf bin/libcvu-sms.lib; $(SDCCLIB) -rc bin/libcvu-sms.lib $(SMSOBJ)
 
 src/%.rel: src/%.c include/cvu.h include/cvu_compression.h  include/cvu_f.h  include/cvu_graphics.h  include/cvu.h  include/cvu_input.h include/cvu_sound.h
 	$(CC) $(CFLAGS) $< -o $@

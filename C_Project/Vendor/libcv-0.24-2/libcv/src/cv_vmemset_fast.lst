@@ -1,0 +1,51 @@
+                              1 ; (c) 2003 - 2007 Philipp Krause philipp@colecovision.eu
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 
+                             18 ; This is the fast graphics memory setting funtion. It needs only 6.70 µs per byte.
+                             19 ; In standard and bitmap mode this is too fast for the graphics chip.
+                             20 
+                             21 
+                             22 .module cv_vmemset_fast
+                             23 
+                             24 .globl _cv_vmemset_fast
+                             25 
+                             26 ; void cv_vmemset_fast(int c, size_t n);
+                             27 
+   0000                      28 _cv_vmemset_fast:	
+   0000 E1            [10]   29 	pop hl
+   0001 D1            [10]   30 	pop de	; c
+   0002 C1            [10]   31 	pop bc	; n
+   0003 C5            [11]   32 	push bc
+   0004 D5            [11]   33 	push de
+   0005 78            [ 4]   34 	ld a, b
+   0006 41            [ 4]   35 	ld b, c
+   0007 4F            [ 4]   36 	ld c, a
+   0008 B0            [ 4]   37 	or a, b
+   0009 28 0D         [12]   38 	jr z, Ende
+   000B 78            [ 4]   39 	ld a, b
+   000C B7            [ 4]   40 	or a
+   000D 7B            [ 4]   41 	ld a, e
+   000E 28 01         [12]   42 	jr z, Weiter
+   0010 0C            [ 4]   43 	inc c
+   0011                      44 Weiter:
+   0011 D3 BE         [11]   45 	out (0xbe), a
+   0013 10 FC         [13]   46 	djnz Weiter
+   0015 0D            [ 4]   47 	dec c
+   0016 20 F9         [12]   48 	jr nz, Weiter
+   0018                      49 Ende:
+   0018 E9            [ 4]   50 	jp (hl)
+                             51 

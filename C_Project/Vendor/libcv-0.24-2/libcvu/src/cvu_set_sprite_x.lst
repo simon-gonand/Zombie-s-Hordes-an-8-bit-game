@@ -1,0 +1,77 @@
+                              1 ; (c) 2005 Philipp Krause pkk@spth.de
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 .module cvu_set_sprite_x
+                             18 
+                             19 .globl _cvu_set_sprite_x
+                             20 
+                             21 ; void cvu_set_sprite_y(struct cvu_sprite *sprite, int x);
+                             22 
+   0000                      23 _cvu_set_sprite_x:
+   0000 E1            [10]   24 	pop hl
+   0001 FD E1         [14]   25 	pop iy
+   0003 C1            [10]   26 	pop bc
+   0004 C5            [11]   27 	push bc
+   0005 FD E5         [15]   28 	push iy
+                             29 
+                             30 ;if(x < -32)
+                             31 ;	x = -32
+   0007 79            [ 4]   32 	ld a, c
+   0008 D6 E0         [ 7]   33 	sub a, #0xe0
+   000A 78            [ 4]   34 	ld a, b
+   000B DE FF         [ 7]   35 	sbc a, #0xff
+   000D F2r14r00      [10]   36 	jp p, g32c
+   0010 06 FF         [ 7]   37 	ld b, #0xff
+   0012 0E E0         [ 7]   38 	ld c, #0xe0
+   0014                      39 g32c:
+                             40 
+                             41 ;if(x > 255)
+                             42 ;	x = 32
+   0014 3E FF         [ 7]   43 	ld a, #0xff
+   0016 91            [ 4]   44 	sub a, c
+   0017 3E 00         [ 7]   45 	ld a, #0x00
+   0019 98            [ 4]   46 	sbc a, b
+   001A F2r21r00      [10]   47 	jp p, g255c
+   001D 06 00         [ 7]   48 	ld b, #0x00
+   001F 0E FF         [ 7]   49 	ld c, #0xff
+   0021                      50 g255c:
+                             51 
+                             52 ;if(x >= 0)
+                             53 ;{
+                             54 ;	sprite->x = x;
+                             55 ;	sprite->tag &= 0xf;
+                             56 ;}
+                             57 ;else
+                             58 ;{
+                             59 ;	sprite->x = x + 32;
+                             60 ;	sprite->tag |= 0x80;
+                             61 ;}
+   0021 CB 78         [ 8]   62 	bit 7, b
+   0023 CAr30r00      [10]   63 	jp z, g0c
+   0026 FD CB 03 FE   [23]   64 	set 7, 3(iy)
+   002A 79            [ 4]   65 	ld a, c
+   002B C6 20         [ 7]   66 	add a, #32
+   002D 4F            [ 4]   67 	ld c, a
+   002E 18 08         [12]   68 	jr g0cc
+   0030                      69 g0c:
+   0030 3E 0F         [ 7]   70 	ld a, #0xf
+   0032 FD A6 03      [19]   71 	and a, 3(iy)
+   0035 FD 77 03      [19]   72 	ld 3(iy), a
+   0038                      73 g0cc:
+   0038 FD 71 01      [19]   74 	ld 1(iy), c
+                             75 
+   003B E9            [ 4]   76 	jp(hl)
+                             77 

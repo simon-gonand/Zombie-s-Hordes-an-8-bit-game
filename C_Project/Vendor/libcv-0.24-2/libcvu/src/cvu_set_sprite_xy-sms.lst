@@ -1,0 +1,110 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_set_sprite_xy
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_set_sprite_y
+                             12 	.globl _cvu_set_sprite_x
+                             13 	.globl _cvu_set_sprite_xy
+                             14 ;--------------------------------------------------------
+                             15 ; special function registers
+                             16 ;--------------------------------------------------------
+                     00BE    17 _cv_graphics_port	=	0x00be
+                             18 ;--------------------------------------------------------
+                             19 ; ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+                             22 ;--------------------------------------------------------
+                             23 ; ram data
+                             24 ;--------------------------------------------------------
+                             25 	.area _INITIALIZED
+                             26 ;--------------------------------------------------------
+                             27 ; absolute external ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _DABS (ABS)
+                             30 ;--------------------------------------------------------
+                             31 ; global & static initialisations
+                             32 ;--------------------------------------------------------
+                             33 	.area _HOME
+                             34 	.area _GSINIT
+                             35 	.area _GSFINAL
+                             36 	.area _GSINIT
+                             37 ;--------------------------------------------------------
+                             38 ; Home
+                             39 ;--------------------------------------------------------
+                             40 	.area _HOME
+                             41 	.area _HOME
+                             42 ;--------------------------------------------------------
+                             43 ; code
+                             44 ;--------------------------------------------------------
+                             45 	.area _CODE
+                             46 ;src/cvu_set_sprite_xy.c:19: void cvu_set_sprite_xy(struct cvu_sprite *sprite, int x, int y)
+                             47 ;	genLabel
+                             48 ;	genFunction
+                             49 ;	---------------------------------
+                             50 ; Function cvu_set_sprite_xy
+                             51 ; ---------------------------------
+                             52 ;	Register assignment is optimal.
+                             53 ; Stack space usage: 0 bytes.
+   0000                      54 _cvu_set_sprite_xy::
+                             55 ;src/cvu_set_sprite_xy.c:21: cvu_set_sprite_x(sprite, x);
+                             56 ;	genIpush
+                             57 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 4, size 2
+                             58 ;fetchPairLong
+   0000 FD 21 04 00   [14]   59 	ld	iy, #4
+   0004 FD 39         [15]   60 	add	iy, sp
+   0006 FD 6E 00      [19]   61 	ld	l, 0 (iy)
+   0009 FD 66 01      [19]   62 	ld	h, 1 (iy)
+   000C E5            [11]   63 	push	hl
+                             64 ;	genIpush
+                             65 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             66 ;fetchPairLong
+   000D FD 2B         [10]   67 	dec	iy
+   000F FD 2B         [10]   68 	dec	iy
+   0011 FD 6E 00      [19]   69 	ld	l, 0 (iy)
+   0014 FD 66 01      [19]   70 	ld	h, 1 (iy)
+   0017 E5            [11]   71 	push	hl
+                             72 ;	genCall
+   0018 CDr00r00      [17]   73 	call	_cvu_set_sprite_x
+   001B F1            [10]   74 	pop	af
+   001C F1            [10]   75 	pop	af
+                             76 ;src/cvu_set_sprite_xy.c:22: cvu_set_sprite_y(sprite, y);
+                             77 ;	genIpush
+                             78 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 6, size 2
+                             79 ;fetchPairLong
+                             80 ; peephole 64 used hl instead of iy.
+   001D 21 06 00      [10]   81 	ld	hl, #6
+   0020 39            [11]   82 	add	hl, sp
+                             83 ; peephole 49 pushed bc instead of hl.
+   0021 4E            [ 7]   84 	ld	c, (hl)
+   0022 23            [ 6]   85 	inc	hl
+   0023 46            [ 7]   86 	ld	b, (hl)
+   0024 C5            [11]   87 	push	bc
+                             88 ;	genIpush
+                             89 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             90 ;fetchPairLong
+                             91 ; peephole 64 used hl instead of iy.
+   0025 21 04 00      [10]   92 	ld	hl, #4
+   0028 39            [11]   93 	add	hl, sp
+                             94 ; peephole 49 pushed bc instead of hl.
+   0029 4E            [ 7]   95 	ld	c, (hl)
+   002A 23            [ 6]   96 	inc	hl
+   002B 46            [ 7]   97 	ld	b, (hl)
+   002C C5            [11]   98 	push	bc
+                             99 ;	genCall
+   002D CDr00r00      [17]  100 	call	_cvu_set_sprite_y
+   0030 F1            [10]  101 	pop	af
+   0031 F1            [10]  102 	pop	af
+                            103 ;	genLabel
+                            104 ; peephole 158 removed unused label 00101$.
+                            105 ;src/cvu_set_sprite_xy.c:23: }
+                            106 ;	genEndFunction
+   0032 C9            [10]  107 	ret
+                            108 	.area _CODE
+                            109 	.area _INITIALIZER
+                            110 	.area _CABS (ABS)

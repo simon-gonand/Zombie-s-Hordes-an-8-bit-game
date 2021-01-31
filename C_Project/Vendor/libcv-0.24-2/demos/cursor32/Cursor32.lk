@@ -1,0 +1,14 @@
+-mjwx
+-i Cursor32.ihx
+-b _CODE = 0x8100
+-b _DATA = 0x7000
+-k /usr/local/bin/../share/sdcc/lib/z80
+-k /usr/local/share/sdcc/lib/z80
+-l ../../bin/libcvu.lib
+-l ../../bin/libcv.lib
+-l z80
+../../bin/crt0.rel
+main.rel
+cursor.png.sprite.rel
+
+-e

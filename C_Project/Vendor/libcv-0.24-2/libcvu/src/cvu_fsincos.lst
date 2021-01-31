@@ -1,0 +1,358 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_fsincos
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_fsintable
+                             12 	.globl _cvu_fsin
+                             13 	.globl _cvu_fcos
+                             14 ;--------------------------------------------------------
+                             15 ; special function registers
+                             16 ;--------------------------------------------------------
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cvu_fsincos.c:24: cvu_f cvu_fsin(cvu_f x)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cvu_fsin
+                             50 ; ---------------------------------
+                             51 ;	Register assignment might be sub-optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cvu_fsin::
+   0000 CDr00r00      [17]   54 	call	___sdcc_enter_ix
+                             55 ;src/cvu_fsincos.c:29: if(x < 0)
+                             56 ;	genCast
+                             57 ;	AOP_STK for 
+                             58 ;fetchPairLong
+                             59 ; peephole 8 removed dead load from 4 (ix) into c.
+   0003 DD 46 05      [19]   60 	ld	b, 5 (ix)
+                             61 ;	genCmpLt
+   0006 CB 78         [ 8]   62 	bit	7, b
+   0008 28 13         [12]   63 	jr	Z,00102$
+                             64 ; peephole 163 changed absolute to relative conditional jump.
+                             65 ;src/cvu_fsincos.c:31: x = -x;
+                             66 ;	genUminus
+                             67 ;	AOP_STK for 
+   000A AF            [ 4]   68 	xor	a, a
+   000B DD 96 04      [19]   69 	sub	a, 4 (ix)
+   000E DD 77 04      [19]   70 	ld	4 (ix), a
+   0011 3E 00         [ 7]   71 	ld	a, #0x00
+   0013 DD 9E 05      [19]   72 	sbc	a, 5 (ix)
+   0016 DD 77 05      [19]   73 	ld	5 (ix), a
+                             74 ;src/cvu_fsincos.c:32: neg = true;
+                             75 ;	genAssign
+                             76 ;	genMove_o
+   0019 0E 01         [ 7]   77 	ld	c, #0x01
+                             78 ;	genGoto
+   001B 18 02         [12]   79 	jr	00104$
+                             80 ; peephole 162 changed absolute to relative unconditional jump.
+                             81 ;	genLabel
+   001D                      82 00102$:
+                             83 ;src/cvu_fsincos.c:35: neg = false;
+                             84 ;	genAssign
+                             85 ;	genMove_o
+   001D 0E 00         [ 7]   86 	ld	c, #0x00
+                             87 ;src/cvu_fsincos.c:37: while(x >= CVU_F_PI)
+                             88 ;	genLabel
+   001F                      89 00104$:
+                             90 ;	genCast
+                             91 ;	AOP_STK for 
+                             92 ;	genMove_o
+   001F DD 46 04      [19]   93 	ld	b, 4 (ix)
+   0022 DD 5E 05      [19]   94 	ld	e, 5 (ix)
+                             95 ;	genMove_o
+                             96 ;	genCmpLt
+   0025 78            [ 4]   97 	ld	a, b
+   0026 D6 C9         [ 7]   98 	sub	a, #0xc9
+   0028 7B            [ 4]   99 	ld	a, e
+   0029 17            [ 4]  100 	rla
+   002A 3F            [ 4]  101 	ccf
+   002B 1F            [ 4]  102 	rra
+   002C DE 80         [ 7]  103 	sbc	a, #0x80
+   002E 38 14         [12]  104 	jr	C,00106$
+                            105 ; peephole 165 changed absolute to relative conditional jump.
+                            106 ;src/cvu_fsincos.c:39: x -= CVU_F_PI;
+                            107 ;	genMinus
+   0030 78            [ 4]  108 	ld	a, b
+   0031 C6 37         [ 7]  109 	add	a, #0x37
+   0033 47            [ 4]  110 	ld	b, a
+   0034 7B            [ 4]  111 	ld	a, e
+   0035 CE FF         [ 7]  112 	adc	a, #0xff
+   0037 5F            [ 4]  113 	ld	e, a
+                            114 ;	genCast
+                            115 ;	AOP_STK for 
+                            116 ;	genMove_o
+   0038 DD 70 04      [19]  117 	ld	4 (ix), b
+   003B DD 73 05      [19]  118 	ld	5 (ix), e
+                            119 ;	genMove_o
+                            120 ;src/cvu_fsincos.c:40: neg = !neg;
+                            121 ;	genNot
+   003E 79            [ 4]  122 	ld	a, c
+   003F EE 01         [ 7]  123 	xor	a, #0x01
+   0041 4F            [ 4]  124 	ld	c, a
+                            125 ;	genGoto
+   0042 18 DB         [12]  126 	jr	00104$
+                            127 ; peephole 162 changed absolute to relative unconditional jump.
+                            128 ;	genLabel
+   0044                     129 00106$:
+                            130 ;src/cvu_fsincos.c:43: if(x < CVU_F_PI_2)
+                            131 ;	genCmpLt
+   0044 78            [ 4]  132 	ld	a, b
+   0045 D6 64         [ 7]  133 	sub	a, #0x64
+   0047 7B            [ 4]  134 	ld	a, e
+   0048 17            [ 4]  135 	rla
+   0049 3F            [ 4]  136 	ccf
+   004A 1F            [ 4]  137 	rra
+   004B DE 80         [ 7]  138 	sbc	a, #0x80
+   004D 30 0F         [12]  139 	jr	NC,00108$
+                            140 ; peephole 166 changed absolute to relative conditional jump.
+                            141 ;src/cvu_fsincos.c:44: ret = cvu_fsintable[x];
+                            142 ;	genAddrOf
+   004F 11r7Dr00      [10]  143 	ld	de, #_cvu_fsintable+0
+                            144 ;	genPlus
+                            145 ;	AOP_STK for 
+                            146 ;fetchPairLong
+   0052 DD 6E 04      [19]  147 	ld	l, 4 (ix)
+   0055 DD 66 05      [19]  148 	ld	h, 5 (ix)
+   0058 19            [11]  149 	add	hl, de
+                            150 ;	genPointerGet
+   0059 6E            [ 7]  151 	ld	l, (hl)
+                            152 ;	genCast
+                            153 ;	genMove_o
+                            154 ;	genMove_o
+                            155 ;	genMove_o
+   005A 26 00         [ 7]  156 	ld	h, #0x00
+                            157 ;	genGoto
+   005C 18 11         [12]  158 	jr	00109$
+                            159 ; peephole 162 changed absolute to relative unconditional jump.
+                            160 ;	genLabel
+   005E                     161 00108$:
+                            162 ;src/cvu_fsincos.c:46: ret = cvu_fsintable[CVU_F_PI - x - 1];
+                            163 ;	genCast
+                            164 ;	AOP_STK for 
+                            165 ;	genMove_o
+   005E DD 46 04      [19]  166 	ld	b, 4 (ix)
+                            167 ;	genMove_o
+                            168 ;	genMinus
+   0061 3E C8         [ 7]  169 	ld	a, #0xc8
+   0063 90            [ 4]  170 	sub	a, b
+                            171 ;	genCast
+                            172 ;	genMove_o
+                            173 ;	genMove_o
+   0064 5F            [ 4]  174 	ld	e, a
+   0065 17            [ 4]  175 	rla
+   0066 9F            [ 4]  176 	sbc	a, a
+   0067 57            [ 4]  177 	ld	d, a
+                            178 ;	genPlus
+                            179 ;fetchPairLong
+                            180 ;fetchLitPair
+   0068 21r7Dr00      [10]  181 	ld	hl, #_cvu_fsintable
+   006B 19            [11]  182 	add	hl, de
+                            183 ;	genPointerGet
+   006C 6E            [ 7]  184 	ld	l, (hl)
+                            185 ;	genCast
+                            186 ;	genMove_o
+                            187 ;	genMove_o
+                            188 ;	genMove_o
+   006D 26 00         [ 7]  189 	ld	h, #0x00
+                            190 ;	genLabel
+   006F                     191 00109$:
+                            192 ;src/cvu_fsincos.c:48: if(neg)
+                            193 ;	genIfx
+   006F CB 41         [ 8]  194 	bit	0, c
+   0071 28 07         [12]  195 	jr	Z,00111$
+                            196 ; peephole 163 changed absolute to relative conditional jump.
+                            197 ;src/cvu_fsincos.c:49: ret = -ret;
+                            198 ;	genUminus
+   0073 AF            [ 4]  199 	xor	a, a
+   0074 95            [ 4]  200 	sub	a, l
+   0075 6F            [ 4]  201 	ld	l, a
+   0076 3E 00         [ 7]  202 	ld	a, #0x00
+   0078 9C            [ 4]  203 	sbc	a, h
+   0079 67            [ 4]  204 	ld	h, a
+                            205 ;	genLabel
+   007A                     206 00111$:
+                            207 ;src/cvu_fsincos.c:51: return(ret);
+                            208 ;	genRet
+                            209 ;fetchPairLong
+                            210 ;	genLabel
+                            211 ; peephole 158 removed unused label 00112$.
+                            212 ;src/cvu_fsincos.c:52: }
+                            213 ;	genEndFunction
+   007A DD E1         [14]  214 	pop	ix
+   007C C9            [10]  215 	ret
+   007D                     216 _cvu_fsintable:
+   007D 00                  217 	.db #0x00	; 0
+   007E 01                  218 	.db #0x01	; 1
+   007F 02                  219 	.db #0x02	; 2
+   0080 03                  220 	.db #0x03	; 3
+   0081 04                  221 	.db #0x04	; 4
+   0082 05                  222 	.db #0x05	; 5
+   0083 06                  223 	.db #0x06	; 6
+   0084 07                  224 	.db #0x07	; 7
+   0085 08                  225 	.db #0x08	; 8
+   0086 09                  226 	.db #0x09	; 9
+   0087 0A                  227 	.db #0x0a	; 10
+   0088 0B                  228 	.db #0x0b	; 11
+   0089 0C                  229 	.db #0x0c	; 12
+   008A 0D                  230 	.db #0x0d	; 13
+   008B 0E                  231 	.db #0x0e	; 14
+   008C 0F                  232 	.db #0x0f	; 15
+   008D 10                  233 	.db #0x10	; 16
+   008E 11                  234 	.db #0x11	; 17
+   008F 12                  235 	.db #0x12	; 18
+   0090 13                  236 	.db #0x13	; 19
+   0091 14                  237 	.db #0x14	; 20
+   0092 15                  238 	.db #0x15	; 21
+   0093 16                  239 	.db #0x16	; 22
+   0094 17                  240 	.db #0x17	; 23
+   0095 17                  241 	.db #0x17	; 23
+   0096 18                  242 	.db #0x18	; 24
+   0097 19                  243 	.db #0x19	; 25
+   0098 1A                  244 	.db #0x1a	; 26
+   0099 1B                  245 	.db #0x1b	; 27
+   009A 1C                  246 	.db #0x1c	; 28
+   009B 1D                  247 	.db #0x1d	; 29
+   009C 1E                  248 	.db #0x1e	; 30
+   009D 1F                  249 	.db #0x1f	; 31
+   009E 20                  250 	.db #0x20	; 32
+   009F 20                  251 	.db #0x20	; 32
+   00A0 21                  252 	.db #0x21	; 33
+   00A1 22                  253 	.db #0x22	; 34
+   00A2 23                  254 	.db #0x23	; 35
+   00A3 24                  255 	.db #0x24	; 36
+   00A4 25                  256 	.db #0x25	; 37
+   00A5 25                  257 	.db #0x25	; 37
+   00A6 26                  258 	.db #0x26	; 38
+   00A7 27                  259 	.db #0x27	; 39
+   00A8 28                  260 	.db #0x28	; 40
+   00A9 29                  261 	.db #0x29	; 41
+   00AA 29                  262 	.db #0x29	; 41
+   00AB 2A                  263 	.db #0x2a	; 42
+   00AC 2B                  264 	.db #0x2b	; 43
+   00AD 2C                  265 	.db #0x2c	; 44
+   00AE 2C                  266 	.db #0x2c	; 44
+   00AF 2D                  267 	.db #0x2d	; 45
+   00B0 2E                  268 	.db #0x2e	; 46
+   00B1 2E                  269 	.db #0x2e	; 46
+   00B2 2F                  270 	.db #0x2f	; 47
+   00B3 30                  271 	.db #0x30	; 48	'0'
+   00B4 30                  272 	.db #0x30	; 48	'0'
+   00B5 31                  273 	.db #0x31	; 49	'1'
+   00B6 32                  274 	.db #0x32	; 50	'2'
+   00B7 32                  275 	.db #0x32	; 50	'2'
+   00B8 33                  276 	.db #0x33	; 51	'3'
+   00B9 34                  277 	.db #0x34	; 52	'4'
+   00BA 34                  278 	.db #0x34	; 52	'4'
+   00BB 35                  279 	.db #0x35	; 53	'5'
+   00BC 35                  280 	.db #0x35	; 53	'5'
+   00BD 36                  281 	.db #0x36	; 54	'6'
+   00BE 36                  282 	.db #0x36	; 54	'6'
+   00BF 37                  283 	.db #0x37	; 55	'7'
+   00C0 37                  284 	.db #0x37	; 55	'7'
+   00C1 38                  285 	.db #0x38	; 56	'8'
+   00C2 38                  286 	.db #0x38	; 56	'8'
+   00C3 39                  287 	.db #0x39	; 57	'9'
+   00C4 39                  288 	.db #0x39	; 57	'9'
+   00C5 3A                  289 	.db #0x3a	; 58
+   00C6 3A                  290 	.db #0x3a	; 58
+   00C7 3B                  291 	.db #0x3b	; 59
+   00C8 3B                  292 	.db #0x3b	; 59
+   00C9 3B                  293 	.db #0x3b	; 59
+   00CA 3C                  294 	.db #0x3c	; 60
+   00CB 3C                  295 	.db #0x3c	; 60
+   00CC 3C                  296 	.db #0x3c	; 60
+   00CD 3D                  297 	.db #0x3d	; 61
+   00CE 3D                  298 	.db #0x3d	; 61
+   00CF 3D                  299 	.db #0x3d	; 61
+   00D0 3E                  300 	.db #0x3e	; 62
+   00D1 3E                  301 	.db #0x3e	; 62
+   00D2 3E                  302 	.db #0x3e	; 62
+   00D3 3E                  303 	.db #0x3e	; 62
+   00D4 3F                  304 	.db #0x3f	; 63
+   00D5 3F                  305 	.db #0x3f	; 63
+   00D6 3F                  306 	.db #0x3f	; 63
+   00D7 3F                  307 	.db #0x3f	; 63
+   00D8 3F                  308 	.db #0x3f	; 63
+   00D9 3F                  309 	.db #0x3f	; 63
+   00DA 40                  310 	.db #0x40	; 64
+   00DB 40                  311 	.db #0x40	; 64
+   00DC 40                  312 	.db #0x40	; 64
+   00DD 40                  313 	.db #0x40	; 64
+   00DE 40                  314 	.db #0x40	; 64
+   00DF 40                  315 	.db #0x40	; 64
+   00E0 40                  316 	.db #0x40	; 64
+   00E1 40                  317 	.db #0x40	; 64
+                            318 ;src/cvu_fsincos.c:54: cvu_f cvu_fcos(cvu_f x)
+                            319 ;	genLabel
+                            320 ;	genFunction
+                            321 ;	---------------------------------
+                            322 ; Function cvu_fcos
+                            323 ; ---------------------------------
+                            324 ;	Register assignment might be sub-optimal.
+                            325 ; Stack space usage: 0 bytes.
+   00E2                     326 _cvu_fcos::
+                            327 ;src/cvu_fsincos.c:56: return(cvu_fsin(x + CVU_F_PI_2));
+                            328 ;	genCast
+                            329 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                            330 ;fetchPairLong
+   00E2 D1            [10]  331 	pop	de
+   00E3 C1            [10]  332 	pop	bc
+   00E4 C5            [11]  333 	push	bc
+   00E5 D5            [11]  334 	push	de
+                            335 ;	genPlus
+                            336 ;fetchPairLong
+                            337 ;fetchLitPair
+   00E6 21 64 00      [10]  338 	ld	hl, #0x0064
+   00E9 09            [11]  339 	add	hl, bc
+                            340 ;	genCast
+                            341 ;	(locations are the same)
+                            342 ;	genIpush
+   00EA E5            [11]  343 	push	hl
+                            344 ;	genCall
+   00EB CDr00r00      [17]  345 	call	_cvu_fsin
+   00EE F1            [10]  346 	pop	af
+                            347 ;	genMove_o
+                            348 ;	genMove_o
+                            349 ;	genRet
+                            350 ;fetchPairLong
+                            351 ;	genLabel
+                            352 ; peephole 158 removed unused label 00101$.
+                            353 ;src/cvu_fsincos.c:57: }
+                            354 ;	genEndFunction
+   00EF C9            [10]  355 	ret
+                            356 	.area _CODE
+                            357 	.area _INITIALIZER
+                            358 	.area _CABS (ABS)

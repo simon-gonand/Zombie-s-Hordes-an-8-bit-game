@@ -1,0 +1,23 @@
+XL2
+H 9 areas 2 global symbols
+M cv_set_noise
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 15 flags 0 addr 0
+S _cv_set_noise Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 0E E0 21 02 00 39 CB 46 28 02 0E E4
+R 00 00 00 00
+T 0C 00
+R 00 00 00 00
+T 0C 00 79 21 03 00 39 B6 D3 FF C9
+R 00 00 00 00

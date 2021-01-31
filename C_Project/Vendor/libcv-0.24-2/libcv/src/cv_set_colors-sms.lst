@@ -1,0 +1,87 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_colors
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_vdpout
+                             12 	.globl _cv_set_colors
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cv_set_colors.c:5: void cv_set_colors(enum cv_color foreground, enum cv_color background)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cv_set_colors
+                             50 ; ---------------------------------
+                             51 ;	Register assignment is optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cv_set_colors::
+                             54 ;src/cv_set_colors.c:7: cv_vdpout(0x07, (foreground << 4) | background);
+                             55 ;	genCast
+                             56 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 1
+   0000 FD 21 02 00   [14]   57 	ld	iy, #2
+   0004 FD 39         [15]   58 	add	iy, sp
+   0006 FD 7E 00      [19]   59 	ld	a, 0 (iy)
+                             60 ;	genLeftShift
+   0009 87            [ 4]   61 	add	a, a
+   000A 87            [ 4]   62 	add	a, a
+   000B 87            [ 4]   63 	add	a, a
+   000C 87            [ 4]   64 	add	a, a
+                             65 ;	genCast
+                             66 ;	(locations are the same)
+                             67 ;	genOr
+                             68 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 3, size 1
+   000D FD 23         [10]   69 	inc	iy
+   000F FD B6 00      [19]   70 	or	a, 0 (iy)
+                             71 ;	genIpush
+                             72 ;	genIpush
+                             73 ; peephole 37 pushed de instead of pushing a twice.
+   0012 57            [ 4]   74 	ld	d,a
+   0013 1E 07         [ 7]   75 	ld	e,#0x07
+   0015 D5            [11]   76 	push	de
+                             77 ;	genCall
+   0016 CDr00r00      [17]   78 	call	_cv_vdpout
+   0019 F1            [10]   79 	pop	af
+                             80 ;	genLabel
+                             81 ; peephole 158 removed unused label 00101$.
+                             82 ;src/cv_set_colors.c:8: }
+                             83 ;	genEndFunction
+   001A C9            [10]   84 	ret
+                             85 	.area _CODE
+                             86 	.area _INITIALIZER
+                             87 	.area _CABS (ABS)

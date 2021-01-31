@@ -1,0 +1,87 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_scroll_inhibit
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_vdpout
+                             12 	.globl _cv_set_scroll_inhibit
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cv_set_scroll_inhibit.c:7: void cv_set_scroll_inhibit(enum cv_scroll_inhibit inhibit)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cv_set_scroll_inhibit
+                             50 ; ---------------------------------
+                             51 ;	Register assignment is optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cv_set_scroll_inhibit::
+                             54 ;src/cv_set_scroll_inhibit.c:9: cv_vdpout(0x0, cv_vdpreg[0] = inhibit | (cv_vdpreg[0] & ~0xc0));
+                             55 ;	genAddrOf
+   0000 01r00r00      [10]   56 	ld	bc, #_cv_vdpreg+0
+                             57 ;	genPointerGet
+   0003 0A            [ 7]   58 	ld	a, (bc)
+                             59 ;	genAnd
+   0004 E6 3F         [ 7]   60 	and	a, #0x3f
+                             61 ;	genOr
+                             62 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 1
+   0006 21 02 00      [10]   63 	ld	hl, #2+0
+   0009 39            [11]   64 	add	hl, sp
+   000A B6            [ 7]   65 	or	a, (hl)
+                             66 ; peephole 68 used hl instead of iy.
+                             67 ;	genAssign (pointer)
+                             68 ;	isBitvar = 0
+   000B 02            [ 7]   69 	ld	(bc), a
+                             70 ;	genIpush
+   000C F5            [11]   71 	push	af
+   000D 33            [ 6]   72 	inc	sp
+                             73 ;	genIpush
+   000E AF            [ 4]   74 	xor	a, a
+   000F F5            [11]   75 	push	af
+   0010 33            [ 6]   76 	inc	sp
+                             77 ;	genCall
+   0011 CDr00r00      [17]   78 	call	_cv_vdpout
+   0014 F1            [10]   79 	pop	af
+                             80 ;	genLabel
+                             81 ; peephole 158 removed unused label 00101$.
+                             82 ;src/cv_set_scroll_inhibit.c:10: }
+                             83 ;	genEndFunction
+   0015 C9            [10]   84 	ret
+                             85 	.area _CODE
+                             86 	.area _INITIALIZER
+                             87 	.area _CABS (ABS)

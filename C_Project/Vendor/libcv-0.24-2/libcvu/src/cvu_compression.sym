@@ -1,0 +1,39 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+    ___sdcc_enter_ix                                               **** GX
+  1 __common_state                                                 0000 GR
+    __read_from_array                                              **** GX
+    _cv_graphics_port                                           =  00BE 
+    _cv_set_write_vram_address                                     **** GX
+  0 _cvu_get_compression                                           005B GR
+    _cvu_get_huffman                                               **** GX
+    _cvu_get_rle                                                   **** GX
+  0 _cvu_init_compression                                          0009 GR
+    _cvu_init_huffman                                              **** GX
+    _cvu_init_rle                                                  **** GX
+  0 _cvu_memtovmemcpy_compression                                  0073 GR
+  0 _read_from_huffman                                             0000 R
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size   AE   flags    0
+   1 _DATA                                      size    2   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+

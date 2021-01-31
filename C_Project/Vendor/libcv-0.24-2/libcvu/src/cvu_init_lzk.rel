@@ -1,0 +1,29 @@
+XL2
+H 9 areas 2 global symbols
+M cvu_init_lzk
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 3A flags 0 addr 0
+S _cvu_init_lzk Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 D1 C1 C5 D5 69 60 FD 21 04 00 FD 39 FD 7E
+R 00 00 00 00
+T 0E 00 00 77 23 FD 7E 01 77 59 50 13 13 FD 23 FD
+R 00 00 00 00
+T 1C 00 23 FD 7E 00 12 59 50 13 13 13 AF 12 21
+R 00 00 00 00
+T 29 00 05 00 09 36 00 21 06 00 09 06 40
+R 00 00 00 00
+T 34 00
+R 00 00 00 00
+T 34 00 36 00 23 10 FB C9
+R 00 00 00 00

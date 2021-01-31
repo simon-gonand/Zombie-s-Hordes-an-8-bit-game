@@ -4,7 +4,7 @@ CFLAGS = --std-c99 -mz80 -c -Iinclude --opt-code-size --fverbose-asm --max-alloc
 CFLAGSS = $(CFLAGS) -DCV_SMS
 AS = sdasz80
 AFLAGS = -plosgff
-SDCCLIB = sdcclib
+SDCCLIB = sdar
 .PHONY: clean all
 
 srcdir = ./src
@@ -19,10 +19,10 @@ OBJ = $(GENOBJ) $(INOBJ) $(GRAOBJ) $(SOOBJ)
 OBJ-SMS = $(OBJ:.rel=-sms.rel) src/cv_set_write_cram_address-sms.rel src/cv_set_left_column_blank-sms.rel src/cv_set_sprite_shift.rel src/cv_set_scroll_inhibit-sms.rel src/cv_set_hscroll-sms.rel src/cv_set_vscroll-sms.rel
 
 bin/libcv.lib: $(OBJ)
-	rm -f bin/libcv.lib; $(SDCCLIB) bin/libcv.lib $(OBJ)
+	rm -f bin/libcv.lib; $(SDCCLIB) -rc bin/libcv.lib $(OBJ)
 
 bin/libcv-sms.lib: $(OBJ-SMS)
-	rm -f bin/libcv-sms.lib; $(SDCCLIB) bin/libcv-sms.lib $(OBJ-SMS)
+	rm -f bin/libcv-sms.lib; $(SDCCLIB) -rc bin/libcv-sms.lib $(OBJ-SMS)
 
 bin/crt0.rel: src/crt0.rel
 	cp src/crt0.rel bin/

@@ -1,0 +1,45 @@
+XL2
+H 9 areas 4 global symbols
+M cvu_fdiv2
+O -mz80
+S _abs Ref0000
+S .__.ABS. Def0000
+S __divsint Ref0000
+A _CODE size 3F flags 0 addr 0
+S _cvu_fdiv2 Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 C1 D1 D5 C5 06 06
+R 00 00 00 00
+T 06 00
+R 00 00 00 00
+T 06 00 78 B7 28 1E 6B 62 D5 E5 CD 00 00 F1 D1 3E
+R 00 00 00 00 02 0B 00 00
+T 14 00 FF BD 3E 3F 9C E2 1E 00 EE 80
+R 00 00 00 00 00 08 00 00
+T 1E 00
+R 00 00 00 00
+T 1E 00 FA 28 00 CB 23 CB 12 05 18 DE
+R 00 00 00 00 00 03 00 00
+T 28 00
+R 00 00 00 00
+T 28 00 C5 21 06 00 39 4E 23 46 C5 D5 CD 00 00 F1
+R 00 00 00 00 02 0D 02 00
+T 36 00 F1 C1 04 18 01
+R 00 00 00 00
+T 3B 00
+R 00 00 00 00
+T 3B 00 29
+R 00 00 00 00
+T 3C 00
+R 00 00 00 00
+T 3C 00 10 FD C9
+R 00 00 00 00

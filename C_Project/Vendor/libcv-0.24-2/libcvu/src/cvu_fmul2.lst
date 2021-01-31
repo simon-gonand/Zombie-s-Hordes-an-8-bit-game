@@ -1,0 +1,222 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_fmul2
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_s_16_16_mul
+                             12 	.globl __u_16_16_mul
+                             13 	.globl _cvu_fmul2
+                             14 ;--------------------------------------------------------
+                             15 ; special function registers
+                             16 ;--------------------------------------------------------
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cvu_fmul2.c:24: int32_t cvu_s_16_16_mul(int16_t l_arg, int16_t r_arg)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cvu_s_16_16_mul
+                             50 ; ---------------------------------
+                             51 ;	Register assignment might be sub-optimal.
+                             52 ; Stack space usage: 1 bytes.
+   0000                      53 _cvu_s_16_16_mul::
+   0000 CDr00r00      [17]   54 	call	___sdcc_enter_ix
+   0003 3B            [ 6]   55 	dec	sp
+                             56 ;src/cvu_fmul2.c:26: bool neg = false;
+                             57 ;	genAssign
+                             58 ;	AOP_STK for _cvu_s_16_16_mul_sloc0_1_0
+                             59 ;	genMove_o
+   0004 AF            [ 4]   60 	xor	a, a
+   0005 DD 77 FF      [19]   61 	ld	-1 (ix), a
+                             62 ;src/cvu_fmul2.c:28: register int16_t l = l_arg;
+                             63 ;	genAssign
+                             64 ;	AOP_STK for 
+                             65 ;fetchPairLong
+   0008 DD 4E 04      [19]   66 	ld	c, 4 (ix)
+   000B DD 46 05      [19]   67 	ld	b, 5 (ix)
+                             68 ;src/cvu_fmul2.c:29: register int16_t r = r_arg;
+                             69 ;	genAssign
+                             70 ;	AOP_STK for 
+                             71 ;fetchPairLong
+   000E DD 5E 06      [19]   72 	ld	e, 6 (ix)
+   0011 DD 56 07      [19]   73 	ld	d, 7 (ix)
+                             74 ;src/cvu_fmul2.c:31: if(l < 0)
+                             75 ;	genCast
+                             76 ;fetchPairLong
+                             77 ; peephole 1 removed dead load from c into l.
+   0014 60            [ 4]   78 	ld	h, b
+                             79 ;	genCmpLt
+   0015 CB 7C         [ 8]   80 	bit	7, h
+   0017 28 0B         [12]   81 	jr	Z,00102$
+                             82 ; peephole 163 changed absolute to relative conditional jump.
+                             83 ;src/cvu_fmul2.c:33: neg = !neg;
+                             84 ;	genAssign
+                             85 ;	AOP_STK for _cvu_s_16_16_mul_sloc0_1_0
+                             86 ;	genMove_o
+   0019 DD 36 FF 01   [19]   87 	ld	-1 (ix), #0x01
+                             88 ;src/cvu_fmul2.c:34: l = -l;
+                             89 ;	genUminus
+   001D AF            [ 4]   90 	xor	a, a
+   001E 91            [ 4]   91 	sub	a, c
+   001F 4F            [ 4]   92 	ld	c, a
+   0020 3E 00         [ 7]   93 	ld	a, #0x00
+   0022 98            [ 4]   94 	sbc	a, b
+   0023 47            [ 4]   95 	ld	b, a
+                             96 ;	genLabel
+   0024                      97 00102$:
+                             98 ;src/cvu_fmul2.c:36: if(r < 0)
+                             99 ;	genCast
+                            100 ;fetchPairLong
+                            101 ; peephole 1 removed dead load from e into l.
+   0024 62            [ 4]  102 	ld	h, d
+                            103 ;	genCmpLt
+   0025 CB 7C         [ 8]  104 	bit	7, h
+   0027 28 0F         [12]  105 	jr	Z,00104$
+                            106 ; peephole 163 changed absolute to relative conditional jump.
+                            107 ;src/cvu_fmul2.c:38: neg = !neg;
+                            108 ;	genNot
+                            109 ;	AOP_STK for _cvu_s_16_16_mul_sloc0_1_0
+   0029 DD 7E FF      [19]  110 	ld	a, -1 (ix)
+   002C EE 01         [ 7]  111 	xor	a, #0x01
+   002E DD 77 FF      [19]  112 	ld	-1 (ix), a
+                            113 ;src/cvu_fmul2.c:39: r = -r;
+                            114 ;	genUminus
+   0031 AF            [ 4]  115 	xor	a, a
+   0032 93            [ 4]  116 	sub	a, e
+   0033 5F            [ 4]  117 	ld	e, a
+   0034 3E 00         [ 7]  118 	ld	a, #0x00
+   0036 9A            [ 4]  119 	sbc	a, d
+   0037 57            [ 4]  120 	ld	d, a
+                            121 ;	genLabel
+   0038                     122 00104$:
+                            123 ;src/cvu_fmul2.c:42: ret = _u_16_16_mul(l, r);
+                            124 ;	genIpush
+   0038 D5            [11]  125 	push	de
+                            126 ;	genIpush
+   0039 C5            [11]  127 	push	bc
+                            128 ;	genCall
+   003A CDr00r00      [17]  129 	call	__u_16_16_mul
+   003D F1            [10]  130 	pop	af
+   003E F1            [10]  131 	pop	af
+                            132 ;	genMove_o
+                            133 ;	genMove_o
+                            134 ;	genAssign
+                            135 ;	(locations are the same)
+                            136 ;src/cvu_fmul2.c:44: if(neg)
+                            137 ;	genIfx
+                            138 ;	AOP_STK for _cvu_s_16_16_mul_sloc0_1_0
+   003F DD CB FF 46   [20]  139 	bit	0, -1 (ix)
+   0043 28 0F         [12]  140 	jr	Z,00106$
+                            141 ; peephole 163 changed absolute to relative conditional jump.
+                            142 ;src/cvu_fmul2.c:45: ret = -ret;
+                            143 ;	genUminus
+   0045 AF            [ 4]  144 	xor	a, a
+   0046 95            [ 4]  145 	sub	a, l
+   0047 6F            [ 4]  146 	ld	l, a
+   0048 3E 00         [ 7]  147 	ld	a, #0x00
+   004A 9C            [ 4]  148 	sbc	a, h
+   004B 67            [ 4]  149 	ld	h, a
+   004C 3E 00         [ 7]  150 	ld	a, #0x00
+   004E 9B            [ 4]  151 	sbc	a, e
+   004F 5F            [ 4]  152 	ld	e, a
+   0050 3E 00         [ 7]  153 	ld	a, #0x00
+   0052 9A            [ 4]  154 	sbc	a, d
+   0053 57            [ 4]  155 	ld	d, a
+                            156 ;	genLabel
+   0054                     157 00106$:
+                            158 ;src/cvu_fmul2.c:47: return(ret);
+                            159 ;	genRet
+                            160 ;	genMove_o
+                            161 ;	genMove_o
+                            162 ;	genLabel
+                            163 ; peephole 158 removed unused label 00107$.
+                            164 ;src/cvu_fmul2.c:48: }
+                            165 ;	genEndFunction
+   0054 33            [ 6]  166 	inc	sp
+   0055 DD E1         [14]  167 	pop	ix
+   0057 C9            [10]  168 	ret
+                            169 ;src/cvu_fmul2.c:50: cvu_f cvu_fmul2(cvu_f l, cvu_f r)
+                            170 ;	genLabel
+                            171 ;	genFunction
+                            172 ;	---------------------------------
+                            173 ; Function cvu_fmul2
+                            174 ; ---------------------------------
+                            175 ;	Register assignment might be sub-optimal.
+                            176 ; Stack space usage: 0 bytes.
+   0058                     177 _cvu_fmul2::
+   0058 CDr00r00      [17]  178 	call	___sdcc_enter_ix
+                            179 ;src/cvu_fmul2.c:53: tmp = cvu_s_16_16_mul(l, r);//(int32_t)l * r;
+                            180 ;	genIpush
+                            181 ;	AOP_STK for 
+                            182 ;fetchPairLong
+   005B DD 6E 06      [19]  183 	ld	l, 6 (ix)
+   005E DD 66 07      [19]  184 	ld	h, 7 (ix)
+   0061 E5            [11]  185 	push	hl
+                            186 ;	genIpush
+                            187 ;	AOP_STK for 
+                            188 ;fetchPairLong
+   0062 DD 6E 04      [19]  189 	ld	l, 4 (ix)
+   0065 DD 66 05      [19]  190 	ld	h, 5 (ix)
+   0068 E5            [11]  191 	push	hl
+                            192 ;	genCall
+   0069 CDr00r00      [17]  193 	call	_cvu_s_16_16_mul
+   006C F1            [10]  194 	pop	af
+   006D F1            [10]  195 	pop	af
+                            196 ;	genMove_o
+                            197 ;	genMove_o
+                            198 ;	genAssign
+                            199 ;	(locations are the same)
+                            200 ;src/cvu_fmul2.c:54: return(tmp >> CVU_F_R);
+                            201 ;	genRightShift
+   006E 06 06         [ 7]  202 	ld	b, #0x06
+   0070                     203 00103$:
+   0070 CB 2A         [ 8]  204 	sra	d
+   0072 CB 1B         [ 8]  205 	rr	e
+   0074 CB 1C         [ 8]  206 	rr	h
+   0076 CB 1D         [ 8]  207 	rr	l
+                            208 ; peephole 158 removed unused label 00104$.
+   0078 10 F6         [13]  209 	djnz	00103$
+                            210 ;	genCast
+                            211 ;fetchPairLong
+                            212 ;	genRet
+                            213 ;fetchPairLong
+                            214 ;	genLabel
+                            215 ; peephole 158 removed unused label 00101$.
+                            216 ;src/cvu_fmul2.c:55: }
+                            217 ;	genEndFunction
+   007A DD E1         [14]  218 	pop	ix
+   007C C9            [10]  219 	ret
+                            220 	.area _CODE
+                            221 	.area _INITIALIZER
+                            222 	.area _CABS (ABS)

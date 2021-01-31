@@ -1,0 +1,595 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module main
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _nmi
+                             13 	.globl _move_cursor
+                             14 	.globl _cvu_get_sprite_y
+                             15 	.globl _cvu_set_sprite_y
+                             16 	.globl _cvu_get_sprite_x
+                             17 	.globl _cvu_set_sprite_x
+                             18 	.globl _cvu_vmemset
+                             19 	.globl _cvu_memtovmemcpy
+                             20 	.globl _cv_set_vint_handler
+                             21 	.globl _cv_memtovmemcpy_slow
+                             22 	.globl _cv_set_write_vram_address
+                             23 	.globl _cv_set_sprite_magnification
+                             24 	.globl _cv_set_sprite_big
+                             25 	.globl _cv_set_sprite_attribute_table
+                             26 	.globl _cv_set_sprite_pattern_table
+                             27 	.globl _cv_set_character_pattern_t
+                             28 	.globl _cv_set_color_table
+                             29 	.globl _cv_set_image_table
+                             30 	.globl _cv_set_screen_mode
+                             31 	.globl _cv_set_screen_active
+                             32 	.globl _cv_get_controller_state
+                             33 	.globl _s
+                             34 	.globl _step
+                             35 	.globl _SPRITE_PATTERNS
+                             36 	.globl _SPRITES
+                             37 	.globl _IMAGE
+                             38 ;--------------------------------------------------------
+                             39 ; special function registers
+                             40 ;--------------------------------------------------------
+                     00BE    41 _cv_graphics_port	=	0x00be
+                             42 ;--------------------------------------------------------
+                             43 ; ram data
+                             44 ;--------------------------------------------------------
+                             45 	.area _DATA
+   0000                      46 _step::
+   0000                      47 	.ds 1
+   0001                      48 _s::
+   0001                      49 	.ds 128
+   0081                      50 _move_cursor_i_65536_88:
+   0081                      51 	.ds 1
+                             52 ;--------------------------------------------------------
+                             53 ; ram data
+                             54 ;--------------------------------------------------------
+                             55 	.area _INITIALIZED
+                             56 ;--------------------------------------------------------
+                             57 ; absolute external ram data
+                             58 ;--------------------------------------------------------
+                             59 	.area _DABS (ABS)
+                             60 ;--------------------------------------------------------
+                             61 ; global & static initialisations
+                             62 ;--------------------------------------------------------
+                             63 	.area _HOME
+                             64 	.area _GSINIT
+                             65 	.area _GSFINAL
+                             66 	.area _GSINIT
+                             67 ;main.c:24: static unsigned char i = 0;
+   0000 FD 21r81r00   [14]   68 	ld	iy, #_move_cursor_i_65536_88
+   0004 FD 36 00 00   [19]   69 	ld	0 (iy), #0x00
+                             70 ;--------------------------------------------------------
+                             71 ; Home
+                             72 ;--------------------------------------------------------
+                             73 	.area _HOME
+                             74 	.area _HOME
+                             75 ;--------------------------------------------------------
+                             76 ; code
+                             77 ;--------------------------------------------------------
+                             78 	.area _CODE
+                             79 ;main.c:22: void move_cursor(void)
+                             80 ;	---------------------------------
+                             81 ; Function move_cursor
+                             82 ; ---------------------------------
+   0000                      83 _move_cursor::
+   0000 DD E5         [15]   84 	push	ix
+   0002 DD 21 00 00   [14]   85 	ld	ix,#0
+   0006 DD 39         [15]   86 	add	ix,sp
+   0008 21 F7 FF      [10]   87 	ld	hl, #-9
+   000B 39            [11]   88 	add	hl, sp
+   000C F9            [ 6]   89 	ld	sp, hl
+                             90 ;main.c:27: cv_get_controller_state(&cs, 0);	// Read the controller.
+   000D 21 01 00      [10]   91 	ld	hl, #1
+   0010 39            [11]   92 	add	hl, sp
+   0011 DD 75 FA      [19]   93 	ld	-6 (ix), l
+   0014 DD 74 FB      [19]   94 	ld	-5 (ix), h
+   0017 4D            [ 4]   95 	ld	c, l
+   0018 44            [ 4]   96 	ld	b, h
+   0019 AF            [ 4]   97 	xor	a, a
+   001A F5            [11]   98 	push	af
+   001B 33            [ 6]   99 	inc	sp
+   001C C5            [11]  100 	push	bc
+   001D CDr00r00      [17]  101 	call	_cv_get_controller_state
+   0020 F1            [10]  102 	pop	af
+   0021 33            [ 6]  103 	inc	sp
+                            104 ;main.c:29: if(cs.joystick & CV_RIGHT)	// Move cursor to the right.
+   0022 DD 7E FA      [19]  105 	ld	a, -6 (ix)
+   0025 C6 01         [ 7]  106 	add	a, #0x01
+   0027 DD 77 FC      [19]  107 	ld	-4 (ix), a
+   002A DD 7E FB      [19]  108 	ld	a, -5 (ix)
+   002D CE 00         [ 7]  109 	adc	a, #0x00
+   002F DD 77 FD      [19]  110 	ld	-3 (ix), a
+   0032 DD 6E FC      [19]  111 	ld	l, -4 (ix)
+   0035 DD 66 FD      [19]  112 	ld	h, -3 (ix)
+   0038 7E            [ 7]  113 	ld	a, (hl)
+   0039 DD 77 F7      [19]  114 	ld	-9 (ix), a
+                            115 ;main.c:31: int x = cvu_get_sprite_x(&s[i]);
+   003C FD 21r81r00   [14]  116 	ld	iy, #_move_cursor_i_65536_88
+   0040 FD 6E 00      [19]  117 	ld	l, 0 (iy)
+   0043 26 00         [ 7]  118 	ld	h, #0x00
+   0045 29            [11]  119 	add	hl, hl
+   0046 29            [11]  120 	add	hl, hl
+   0047 DD 75 FE      [19]  121 	ld	-2 (ix), l
+   004A DD 74 FF      [19]  122 	ld	-1 (ix), h
+                            123 ;main.c:29: if(cs.joystick & CV_RIGHT)	// Move cursor to the right.
+   004D DD CB F7 4E   [20]  124 	bit	1, -9 (ix)
+   0051 28 4C         [12]  125 	jr	Z,00108$
+                            126 ;main.c:31: int x = cvu_get_sprite_x(&s[i]);
+   0053 3Er01         [ 7]  127 	ld	a, #<(_s)
+   0055 DD 86 FE      [19]  128 	add	a, -2 (ix)
+   0058 4F            [ 4]  129 	ld	c, a
+   0059 3Es00         [ 7]  130 	ld	a, #>(_s)
+   005B DD 8E FF      [19]  131 	adc	a, -1 (ix)
+   005E 47            [ 4]  132 	ld	b, a
+   005F C5            [11]  133 	push	bc
+   0060 CDr00r00      [17]  134 	call	_cvu_get_sprite_x
+   0063 F1            [10]  135 	pop	af
+   0064 DD 75 FE      [19]  136 	ld	-2 (ix), l
+   0067 DD 74 FF      [19]  137 	ld	-1 (ix), h
+                            138 ;main.c:32: if(x < 240)
+   006A DD 7E FE      [19]  139 	ld	a, -2 (ix)
+   006D D6 F0         [ 7]  140 	sub	a, #0xf0
+   006F DD 7E FF      [19]  141 	ld	a, -1 (ix)
+   0072 17            [ 4]  142 	rla
+   0073 3F            [ 4]  143 	ccf
+   0074 1F            [ 4]  144 	rra
+   0075 DE 80         [ 7]  145 	sbc	a, #0x80
+   0077 30 08         [12]  146 	jr	NC,00102$
+                            147 ;main.c:33: x++;
+   0079 DD 34 FE      [23]  148 	inc	-2 (ix)
+   007C 20 03         [12]  149 	jr	NZ,00216$
+   007E DD 34 FF      [23]  150 	inc	-1 (ix)
+   0081                     151 00216$:
+   0081                     152 00102$:
+                            153 ;main.c:34: cvu_set_sprite_x(&s[i], x);
+   0081 FD 21r81r00   [14]  154 	ld	iy, #_move_cursor_i_65536_88
+   0085 FD 6E 00      [19]  155 	ld	l, 0 (iy)
+   0088 26 00         [ 7]  156 	ld	h, #0x00
+   008A 29            [11]  157 	add	hl, hl
+   008B 29            [11]  158 	add	hl, hl
+   008C 11r01r00      [10]  159 	ld	de, #_s
+   008F 19            [11]  160 	add	hl, de
+   0090 DD 4E FE      [19]  161 	ld	c, -2 (ix)
+   0093 DD 46 FF      [19]  162 	ld	b, -1 (ix)
+   0096 C5            [11]  163 	push	bc
+   0097 E5            [11]  164 	push	hl
+   0098 CDr00r00      [17]  165 	call	_cvu_set_sprite_x
+   009B F1            [10]  166 	pop	af
+   009C F1            [10]  167 	pop	af
+   009D 18 35         [12]  168 	jr	00109$
+   009F                     169 00108$:
+                            170 ;main.c:36: else if(cs.joystick & CV_LEFT)	// Move the cursor to the left.
+   009F DD CB F7 5E   [20]  171 	bit	3, -9 (ix)
+   00A3 28 2F         [12]  172 	jr	Z,00109$
+                            173 ;main.c:38: int x = cvu_get_sprite_x(&s[i]);
+   00A5 01r01r00      [10]  174 	ld	bc, #_s+0
+   00A8 DD 6E FE      [19]  175 	ld	l, -2 (ix)
+   00AB DD 66 FF      [19]  176 	ld	h, -1 (ix)
+   00AE 09            [11]  177 	add	hl, bc
+   00AF E5            [11]  178 	push	hl
+   00B0 CDr00r00      [17]  179 	call	_cvu_get_sprite_x
+   00B3 F1            [10]  180 	pop	af
+   00B4 EB            [ 4]  181 	ex	de,hl
+                            182 ;main.c:39: if(x > 0)
+   00B5 AF            [ 4]  183 	xor	a, a
+   00B6 BB            [ 4]  184 	cp	a, e
+   00B7 9A            [ 4]  185 	sbc	a, d
+   00B8 E2rBDr00      [10]  186 	jp	PO, 00218$
+   00BB EE 80         [ 7]  187 	xor	a, #0x80
+   00BD                     188 00218$:
+   00BD F2rC1r00      [10]  189 	jp	P, 00104$
+                            190 ;main.c:40: x--;
+   00C0 1B            [ 6]  191 	dec	de
+   00C1                     192 00104$:
+                            193 ;main.c:41: cvu_set_sprite_x(&s[i], x);
+   00C1 FD 21r81r00   [14]  194 	ld	iy, #_move_cursor_i_65536_88
+   00C5 FD 6E 00      [19]  195 	ld	l, 0 (iy)
+   00C8 26 00         [ 7]  196 	ld	h, #0x00
+   00CA 29            [11]  197 	add	hl, hl
+   00CB 29            [11]  198 	add	hl, hl
+   00CC 09            [11]  199 	add	hl, bc
+   00CD D5            [11]  200 	push	de
+   00CE E5            [11]  201 	push	hl
+   00CF CDr00r00      [17]  202 	call	_cvu_set_sprite_x
+   00D2 F1            [10]  203 	pop	af
+   00D3 F1            [10]  204 	pop	af
+   00D4                     205 00109$:
+                            206 ;main.c:43: if(cs.joystick & CV_DOWN)	// Move the cursor down.
+   00D4 DD 6E FC      [19]  207 	ld	l, -4 (ix)
+   00D7 DD 66 FD      [19]  208 	ld	h, -3 (ix)
+   00DA 4E            [ 7]  209 	ld	c, (hl)
+                            210 ;main.c:31: int x = cvu_get_sprite_x(&s[i]);
+   00DB FD 21r81r00   [14]  211 	ld	iy, #_move_cursor_i_65536_88
+   00DF FD 6E 00      [19]  212 	ld	l, 0 (iy)
+   00E2 26 00         [ 7]  213 	ld	h, #0x00
+   00E4 29            [11]  214 	add	hl, hl
+   00E5 29            [11]  215 	add	hl, hl
+   00E6 EB            [ 4]  216 	ex	de,hl
+                            217 ;main.c:43: if(cs.joystick & CV_DOWN)	// Move the cursor down.
+   00E7 CB 51         [ 8]  218 	bit	2, c
+   00E9 28 2F         [12]  219 	jr	Z,00117$
+                            220 ;main.c:45: int y = cvu_get_sprite_y(&s[i]);
+   00EB 21r01r00      [10]  221 	ld	hl, #_s
+   00EE 19            [11]  222 	add	hl, de
+   00EF E5            [11]  223 	push	hl
+   00F0 CDr00r00      [17]  224 	call	_cvu_get_sprite_y
+   00F3 F1            [10]  225 	pop	af
+   00F4 4D            [ 4]  226 	ld	c, l
+   00F5 44            [ 4]  227 	ld	b, h
+                            228 ;main.c:46: if(y < 153)
+   00F6 79            [ 4]  229 	ld	a, c
+   00F7 D6 99         [ 7]  230 	sub	a, #0x99
+   00F9 78            [ 4]  231 	ld	a, b
+   00FA 17            [ 4]  232 	rla
+   00FB 3F            [ 4]  233 	ccf
+   00FC 1F            [ 4]  234 	rra
+   00FD DE 80         [ 7]  235 	sbc	a, #0x80
+   00FF 30 01         [12]  236 	jr	NC,00111$
+                            237 ;main.c:47: y++;
+   0101 03            [ 6]  238 	inc	bc
+   0102                     239 00111$:
+                            240 ;main.c:48: cvu_set_sprite_y(&s[i], y);
+   0102 FD 21r81r00   [14]  241 	ld	iy, #_move_cursor_i_65536_88
+   0106 FD 6E 00      [19]  242 	ld	l, 0 (iy)
+   0109 26 00         [ 7]  243 	ld	h, #0x00
+   010B 29            [11]  244 	add	hl, hl
+   010C 29            [11]  245 	add	hl, hl
+   010D 11r01r00      [10]  246 	ld	de, #_s
+   0110 19            [11]  247 	add	hl, de
+   0111 C5            [11]  248 	push	bc
+   0112 E5            [11]  249 	push	hl
+   0113 CDr00r00      [17]  250 	call	_cvu_set_sprite_y
+   0116 F1            [10]  251 	pop	af
+   0117 F1            [10]  252 	pop	af
+   0118 18 31         [12]  253 	jr	00118$
+   011A                     254 00117$:
+                            255 ;main.c:50: else if(cs.joystick & CV_UP)	// Move the cursor up.
+   011A CB 41         [ 8]  256 	bit	0, c
+   011C 28 2D         [12]  257 	jr	Z,00118$
+                            258 ;main.c:52: int y = cvu_get_sprite_y(&s[i]);
+   011E 21r01r00      [10]  259 	ld	hl, #_s
+   0121 19            [11]  260 	add	hl, de
+   0122 E5            [11]  261 	push	hl
+   0123 CDr00r00      [17]  262 	call	_cvu_get_sprite_y
+   0126 F1            [10]  263 	pop	af
+   0127 4D            [ 4]  264 	ld	c, l
+   0128 44            [ 4]  265 	ld	b, h
+                            266 ;main.c:53: if(y > 0)
+   0129 AF            [ 4]  267 	xor	a, a
+   012A B9            [ 4]  268 	cp	a, c
+   012B 98            [ 4]  269 	sbc	a, b
+   012C E2r31r01      [10]  270 	jp	PO, 00221$
+   012F EE 80         [ 7]  271 	xor	a, #0x80
+   0131                     272 00221$:
+   0131 F2r35r01      [10]  273 	jp	P, 00113$
+                            274 ;main.c:54: y--;
+   0134 0B            [ 6]  275 	dec	bc
+   0135                     276 00113$:
+                            277 ;main.c:55: cvu_set_sprite_y(&s[i], y);
+   0135 FD 21r81r00   [14]  278 	ld	iy, #_move_cursor_i_65536_88
+   0139 FD 6E 00      [19]  279 	ld	l, 0 (iy)
+   013C 26 00         [ 7]  280 	ld	h, #0x00
+   013E 29            [11]  281 	add	hl, hl
+   013F 29            [11]  282 	add	hl, hl
+   0140 11r01r00      [10]  283 	ld	de, #_s
+   0143 19            [11]  284 	add	hl, de
+   0144 C5            [11]  285 	push	bc
+   0145 E5            [11]  286 	push	hl
+   0146 CDr00r00      [17]  287 	call	_cvu_set_sprite_y
+   0149 F1            [10]  288 	pop	af
+   014A F1            [10]  289 	pop	af
+   014B                     290 00118$:
+                            291 ;main.c:58: cvu_set_sprite(SPRITES, i, &s[i]);	// Update the cursor on the screen.
+   014B 01r01r00      [10]  292 	ld	bc, #_s+0
+   014E FD 21r81r00   [14]  293 	ld	iy, #_move_cursor_i_65536_88
+   0152 FD 6E 00      [19]  294 	ld	l, 0 (iy)
+   0155 26 00         [ 7]  295 	ld	h, #0x00
+   0157 29            [11]  296 	add	hl, hl
+   0158 29            [11]  297 	add	hl, hl
+   0159 09            [11]  298 	add	hl, bc
+   015A EB            [ 4]  299 	ex	de, hl
+   015B FD 6E 00      [19]  300 	ld	l, 0 (iy)
+   015E ED 4BrF3r01   [20]  301 	ld	bc, (_SPRITES)
+                            302 ;../../include/cvu_graphics.h:83: cv_set_write_vram_address((base) + (number) * 0x4);
+   0162 26 00         [ 7]  303 	ld	h, #0x00
+   0164 29            [11]  304 	add	hl, hl
+   0165 29            [11]  305 	add	hl, hl
+   0166 09            [11]  306 	add	hl, bc
+   0167 E5            [11]  307 	push	hl
+   0168 CDr00r00      [17]  308 	call	_cv_set_write_vram_address
+                            309 ;../../include/cvu_graphics.h:84: cv_memtovmemcpy_slow((sprite), 4);
+   016B 21 04 00      [10]  310 	ld	hl, #0x0004
+   016E E3            [19]  311 	ex	(sp),hl
+   016F D5            [11]  312 	push	de
+   0170 CDr00r00      [17]  313 	call	_cv_memtovmemcpy_slow
+   0173 F1            [10]  314 	pop	af
+   0174 F1            [10]  315 	pop	af
+                            316 ;main.c:61: if(cs.joystick & CV_FIRE_0)
+   0175 DD 6E FC      [19]  317 	ld	l, -4 (ix)
+   0178 DD 66 FD      [19]  318 	ld	h, -3 (ix)
+   017B 7E            [ 7]  319 	ld	a, (hl)
+   017C DD 77 FF      [19]  320 	ld	-1 (ix), a
+   017F DD CB FF 76   [20]  321 	bit	6, -1 (ix)
+   0183 28 23         [12]  322 	jr	Z,00128$
+                            323 ;main.c:63: do
+   0185 DD 4E FA      [19]  324 	ld	c, -6 (ix)
+   0188 DD 46 FB      [19]  325 	ld	b, -5 (ix)
+   018B                     326 00119$:
+                            327 ;main.c:64: cv_get_controller_state(&cs, 0);
+   018B 59            [ 4]  328 	ld	e, c
+   018C 50            [ 4]  329 	ld	d, b
+   018D C5            [11]  330 	push	bc
+   018E AF            [ 4]  331 	xor	a, a
+   018F F5            [11]  332 	push	af
+   0190 33            [ 6]  333 	inc	sp
+   0191 D5            [11]  334 	push	de
+   0192 CDr00r00      [17]  335 	call	_cv_get_controller_state
+   0195 F1            [10]  336 	pop	af
+   0196 33            [ 6]  337 	inc	sp
+   0197 C1            [10]  338 	pop	bc
+                            339 ;main.c:65: while(cs.joystick & CV_FIRE_0);
+   0198 DD 6E FC      [19]  340 	ld	l, -4 (ix)
+   019B DD 66 FD      [19]  341 	ld	h, -3 (ix)
+   019E CB 76         [12]  342 	bit	6, (hl)
+   01A0 20 E9         [12]  343 	jr	NZ,00119$
+                            344 ;main.c:66: i++;
+   01A2 21r81r00      [10]  345 	ld	hl, #_move_cursor_i_65536_88+0
+   01A5 34            [11]  346 	inc	(hl)
+   01A6 18 27         [12]  347 	jr	00129$
+   01A8                     348 00128$:
+                            349 ;main.c:68: else if(cs.joystick & CV_FIRE_1)
+   01A8 DD CB FF 7E   [20]  350 	bit	7, -1 (ix)
+   01AC 28 21         [12]  351 	jr	Z,00129$
+                            352 ;main.c:70: do
+   01AE DD 4E FA      [19]  353 	ld	c, -6 (ix)
+   01B1 DD 46 FB      [19]  354 	ld	b, -5 (ix)
+   01B4                     355 00122$:
+                            356 ;main.c:71: cv_get_controller_state(&cs, 0);
+   01B4 59            [ 4]  357 	ld	e, c
+   01B5 50            [ 4]  358 	ld	d, b
+   01B6 C5            [11]  359 	push	bc
+   01B7 AF            [ 4]  360 	xor	a, a
+   01B8 F5            [11]  361 	push	af
+   01B9 33            [ 6]  362 	inc	sp
+   01BA D5            [11]  363 	push	de
+   01BB CDr00r00      [17]  364 	call	_cv_get_controller_state
+   01BE F1            [10]  365 	pop	af
+   01BF 33            [ 6]  366 	inc	sp
+   01C0 C1            [10]  367 	pop	bc
+                            368 ;main.c:72: while(cs.joystick & CV_FIRE_1);
+   01C1 DD 6E FC      [19]  369 	ld	l, -4 (ix)
+   01C4 DD 66 FD      [19]  370 	ld	h, -3 (ix)
+   01C7 7E            [ 7]  371 	ld	a, (hl)
+   01C8 07            [ 4]  372 	rlca
+   01C9 38 E9         [12]  373 	jr	C,00122$
+                            374 ;main.c:73: i--;
+   01CB 21r81r00      [10]  375 	ld	hl, #_move_cursor_i_65536_88+0
+   01CE 35            [11]  376 	dec	(hl)
+   01CF                     377 00129$:
+                            378 ;main.c:76: if(i == 32)
+   01CF FD 21r81r00   [14]  379 	ld	iy, #_move_cursor_i_65536_88
+   01D3 FD 7E 00      [19]  380 	ld	a, 0 (iy)
+   01D6 D6 20         [ 7]  381 	sub	a, #0x20
+   01D8 20 04         [12]  382 	jr	NZ,00131$
+                            383 ;main.c:77: i = 0;
+   01DA FD 36 00 00   [19]  384 	ld	0 (iy), #0x00
+   01DE                     385 00131$:
+                            386 ;main.c:78: if(i == 255)
+   01DE FD 21r81r00   [14]  387 	ld	iy, #_move_cursor_i_65536_88
+   01E2 FD 7E 00      [19]  388 	ld	a, 0 (iy)
+   01E5 3C            [ 4]  389 	inc	a
+   01E6 20 04         [12]  390 	jr	NZ,00135$
+                            391 ;main.c:79: i = 31;
+   01E8 FD 36 00 1F   [19]  392 	ld	0 (iy), #0x1f
+   01EC                     393 00135$:
+                            394 ;main.c:80: }
+   01EC DD F9         [10]  395 	ld	sp, ix
+   01EE DD E1         [14]  396 	pop	ix
+   01F0 C9            [10]  397 	ret
+   01F1                     398 _IMAGE:
+   01F1 00 18               399 	.dw #0x1800
+   01F3                     400 _SPRITES:
+   01F3 80 1B               401 	.dw #0x1b80
+   01F5                     402 _SPRITE_PATTERNS:
+   01F5 00 38               403 	.dw #0x3800
+                            404 ;main.c:82: void nmi(void)
+                            405 ;	---------------------------------
+                            406 ; Function nmi
+                            407 ; ---------------------------------
+   01F7                     408 _nmi::
+                            409 ;main.c:84: step = true;
+   01F7 21r00r00      [10]  410 	ld	hl,#_step + 0
+   01FA 36 01         [10]  411 	ld	(hl), #0x01
+                            412 ;main.c:85: }
+   01FC C9            [10]  413 	ret
+                            414 ;main.c:87: void main(void)
+                            415 ;	---------------------------------
+                            416 ; Function main
+                            417 ; ---------------------------------
+   01FD                     418 _main::
+   01FD DD E5         [15]  419 	push	ix
+   01FF DD 21 00 00   [14]  420 	ld	ix,#0
+   0203 DD 39         [15]  421 	add	ix,sp
+   0205 F5            [11]  422 	push	af
+                            423 ;main.c:91: cv_set_screen_active(false);	// Switch screen off.
+   0206 AF            [ 4]  424 	xor	a, a
+   0207 F5            [11]  425 	push	af
+   0208 33            [ 6]  426 	inc	sp
+   0209 CDr00r00      [17]  427 	call	_cv_set_screen_active
+   020C 33            [ 6]  428 	inc	sp
+                            429 ;main.c:93: cv_set_color_table(0x3fff);
+   020D 21 FF 3F      [10]  430 	ld	hl, #0x3fff
+   0210 E5            [11]  431 	push	hl
+   0211 CDr00r00      [17]  432 	call	_cv_set_color_table
+                            433 ;main.c:94: cv_set_character_pattern_t(0x1fff);
+   0214 21 FF 1F      [10]  434 	ld	hl, #0x1fff
+   0217 E3            [19]  435 	ex	(sp),hl
+   0218 CDr00r00      [17]  436 	call	_cv_set_character_pattern_t
+   021B F1            [10]  437 	pop	af
+                            438 ;main.c:95: cv_set_image_table(IMAGE);
+   021C 2ArF1r01      [16]  439 	ld	hl, (_IMAGE)
+   021F E5            [11]  440 	push	hl
+   0220 CDr00r00      [17]  441 	call	_cv_set_image_table
+   0223 F1            [10]  442 	pop	af
+                            443 ;main.c:96: cv_set_sprite_pattern_table(SPRITE_PATTERNS);
+   0224 2ArF5r01      [16]  444 	ld	hl, (_SPRITE_PATTERNS)
+   0227 E5            [11]  445 	push	hl
+   0228 CDr00r00      [17]  446 	call	_cv_set_sprite_pattern_table
+   022B F1            [10]  447 	pop	af
+                            448 ;main.c:97: cv_set_sprite_attribute_table(SPRITES);
+   022C 2ArF3r01      [16]  449 	ld	hl, (_SPRITES)
+   022F E5            [11]  450 	push	hl
+   0230 CDr00r00      [17]  451 	call	_cv_set_sprite_attribute_table
+                            452 ;main.c:98: cv_set_screen_mode(CV_SCREENMODE_BITMAP);	// Doesn't really matter much here. We only need a screen mode that supports sprites.
+   0233 26 02         [ 7]  453 	ld	h,#0x02
+   0235 E3            [19]  454 	ex	(sp),hl
+   0236 33            [ 6]  455 	inc	sp
+   0237 CDr00r00      [17]  456 	call	_cv_set_screen_mode
+   023A 33            [ 6]  457 	inc	sp
+                            458 ;main.c:99: cvu_vmemset(0x2000, (CV_COLOR_BLACK << 4) | CV_COLOR_BLACK, 6144);	// Set both colors for all characters to black to get a black background.
+   023B 21 00 18      [10]  459 	ld	hl, #0x1800
+   023E E5            [11]  460 	push	hl
+   023F 21 11 00      [10]  461 	ld	hl, #0x0011
+   0242 E5            [11]  462 	push	hl
+   0243 21 00 20      [10]  463 	ld	hl, #0x2000
+   0246 E5            [11]  464 	push	hl
+   0247 CDr00r00      [17]  465 	call	_cvu_vmemset
+   024A 21 06 00      [10]  466 	ld	hl, #6
+   024D 39            [11]  467 	add	hl, sp
+   024E F9            [ 6]  468 	ld	sp, hl
+                            469 ;main.c:101: cv_set_sprite_magnification(false);
+   024F AF            [ 4]  470 	xor	a, a
+   0250 F5            [11]  471 	push	af
+   0251 33            [ 6]  472 	inc	sp
+   0252 CDr00r00      [17]  473 	call	_cv_set_sprite_magnification
+   0255 33            [ 6]  474 	inc	sp
+                            475 ;main.c:102: cv_set_sprite_big(true);	// 16x16 pixel sprites.
+   0256 3E 01         [ 7]  476 	ld	a, #0x01
+   0258 F5            [11]  477 	push	af
+   0259 33            [ 6]  478 	inc	sp
+   025A CDr00r00      [17]  479 	call	_cv_set_sprite_big
+   025D 33            [ 6]  480 	inc	sp
+                            481 ;main.c:104: cvu_memtovmemcpy(SPRITE_PATTERNS, sprite, 0x20);	// Copy sprite pattern number 0 to graphics memory.
+   025E 01r00r00      [10]  482 	ld	bc, #_sprite+0
+   0261 2ArF5r01      [16]  483 	ld	hl, (_SPRITE_PATTERNS)
+   0264 11 20 00      [10]  484 	ld	de, #0x0020
+   0267 D5            [11]  485 	push	de
+   0268 C5            [11]  486 	push	bc
+   0269 E5            [11]  487 	push	hl
+   026A CDr00r00      [17]  488 	call	_cvu_memtovmemcpy
+   026D 21 06 00      [10]  489 	ld	hl, #6
+   0270 39            [11]  490 	add	hl, sp
+   0271 F9            [ 6]  491 	ld	sp, hl
+                            492 ;main.c:106: for(i = 0; i < 32; i++)
+   0272 21 00 00      [10]  493 	ld	hl, #0x0000
+   0275 E3            [19]  494 	ex	(sp), hl
+   0276                     495 00108$:
+                            496 ;main.c:108: cvu_set_sprite_x(&s[i], i * 4);	// Set initial cursor position.
+   0276 E1            [10]  497 	pop	hl
+   0277 E5            [11]  498 	push	hl
+   0278 29            [11]  499 	add	hl, hl
+   0279 29            [11]  500 	add	hl, hl
+   027A 3Er01         [ 7]  501 	ld	a, #<(_s)
+   027C 85            [ 4]  502 	add	a, l
+   027D 5F            [ 4]  503 	ld	e, a
+   027E 3Es00         [ 7]  504 	ld	a, #>(_s)
+   0280 8C            [ 4]  505 	adc	a, h
+   0281 57            [ 4]  506 	ld	d, a
+   0282 4B            [ 4]  507 	ld	c, e
+   0283 42            [ 4]  508 	ld	b, d
+   0284 E5            [11]  509 	push	hl
+   0285 E5            [11]  510 	push	hl
+   0286 C5            [11]  511 	push	bc
+   0287 CDr00r00      [17]  512 	call	_cvu_set_sprite_x
+   028A F1            [10]  513 	pop	af
+   028B F1            [10]  514 	pop	af
+   028C E1            [10]  515 	pop	hl
+                            516 ;main.c:109: cvu_set_sprite_y(&s[i], i * 4);	// Set initial cursor position.
+   028D 4B            [ 4]  517 	ld	c, e
+   028E 42            [ 4]  518 	ld	b, d
+   028F E5            [11]  519 	push	hl
+   0290 C5            [11]  520 	push	bc
+   0291 CDr00r00      [17]  521 	call	_cvu_set_sprite_y
+   0294 F1            [10]  522 	pop	af
+   0295 F1            [10]  523 	pop	af
+                            524 ;main.c:110: cvu_set_sprite_color(&s[i], CV_COLOR_WHITE);
+   0296 4B            [ 4]  525 	ld	c, e
+   0297 42            [ 4]  526 	ld	b, d
+                            527 ;../../include/cvu_graphics.h:116: sprite->tag = (sprite->tag & 0x80) | color;
+   0298 03            [ 6]  528 	inc	bc
+   0299 03            [ 6]  529 	inc	bc
+   029A 03            [ 6]  530 	inc	bc
+   029B 0A            [ 7]  531 	ld	a, (bc)
+   029C E6 80         [ 7]  532 	and	a, #0x80
+   029E F6 0F         [ 7]  533 	or	a, #0x0f
+   02A0 02            [ 7]  534 	ld	(bc), a
+                            535 ;main.c:111: s[i].name = 0;	// Use sprite pattern number 0.
+   02A1 4B            [ 4]  536 	ld	c, e
+   02A2 42            [ 4]  537 	ld	b, d
+   02A3 03            [ 6]  538 	inc	bc
+   02A4 03            [ 6]  539 	inc	bc
+   02A5 AF            [ 4]  540 	xor	a, a
+   02A6 02            [ 7]  541 	ld	(bc), a
+                            542 ;main.c:112: cvu_set_sprite(SPRITES, i, &s[i]);
+   02A7 DD 6E FE      [19]  543 	ld	l, -2 (ix)
+   02AA ED 4BrF3r01   [20]  544 	ld	bc, (_SPRITES)
+                            545 ;../../include/cvu_graphics.h:83: cv_set_write_vram_address((base) + (number) * 0x4);
+   02AE 26 00         [ 7]  546 	ld	h, #0x00
+   02B0 29            [11]  547 	add	hl, hl
+   02B1 29            [11]  548 	add	hl, hl
+   02B2 09            [11]  549 	add	hl, bc
+   02B3 E5            [11]  550 	push	hl
+   02B4 CDr00r00      [17]  551 	call	_cv_set_write_vram_address
+                            552 ;../../include/cvu_graphics.h:84: cv_memtovmemcpy_slow((sprite), 4);
+   02B7 21 04 00      [10]  553 	ld	hl, #0x0004
+   02BA E3            [19]  554 	ex	(sp),hl
+   02BB D5            [11]  555 	push	de
+   02BC CDr00r00      [17]  556 	call	_cv_memtovmemcpy_slow
+   02BF F1            [10]  557 	pop	af
+   02C0 F1            [10]  558 	pop	af
+                            559 ;main.c:106: for(i = 0; i < 32; i++)
+   02C1 DD 34 FE      [23]  560 	inc	-2 (ix)
+   02C4 20 03         [12]  561 	jr	NZ,00140$
+   02C6 DD 34 FF      [23]  562 	inc	-1 (ix)
+   02C9                     563 00140$:
+   02C9 DD 7E FE      [19]  564 	ld	a, -2 (ix)
+   02CC D6 20         [ 7]  565 	sub	a, #0x20
+   02CE DD 7E FF      [19]  566 	ld	a, -1 (ix)
+   02D1 DE 00         [ 7]  567 	sbc	a, #0x00
+   02D3 38 A1         [12]  568 	jr	C,00108$
+                            569 ;main.c:115: cv_set_screen_active(true);	// Switch screen on.
+   02D5 3E 01         [ 7]  570 	ld	a, #0x01
+   02D7 F5            [11]  571 	push	af
+   02D8 33            [ 6]  572 	inc	sp
+   02D9 CDr00r00      [17]  573 	call	_cv_set_screen_active
+   02DC 33            [ 6]  574 	inc	sp
+                            575 ;main.c:117: cv_set_vint_handler(nmi);
+   02DD 21rF7r01      [10]  576 	ld	hl, #_nmi
+   02E0 E5            [11]  577 	push	hl
+   02E1 CDr00r00      [17]  578 	call	_cv_set_vint_handler
+   02E4 F1            [10]  579 	pop	af
+   02E5                     580 00110$:
+                            581 ;main.c:120: step = false;
+   02E5 21r00r00      [10]  582 	ld	hl,#_step + 0
+   02E8 36 00         [10]  583 	ld	(hl), #0x00
+                            584 ;main.c:121: while(!step);	// Wait until the NMI handler sets step to true.
+   02EA                     585 00102$:
+   02EA 21r00r00      [10]  586 	ld	hl,#_step+0
+   02ED CB 46         [12]  587 	bit	0, (hl)
+   02EF 28 F9         [12]  588 	jr	Z,00102$
+                            589 ;main.c:122: move_cursor();
+   02F1 CDr00r00      [17]  590 	call	_move_cursor
+                            591 ;main.c:124: }
+   02F4 18 EF         [12]  592 	jr	00110$
+                            593 	.area _CODE
+                            594 	.area _INITIALIZER
+                            595 	.area _CABS (ABS)

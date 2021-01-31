@@ -1,0 +1,55 @@
+XL2
+H 9 areas 8 global symbols
+M cv_init
+O -mz80
+S .__.ABS. Def0000
+S _cv_set_attenuation Ref0000
+A _CODE size 2B flags 0 addr 0
+S _cv_init Def0000
+A _DATA size 6 flags 0 addr 0
+S _cv_spint_handler Def0000
+S _cv_vdpstat Def0002
+S _cv_vdpreg Def0004
+S _cv_vint_indicator Def0003
+A _INITIALIZED size 2 flags 0 addr 0
+S _cv_vint_handler Def0000
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 2 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00
+T 02 00
+R 00 00 01 00
+T 02 00
+R 00 00 01 00
+T 03 00
+R 00 00 01 00
+T 03 00
+R 00 00 01 00
+T 04 00
+R 00 00 01 00
+T 04 00
+R 00 00 01 00
+T 00 00
+R 00 00 02 00
+T 00 00
+R 00 00 02 00
+T 00 00
+R 00 00 00 00
+T 00 00 21 05 00 36 A0 AF F5 33 AF F5 33 CD 00 00
+R 00 00 00 00 00 03 01 00 02 0E 01 00
+T 0E 00 F1 AF 57 1E 02 D5 CD 00 00 F1 AF 57 1E 04
+R 00 00 00 00 02 09 01 00
+T 1C 00 D5 CD 00 00 F1 AF 57 1E 06 D5 CD 00 00 F1
+R 00 00 00 00 02 04 01 00 02 0D 01 00
+T 2A 00 C9
+R 00 00 00 00
+T 00 00
+R 00 00 07 00
+T 00 00 00 00
+R 00 00 07 00

@@ -1,0 +1,203 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           cv_memtovmemcpy_fast
+     00000000  l__BSEG                         
+     00000000  l__BSS                          
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__HEADER                       
+     00000000  l__HEAP                         
+     00000000  l__HOME                         
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000000  s__HEADER                       
+     00000000  s__HEADER0                      
+     00000001  l__GSFINAL                      
+     00000002  l__INITIALIZED                  
+     00000002  l__INITIALIZER                  
+     0000002C  l__HEADER0                      
+     0000002D  l__GSINIT                       
+     00000088  l__DATA                         
+     0000075F  l__CODE                         
+     00007000  s__DATA                         
+     00007088  s__INITIALIZED                  
+     0000708A  s__BSEG                         
+     0000708A  s__BSS                          
+     0000708A  s__HEAP                         
+     00008100  s__CODE                         
+     0000885F  s__INITIALIZER                  
+     00008861  s__GSINIT                       
+     00008861  s__HOME                         
+     0000888E  s__GSFINAL                      
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00008100    0000075F =        1887. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00008100  _cv_start                          crt0
+     00008142  _move_cursor                       main
+     00008333  _IMAGE                             main
+     00008335  _SPRITES                           main
+     00008337  _SPRITE_PATTERNS                   main
+     00008339  _nmi                               main
+     0000833F  _main                              main
+     00008438  _sprite                            cursor_png_sprite
+     00008458  _cv_set_vint_handler               cv_set_vint_handler
+     00008466  _cv_init                           cv_init
+     00008491  _cv_set_screen_mode                cv_set_screen_mode
+     000084C3  _cv_set_write_vram_address         cv_set_write_vram_address
+     000084DE  _cv_set_color_table                cv_set_color_table
+     000084F3  _cvu_vmemset                       cvu_vmemset
+     0000854F  _cv_get_screen_active              cv_get_screen_active
+     0000855E  _cv_set_sprite_magnification       cv_set_sprite_magnification
+     00008574  _cv_vint                           cv_vint
+     0000858D  _cvu_get_sprite_x                  cvu_get_sprite_x
+     000085A6  _cvu_get_sprite_y                  cvu_get_sprite_y
+     000085B6  _cv_set_sprite_pattern_table       cv_set_sprite_pattern_table
+     000085CE  _cv_set_screen_active              cv_set_screen_active
+     000085F3  _cv_memtovmemcpy_slow              cv_memtovmemcpy_slow
+     00008614  _cv_set_character_pattern_t        cv_set_character_pattern_tab
+     0000862C  _cv_vmemset_fast                   cv_vmemset_fast
+     00008645  _cvu_set_sprite_x                  cvu_set_sprite_x
+     00008681  _cvu_set_sprite_y                  cvu_set_sprite_y
+     000086A4  ___sdcc_call_hl                    
+     000086A5  _cv_set_sprite_big                 cv_set_sprite_big
+     000086CA  _cv_set_image_table                cv_set_image_table
+     000086E1  _cv_set_attenuation                cv_set_attenuation
+     0000870D  _cvu_memtovmemcpy                  cvu_memtovmemcpy
+     00008769  _cv_set_sprite_attribute_table     cv_set_sprite_attribute_tabl
+     0000877E  ___sdcc_enter_ix                   
+     00008788  _cv_vdpout                         cv_vdpout
+     000087A0  _cv_get_screen_mode                cv_get_screen_mode
+     000087AE  _cv_get_controller_state           cv_get_controller_state
+     00008827  _cv_vmemset_slow                   cv_vmemset_slow
+     00008841  _cv_memtovmemcpy_fast              cv_memtovmemcpy_fast
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER0                            00000000    0000002C =          44. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZER                        0000885F    00000002 =           2. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSINIT                             00008861    0000002D =          45. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00008861  gsinit                             crt0
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSFINAL                            0000888E    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               00007000    00000088 =         136. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00007000  _step                              main
+     00007001  _s                                 main
+     00007082  _cv_spint_handler                  cv_init
+     00007084  _cv_vdpstat                        cv_init
+     00007085  _cv_vint_indicator                 cv_init
+     00007086  _cv_vdpreg                         cv_init
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZED                        00007088    00000002 =           2. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00007088  _cv_vint_handler                   cv_init
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+
+Files Linked                              [ module(s) ]
+
+../../bin/crt0.rel                        [ crt0 ]
+main.rel                                  [ main ]
+cursor.png.sprite.rel                     [ cursor_png_sprite ]
+
+
+Libraries Linked                          [ object file ]
+
+../../bin/libcv.lib                       [ cv_set_vint_handler.rel ]
+../../bin/libcv.lib                       [ cv_init.rel ]
+../../bin/libcv.lib                       [ cv_set_screen_mode.rel ]
+../../bin/libcv.lib                       [ cv_set_write_vram_address.rel ]
+../../bin/libcv.lib                       [ cv_set_color_table.rel ]
+../../bin/libcvu.lib                      [ cvu_vmemset.rel ]
+../../bin/libcv.lib                       [ cv_get_screen_active.rel ]
+../../bin/libcv.lib                       [ cv_set_sprite_magnification.rel ]
+../../bin/libcv.lib                       [ cv_vint.rel ]
+../../bin/libcvu.lib                      [ cvu_get_sprite_x.rel ]
+../../bin/libcvu.lib                      [ cvu_get_sprite_y.rel ]
+../../bin/libcv.lib                       [ cv_set_sprite_pattern_table.rel ]
+../../bin/libcv.lib                       [ cv_set_screen_active.rel ]
+../../bin/libcv.lib                       [ cv_memtovmemcpy_slow.rel ]
+../../bin/libcv.lib                       [ cv_set_character_pattern_table.r ]
+../../bin/libcv.lib                       [ cv_vmemset_fast.rel ]
+../../bin/libcvu.lib                      [ cvu_set_sprite_x.rel ]
+../../bin/libcvu.lib                      [ cvu_set_sprite_y.rel ]
+/usr/local/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ __sdcc_call_hl.rel ]
+../../bin/libcv.lib                       [ cv_set_sprite_big.rel ]
+../../bin/libcv.lib                       [ cv_set_image_table.rel ]
+../../bin/libcv.lib                       [ cv_set_attenuation.rel ]
+../../bin/libcvu.lib                      [ cvu_memtovmemcpy.rel ]
+../../bin/libcv.lib                       [ cv_set_sprite_attribute_table.re ]
+/usr/local/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ crtenter.rel ]
+../../bin/libcv.lib                       [ cv_vdpout.rel ]
+../../bin/libcv.lib                       [ cv_get_screen_mode.rel ]
+../../bin/libcv.lib                       [ cv_get_controller_state.rel ]
+../../bin/libcv.lib                       [ cv_vmemset_slow.rel ]
+../../bin/libcv.lib                       [ cv_memtovmemcpy_fast.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+
+User Base Address Definitions
+
+_CODE = 0x8100
+_DATA = 0x7000
+
+

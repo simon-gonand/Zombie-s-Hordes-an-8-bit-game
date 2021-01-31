@@ -1,0 +1,50 @@
+XL2
+H 9 areas 5 global symbols
+M cvu_get_spinner
+O -mz80
+S .__.ABS. Def0000
+S _cv_set_spint_handler Ref0000
+A _CODE size 5A flags 0 addr 0
+S _cvu_get_spinner Def0035
+S _cvu_spint_handler Def0000
+A _DATA size 2 flags 0 addr 0
+S _cvu_spinners Def0000
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 00 00
+T 00 00 21 02 00 39 7E CB 67 20 12 CB 6F 28 08 01
+R 00 00 00 00
+T 0E 00 00 00 0A 3C 02 18 06
+R 00 00 00 00 00 02 01 00
+T 15 00
+R 00 00 00 00
+T 15 00 01 00 00 0A 3D 02
+R 00 00 00 00 00 03 01 00
+T 1B 00
+R 00 00 00 00
+T 1B 00 21 03 00 39 7E CB 67 C0 CB 6F 28 07 01
+R 00 00 00 00
+T 28 00 01 00 0A 3C 02 C9
+R 00 00 00 00 00 02 01 00
+T 2E 00
+R 00 00 00 00
+T 2E 00 01 01 00 0A 3D 02 C9
+R 00 00 00 00 00 03 01 00
+T 35 00
+R 00 00 00 00
+T 35 00 21 00 00 E5 CD 00 00 F1 3E 00 00 21 02 00
+R 00 00 00 00 02 07 01 00 09 0B 01 00
+T 42 00 39 86 4F 3E 00 00 CE 00 47 0A 5F AF 02 D5
+R 00 00 00 00 89 06 01 00
+T 4F 00 21 00 00 E5 CD 00 00 F1 D1 6B C9
+R 00 00 00 00 00 03 00 00 02 07 01 00

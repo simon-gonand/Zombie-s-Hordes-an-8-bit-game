@@ -1,0 +1,10 @@
+XL2
+H 1 areas 2 global symbols
+M cv_get_r
+S .__.ABS. Def0000
+A _CODE size 4 flags 0 addr 0
+S _cv_get_r Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 ED 5F 6F C9
+R 00 00 00 00

@@ -1,0 +1,23 @@
+XL2
+H 9 areas 2 global symbols
+M cvu_tuning_scientific_equal
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 1E flags 0 addr 0
+S _CVU_TUNING_SCIENTIFIC_EQUAL Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 72 DA 2F CE 9D C2 B1 B7 61 AD A6 A3 77 9A
+R 00 00 00 00
+T 0E 00 CB 91 9D 89 E3 81 99 7A B8 73 00 00 00 00
+R 00 00 00 00
+T 1C 00 00 00
+R 00 00 00 00

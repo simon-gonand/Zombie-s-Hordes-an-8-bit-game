@@ -1,0 +1,157 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_vmemset
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_vmemset_slow
+                             12 	.globl _cv_vmemset_fast
+                             13 	.globl _cv_set_write_vram_address
+                             14 	.globl _cv_get_screen_mode
+                             15 	.globl _cv_get_screen_active
+                             16 	.globl _cvu_vmemset
+                             17 ;--------------------------------------------------------
+                             18 ; special function registers
+                             19 ;--------------------------------------------------------
+                     00BE    20 _cv_graphics_port	=	0x00be
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _DATA
+                             25 ;--------------------------------------------------------
+                             26 ; ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _INITIALIZED
+                             29 ;--------------------------------------------------------
+                             30 ; absolute external ram data
+                             31 ;--------------------------------------------------------
+                             32 	.area _DABS (ABS)
+                             33 ;--------------------------------------------------------
+                             34 ; global & static initialisations
+                             35 ;--------------------------------------------------------
+                             36 	.area _HOME
+                             37 	.area _GSINIT
+                             38 	.area _GSFINAL
+                             39 	.area _GSINIT
+                             40 ;--------------------------------------------------------
+                             41 ; Home
+                             42 ;--------------------------------------------------------
+                             43 	.area _HOME
+                             44 	.area _HOME
+                             45 ;--------------------------------------------------------
+                             46 ; code
+                             47 ;--------------------------------------------------------
+                             48 	.area _CODE
+                             49 ;src/cvu_vmemset.c:8: void cvu_vmemset(cv_vmemp dest, int c, size_t n)
+                             50 ;	genLabel
+                             51 ;	genFunction
+                             52 ;	---------------------------------
+                             53 ; Function cvu_vmemset
+                             54 ; ---------------------------------
+                             55 ;	Register assignment is optimal.
+                             56 ; Stack space usage: 0 bytes.
+   0000                      57 _cvu_vmemset::
+                             58 ;src/cvu_vmemset.c:10: cv_set_write_vram_address(dest);
+                             59 ;	genIpush
+                             60 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             61 ;fetchPairLong
+   0000 C1            [10]   62 	pop	bc
+   0001 E1            [10]   63 	pop	hl
+   0002 E5            [11]   64 	push	hl
+   0003 C5            [11]   65 	push	bc
+   0004 E5            [11]   66 	push	hl
+                             67 ;	genCall
+   0005 CDr00r00      [17]   68 	call	_cv_set_write_vram_address
+   0008 F1            [10]   69 	pop	af
+                             70 ;src/cvu_vmemset.c:11: if(cv_get_screen_active() &&
+                             71 ;	genCall
+   0009 CDr00r00      [17]   72 	call	_cv_get_screen_active
+                             73 ;	genMove_o
+                             74 ;	genMove_o
+                             75 ;	genIfx
+   000C CB 45         [ 8]   76 	bit	0, l
+   000E 28 2E         [12]   77 	jr	Z,00102$
+                             78 ; peephole 163 changed absolute to relative conditional jump.
+                             79 ;src/cvu_vmemset.c:12: cv_get_screen_mode() != CV_SCREENMODE_TEXT &&
+                             80 ;	genCall
+   0010 CDr00r00      [17]   81 	call	_cv_get_screen_mode
+                             82 ;	genMove_o
+   0013 7D            [ 4]   83 	ld	a, l
+                             84 ;	genMove_o
+                             85 ;	genCmpEq
+   0014 D6 10         [ 7]   86 	sub	a, #0x10
+   0016 28 26         [12]   87 	jr	Z,00102$
+                             88 ; peephole 163 changed absolute to relative conditional jump.
+                             89 ; peephole 81 removed jp by using inverse jump logic
+                             90 ; peephole 158 removed unused label 00123$.
+                             91 ;src/cvu_vmemset.c:13: cv_get_screen_mode() != CV_SCREENMODE_MULTICOLOR)
+                             92 ;	genCall
+   0018 CDr00r00      [17]   93 	call	_cv_get_screen_mode
+                             94 ;	genMove_o
+   001B 7D            [ 4]   95 	ld	a, l
+                             96 ;	genMove_o
+                             97 ;	genCmpEq
+   001C D6 08         [ 7]   98 	sub	a, #0x08
+   001E 28 1E         [12]   99 	jr	Z,00102$
+                            100 ; peephole 163 changed absolute to relative conditional jump.
+                            101 ; peephole 81 removed jp by using inverse jump logic
+                            102 ; peephole 158 removed unused label 00124$.
+                            103 ;src/cvu_vmemset.c:14: cv_vmemset_slow(c, n);
+                            104 ;	genIpush
+                            105 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 6, size 2
+                            106 ;fetchPairLong
+   0020 FD 21 06 00   [14]  107 	ld	iy, #6
+   0024 FD 39         [15]  108 	add	iy, sp
+   0026 FD 6E 00      [19]  109 	ld	l, 0 (iy)
+   0029 FD 66 01      [19]  110 	ld	h, 1 (iy)
+   002C E5            [11]  111 	push	hl
+                            112 ;	genIpush
+                            113 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 4, size 2
+                            114 ;fetchPairLong
+   002D FD 2B         [10]  115 	dec	iy
+   002F FD 2B         [10]  116 	dec	iy
+   0031 FD 6E 00      [19]  117 	ld	l, 0 (iy)
+   0034 FD 66 01      [19]  118 	ld	h, 1 (iy)
+   0037 E5            [11]  119 	push	hl
+                            120 ;	genCall
+   0038 CDr00r00      [17]  121 	call	_cv_vmemset_slow
+   003B F1            [10]  122 	pop	af
+   003C F1            [10]  123 	pop	af
+                            124 ;	genGoto
+   003D C9            [10]  125 	ret
+                            126 ; peephole 160 replaced jump by return.
+                            127 ;	genLabel
+   003E                     128 00102$:
+                            129 ;src/cvu_vmemset.c:16: cv_vmemset_fast(c, n);
+                            130 ;	genIpush
+                            131 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 6, size 2
+                            132 ;fetchPairLong
+   003E FD 21 06 00   [14]  133 	ld	iy, #6
+   0042 FD 39         [15]  134 	add	iy, sp
+   0044 FD 6E 00      [19]  135 	ld	l, 0 (iy)
+   0047 FD 66 01      [19]  136 	ld	h, 1 (iy)
+   004A E5            [11]  137 	push	hl
+                            138 ;	genIpush
+                            139 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 4, size 2
+                            140 ;fetchPairLong
+   004B FD 2B         [10]  141 	dec	iy
+   004D FD 2B         [10]  142 	dec	iy
+   004F FD 6E 00      [19]  143 	ld	l, 0 (iy)
+   0052 FD 66 01      [19]  144 	ld	h, 1 (iy)
+   0055 E5            [11]  145 	push	hl
+                            146 ;	genCall
+   0056 CDr00r00      [17]  147 	call	_cv_vmemset_fast
+   0059 F1            [10]  148 	pop	af
+   005A F1            [10]  149 	pop	af
+                            150 ;	genLabel
+                            151 ; peephole 158 removed unused label 00106$.
+                            152 ;src/cvu_vmemset.c:17: }
+                            153 ;	genEndFunction
+   005B C9            [10]  154 	ret
+                            155 	.area _CODE
+                            156 	.area _INITIALIZER
+                            157 	.area _CABS (ABS)

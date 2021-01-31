@@ -1,0 +1,13 @@
+XL2
+H 1 areas 3 global symbols
+M _read_from_array
+S __common_state Ref0000
+S .__.ABS. Def0000
+A _CODE size 11 flags 0 addr 0
+S __read_from_array Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 2A 00 00 01 0F 00 09 5E 23 56 1A 13 72 2B
+R 00 00 00 00 02 03 00 00
+T 0E 00 73 6F C9
+R 00 00 00 00

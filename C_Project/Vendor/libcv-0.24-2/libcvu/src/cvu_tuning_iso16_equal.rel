@@ -1,0 +1,23 @@
+XL2
+H 9 areas 2 global symbols
+M cvu_tuning_iso16_equal
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 1E flags 0 addr 0
+S _CVU_TUNING_ISO16_EQUAL Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 BF D5 C0 C9 6D BE BD B3 A7 A9 21 A0 24 97
+R 00 00 00 00
+T 0E 00 A9 8E A7 86 18 7F F6 77 3B 71 00 00 00 00
+R 00 00 00 00
+T 1C 00 00 00
+R 00 00 00 00

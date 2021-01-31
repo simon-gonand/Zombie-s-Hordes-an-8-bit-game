@@ -1,0 +1,89 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_noise
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_set_noise
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                     007F    15 _port	=	0x007f
+                             16 ;--------------------------------------------------------
+                             17 ; ram data
+                             18 ;--------------------------------------------------------
+                             19 	.area _DATA
+                             20 ;--------------------------------------------------------
+                             21 ; ram data
+                             22 ;--------------------------------------------------------
+                             23 	.area _INITIALIZED
+                             24 ;--------------------------------------------------------
+                             25 ; absolute external ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DABS (ABS)
+                             28 ;--------------------------------------------------------
+                             29 ; global & static initialisations
+                             30 ;--------------------------------------------------------
+                             31 	.area _HOME
+                             32 	.area _GSINIT
+                             33 	.area _GSFINAL
+                             34 	.area _GSINIT
+                             35 ;--------------------------------------------------------
+                             36 ; Home
+                             37 ;--------------------------------------------------------
+                             38 	.area _HOME
+                             39 	.area _HOME
+                             40 ;--------------------------------------------------------
+                             41 ; code
+                             42 ;--------------------------------------------------------
+                             43 	.area _CODE
+                             44 ;src/cv_set_noise.c:9: void cv_set_noise(bool white, enum cv_shift shift)
+                             45 ;	genLabel
+                             46 ;	genFunction
+                             47 ;	---------------------------------
+                             48 ; Function cv_set_noise
+                             49 ; ---------------------------------
+                             50 ;	Register assignment is optimal.
+                             51 ; Stack space usage: 0 bytes.
+   0000                      52 _cv_set_noise::
+                             53 ;src/cv_set_noise.c:11: uint8_t n = 0xe0;
+                             54 ;	genAssign
+                             55 ;	genMove_o
+   0000 0E E0         [ 7]   56 	ld	c, #0xe0
+                             57 ;src/cv_set_noise.c:12: if(white)
+                             58 ;	genIfx
+                             59 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 1
+   0002 21 02 00      [10]   60 	ld	hl, #2+0
+   0005 39            [11]   61 	add	hl, sp
+   0006 CB 46         [12]   62 	bit	0, (hl)
+                             63 ; peephole 67 used hl instead of iy.
+   0008 28 02         [12]   64 	jr	Z,00102$
+                             65 ; peephole 163 changed absolute to relative conditional jump.
+                             66 ;src/cv_set_noise.c:13: n |= 0x04;
+                             67 ;	genAssign
+                             68 ;	genMove_o
+   000A 0E E4         [ 7]   69 	ld	c, #0xe4
+                             70 ;	genLabel
+   000C                      71 00102$:
+                             72 ;src/cv_set_noise.c:14: n |= shift;
+                             73 ;	genOr
+                             74 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 3, size 1
+   000C 79            [ 4]   75 	ld	a, c
+   000D 21 03 00      [10]   76 	ld	hl, #3+0
+   0010 39            [11]   77 	add	hl, sp
+   0011 B6            [ 7]   78 	or	a, (hl)
+                             79 ; peephole 68 used hl instead of iy.
+   0012 D3 7F         [11]   80 	out	(_port), a
+                             81 ;src/cv_set_noise.c:15: port = n;
+                             82 ;	genLabel
+                             83 ; peephole 158 removed unused label 00103$.
+                             84 ;src/cv_set_noise.c:16: }
+                             85 ;	genEndFunction
+   0014 C9            [10]   86 	ret
+                             87 	.area _CODE
+                             88 	.area _INITIALIZER
+                             89 	.area _CABS (ABS)

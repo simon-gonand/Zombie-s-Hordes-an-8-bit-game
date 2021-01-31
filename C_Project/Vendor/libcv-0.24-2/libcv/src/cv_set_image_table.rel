@@ -1,0 +1,22 @@
+XL2
+H 9 areas 3 global symbols
+M cv_set_image_table
+O -mz80
+S .__.ABS. Def0000
+S _cv_vdpout Ref0000
+A _CODE size 17 flags 0 addr 0
+S _cv_set_image_table Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 21 03 00 39 7E 0F 0F E6 3F 47 0E 00 C5 33
+R 00 00 00 00
+T 0E 00 3E 02 F5 33 CD 00 00 F1 C9
+R 00 00 00 00 02 07 01 00

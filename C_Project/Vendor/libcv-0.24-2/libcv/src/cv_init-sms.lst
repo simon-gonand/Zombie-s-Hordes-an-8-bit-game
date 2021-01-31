@@ -1,0 +1,239 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_init
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_find_vint_frequency
+                             12 	.globl _cv_set_vint_handler
+                             13 	.globl _cv_set_attenuation
+                             14 	.globl _cv_set_screen_active
+                             15 	.globl _cv_vint_handler
+                             16 	.globl _cv_vdpreg
+                             17 	.globl _cv_vint_indicator
+                             18 	.globl _cv_vdpstat
+                             19 	.globl _cv_spint_handler
+                             20 	.globl _cv_init
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
+                     00BE    24 _cv_graphics_port	=	0x00be
+                             25 ;--------------------------------------------------------
+                             26 ; ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DATA
+   0000                      29 _cv_spint_handler::
+   0000                      30 	.ds 2
+   0002                      31 _cv_vdpstat::
+   0002                      32 	.ds 1
+   0003                      33 _cv_vint_indicator::
+   0003                      34 	.ds 1
+   0004                      35 _cv_vdpreg::
+   0004                      36 	.ds 2
+                             37 ;--------------------------------------------------------
+                             38 ; ram data
+                             39 ;--------------------------------------------------------
+                             40 	.area _INITIALIZED
+   0000                      41 _cv_vint_handler::
+   0000                      42 	.ds 2
+                             43 ;--------------------------------------------------------
+                             44 ; absolute external ram data
+                             45 ;--------------------------------------------------------
+                             46 	.area _DABS (ABS)
+                             47 ;--------------------------------------------------------
+                             48 ; global & static initialisations
+                             49 ;--------------------------------------------------------
+                             50 	.area _HOME
+                             51 	.area _GSINIT
+                             52 	.area _GSFINAL
+                             53 	.area _GSINIT
+                             54 ;--------------------------------------------------------
+                             55 ; Home
+                             56 ;--------------------------------------------------------
+                             57 	.area _HOME
+                             58 	.area _HOME
+                             59 ;--------------------------------------------------------
+                             60 ; code
+                             61 ;--------------------------------------------------------
+                             62 	.area _CODE
+                             63 ;src/cv_init.c:16: static void cv_set_vint_bit(void)
+                             64 ;	genLabel
+                             65 ;	genFunction
+                             66 ;	---------------------------------
+                             67 ; Function cv_set_vint_bit
+                             68 ; ---------------------------------
+                             69 ;	Register assignment is optimal.
+                             70 ; Stack space usage: 0 bytes.
+   0000                      71 _cv_set_vint_bit:
+                             72 ;src/cv_init.c:18: cv_machine_config |= 1;
+                             73 ;	genAssign
+                             74 ;fetchLitPair
+                             75 ; peephole 16 loaded _cv_machine_config into a directly instead of going through iy.
+   0000 3Ar00r00      [13]   76 	ld	a,(#_cv_machine_config + 0)
+                             77 ;	genOr
+   0003 F6 01         [ 7]   78 	or	a, #0x01
+   0005 32r00r00      [13]   79 	ld	(_cv_machine_config+0), a
+                             80 ;	genLabel
+                             81 ; peephole 158 removed unused label 00101$.
+                             82 ;src/cv_init.c:19: }
+                             83 ;	genEndFunction
+   0008 C9            [10]   84 	ret
+                             85 ;src/cv_init.c:21: void cv_find_vint_frequency(void)
+                             86 ;	genLabel
+                             87 ;	genFunction
+                             88 ;	---------------------------------
+                             89 ; Function cv_find_vint_frequency
+                             90 ; ---------------------------------
+                             91 ;	Register assignment is optimal.
+                             92 ; Stack space usage: 0 bytes.
+   0009                      93 _cv_find_vint_frequency::
+                             94 ;src/cv_init.c:23: cv_set_vint_handler(&cv_set_vint_bit);
+                             95 ;	genIpush
+                             96 ;fetchPairLong
+                             97 ;fetchLitPair
+   0009 21r00r00      [10]   98 	ld	hl, #_cv_set_vint_bit
+   000C E5            [11]   99 	push	hl
+                            100 ;	genCall
+   000D CDr00r00      [17]  101 	call	_cv_set_vint_handler
+   0010 F1            [10]  102 	pop	af
+                            103 ;src/cv_init.c:24: cv_set_screen_active(true);
+                            104 ;	genIpush
+   0011 3E 01         [ 7]  105 	ld	a, #0x01
+   0013 F5            [11]  106 	push	af
+   0014 33            [ 6]  107 	inc	sp
+                            108 ;	genCall
+   0015 CDr00r00      [17]  109 	call	_cv_set_screen_active
+   0018 33            [ 6]  110 	inc	sp
+                            111 ;src/cv_init.c:48: __endasm;
+                            112 ;	genInline
+                            113 ;	genInline
+                            114 ;
+   0019 11 00 00      [10]  115 	ld	de, #0
+   001C 21r00r00      [10]  116 	ld	hl, #_cv_machine_config
+   001F CB 86         [15]  117 	res	0, (hl)
+   0021                     118 	wait1:
+   0021 CB 46         [12]  119 	bit	0, (hl)
+   0023 28 FC         [12]  120 	jr	z, wait1
+   0025 CB 86         [15]  121 	res	0, (hl)
+   0027                     122 	wait2:
+   0027 13            [ 6]  123 	inc	de
+   0028 CB 46         [12]  124 	bit	0, (hl)
+   002A 28 FB         [12]  125 	jr	z, wait2
+   002C 3E 08         [ 7]  126 	ld	a, #8
+   002E BA            [ 4]  127 	cp	a, d
+   002F 38 04         [12]  128 	jr	c, pal
+   0031                     129 	ntsc:
+   0031 3E 3C         [ 7]  130 	ld	a, #60
+   0033 18 02         [12]  131 	jr	cont
+   0035                     132 	pal:
+   0035 3E 32         [ 7]  133 	ld	a, #50
+   0037                     134 	cont:
+   0037 B6            [ 7]  135 	or	a, (hl)
+   0038 77            [ 7]  136 	ld	(hl), a
+                            137 ;src/cv_init.c:49: cv_set_screen_active(false);
+                            138 ;	genIpush
+   0039 AF            [ 4]  139 	xor	a, a
+   003A F5            [11]  140 	push	af
+   003B 33            [ 6]  141 	inc	sp
+                            142 ;	genCall
+   003C CDr00r00      [17]  143 	call	_cv_set_screen_active
+   003F 33            [ 6]  144 	inc	sp
+                            145 ;src/cv_init.c:50: cv_set_vint_handler(0);
+                            146 ;	genIpush
+                            147 ;fetchPairLong
+                            148 ;fetchLitPair
+   0040 21 00 00      [10]  149 	ld	hl, #0x0000
+   0043 E5            [11]  150 	push	hl
+                            151 ;	genCall
+   0044 CDr00r00      [17]  152 	call	_cv_set_vint_handler
+   0047 F1            [10]  153 	pop	af
+                            154 ;src/cv_init.c:51: cv_machine_config &= ~1;
+                            155 ;	genAnd
+                            156 ;fetchLitPair
+                            157 ; peephole 16 loaded _cv_machine_config into a directly instead of going through iy.
+   0048 3Ar00r00      [13]  158 	ld	a,(#_cv_machine_config + 0)
+   004B E6 FE         [ 7]  159 	and	a, #0xfe
+   004D 32r00r00      [13]  160 	ld	(_cv_machine_config+0), a
+                            161 ;	genLabel
+                            162 ; peephole 158 removed unused label 00101$.
+                            163 ;src/cv_init.c:52: }
+                            164 ;	genEndFunction
+   0050 C9            [10]  165 	ret
+                            166 ;src/cv_init.c:55: void cv_init(void)
+                            167 ;	genLabel
+                            168 ;	genFunction
+                            169 ;	---------------------------------
+                            170 ; Function cv_init
+                            171 ; ---------------------------------
+                            172 ;	Register assignment is optimal.
+                            173 ; Stack space usage: 0 bytes.
+   0051                     174 _cv_init::
+                            175 ;src/cv_init.c:58: cv_vdpreg[1] = 0xa0;
+                            176 ;	genAssign (pointer)
+                            177 ;	isBitvar = 0
+                            178 ;fetchPairLong
+                            179 ;fetchLitPair
+   0051 21r05r00      [10]  180 	ld	hl, #(_cv_vdpreg + 0x0001)
+   0054 36 A0         [10]  181 	ld	(hl), #0xa0
+                            182 ;src/cv_init.c:61: cv_set_attenuation(CV_SOUNDCHANNEL_0, 0);
+                            183 ;	genIpush
+   0056 AF            [ 4]  184 	xor	a, a
+   0057 F5            [11]  185 	push	af
+   0058 33            [ 6]  186 	inc	sp
+                            187 ;	genIpush
+   0059 AF            [ 4]  188 	xor	a, a
+   005A F5            [11]  189 	push	af
+   005B 33            [ 6]  190 	inc	sp
+                            191 ;	genCall
+   005C CDr00r00      [17]  192 	call	_cv_set_attenuation
+   005F F1            [10]  193 	pop	af
+                            194 ;src/cv_init.c:62: cv_set_attenuation(CV_SOUNDCHANNEL_1, 0);
+                            195 ;	genIpush
+   0060 AF            [ 4]  196 	xor	a, a
+                            197 ;	genIpush
+                            198 ; peephole 37 pushed de instead of pushing a twice.
+   0061 57            [ 4]  199 	ld	d,a
+   0062 1E 02         [ 7]  200 	ld	e,#0x02
+   0064 D5            [11]  201 	push	de
+                            202 ;	genCall
+   0065 CDr00r00      [17]  203 	call	_cv_set_attenuation
+   0068 F1            [10]  204 	pop	af
+                            205 ;src/cv_init.c:63: cv_set_attenuation(CV_SOUNDCHANNEL_2, 0);
+                            206 ;	genIpush
+   0069 AF            [ 4]  207 	xor	a, a
+                            208 ;	genIpush
+                            209 ; peephole 37 pushed de instead of pushing a twice.
+   006A 57            [ 4]  210 	ld	d,a
+   006B 1E 04         [ 7]  211 	ld	e,#0x04
+   006D D5            [11]  212 	push	de
+                            213 ;	genCall
+   006E CDr00r00      [17]  214 	call	_cv_set_attenuation
+   0071 F1            [10]  215 	pop	af
+                            216 ;src/cv_init.c:64: cv_set_attenuation(CV_SOUNDCHANNEL_NOISE, 0);
+                            217 ;	genIpush
+   0072 AF            [ 4]  218 	xor	a, a
+                            219 ;	genIpush
+                            220 ; peephole 37 pushed de instead of pushing a twice.
+   0073 57            [ 4]  221 	ld	d,a
+   0074 1E 06         [ 7]  222 	ld	e,#0x06
+   0076 D5            [11]  223 	push	de
+                            224 ;	genCall
+   0077 CDr00r00      [17]  225 	call	_cv_set_attenuation
+   007A F1            [10]  226 	pop	af
+                            227 ;src/cv_init.c:69: cv_find_vint_frequency();
+                            228 ;	genCall
+                            229 ;	genLabel
+                            230 ; peephole 158 removed unused label 00101$.
+                            231 ;src/cv_init.c:71: }
+                            232 ;	genEndFunction
+   007B C3r09r00      [10]  233 	jp	_cv_find_vint_frequency
+                            234 ; peephole 152 removed unused ret.
+                            235 	.area _CODE
+                            236 	.area _INITIALIZER
+   0000                     237 __xinit__cv_vint_handler:
+   0000 00 00               238 	.dw #0x0000
+                            239 	.area _CABS (ABS)

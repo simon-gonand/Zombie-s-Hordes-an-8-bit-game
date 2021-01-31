@@ -1,0 +1,39 @@
+                              1 ; (c) 2005 Philipp Krause pkk@spth.de
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 .module cvu_get_sprite_x
+                             18 
+                             19 .globl _cvu_get_sprite_x
+                             20 
+                             21 ; int cvu_get_sprite_x(const struct cvu_sprite *sprite);
+                             22 
+   0000                      23 _cvu_get_sprite_x:
+   0000 E1            [10]   24 	pop hl
+   0001 FD E1         [14]   25 	pop iy
+   0003 FD E5         [15]   26 	push iy
+   0005 E5            [11]   27 	push hl
+   0006 26 00         [ 7]   28 	ld h, #0
+   0008 FD 6E 01      [19]   29 	ld l, 1(iy)
+   000B FD CB 03 7E   [20]   30 	bit 7, 3(iy)
+   000F C8            [11]   31 	ret z
+   0010 7D            [ 4]   32 	ld a, l
+   0011 C6 E0         [ 7]   33 	add a, #0xe0
+   0013 6F            [ 4]   34 	ld l, a
+   0014 7C            [ 4]   35 	ld a, h
+   0015 CE FF         [ 7]   36 	adc a, #0xff
+   0017 67            [ 4]   37 	ld h, a
+   0018 C9            [10]   38 	ret
+                             39 

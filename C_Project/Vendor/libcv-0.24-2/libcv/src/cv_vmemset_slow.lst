@@ -1,0 +1,51 @@
+                              1 ; (c) 2003 - 2007 Philipp Klaus Krause philipp@colecovision.eu
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 
+                             18 ; This is the slow graphics memory setting funtion. It needs 8.4 µs per byte.
+                             19 
+                             20 
+                             21 .module cv_vmemset_slow
+                             22 
+                             23 .globl _cv_vmemset_slow
+                             24 
+                             25 ; void cv_vmemset_slow(int c, size_t n);
+                             26 
+   0000                      27 _cv_vmemset_slow:	
+   0000 E1            [10]   28 	pop hl
+   0001 D1            [10]   29 	pop de	; c
+   0002 C1            [10]   30 	pop bc	; n
+   0003 C5            [11]   31 	push bc
+   0004 D5            [11]   32 	push de
+   0005 78            [ 4]   33 	ld a, b
+   0006 41            [ 4]   34 	ld b, c
+   0007 4F            [ 4]   35 	ld c, a
+   0008 B0            [ 4]   36 	or a, b
+   0009 28 0E         [12]   37 	jr z, Ende
+   000B 78            [ 4]   38 	ld a, b
+   000C B7            [ 4]   39 	or a
+   000D 7B            [ 4]   40 	ld a, e
+   000E 28 01         [12]   41 	jr z, Weiter
+   0010 0C            [ 4]   42 	inc c
+   0011                      43 Weiter:
+   0011 D3 BE         [11]   44 	out (0xbe), a
+   0013 1B            [ 6]   45 	dec	de	; delay by 6 cycles
+   0014 10 FB         [13]   46 	djnz Weiter
+   0016 0D            [ 4]   47 	dec c
+   0017 20 F8         [12]   48 	jr nz, Weiter
+   0019                      49 Ende:
+   0019 E9            [ 4]   50 	jp (hl)
+                             51 

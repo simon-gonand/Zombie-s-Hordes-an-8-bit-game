@@ -1,0 +1,70 @@
+                              1 .module u_16_16_mul
+                              2 
+                              3 .globl __u_16_16_mul
+                              4 
+                              5 ; uint32_t _u_16_16_mul(uint16_t l, uint16_t r);
+                              6 
+                              7 .area _CODE
+                              8 
+                              9 ; 8x8->16 multiplication, takes arguments in e, h, returns result in hl. d has to be 0 before call.
+   0000                      10 u_16_16_mul_8_8:
+   0000 6A            [ 4]   11 	ld	l,d
+   0001 06 08         [ 7]   12 	ld      b,#8
+   0003                      13 muluchar_rrx_s_loop:
+   0003 29            [11]   14 	add     hl,hl
+   0004 30 01         [12]   15 	jr      nc,muluchar_rrx_s_noadd
+   0006 19            [11]   16 	add     hl,de
+   0007                      17 muluchar_rrx_s_noadd:
+   0007 10 FA         [13]   18 	djnz    muluchar_rrx_s_loop
+   0009 C9            [10]   19 	ret
+                             20 
+                             21 ; 16x16->32 multiplication
+   000A                      22 __u_16_16_mul:
+                             23 	; setup iy for stack access.
+   000A FD 21 00 00   [14]   24 	ld	iy,#0
+   000E FD 39         [15]   25 	add	iy,sp
+                             26 
+                             27 	; need one 32-bit local variable on stack.
+                             28 	
+   0010 16 00         [ 7]   29 	ld	d,#0
+                             30 
+                             31 	; Multiplication of upper bytes
+   0012 FD 5E 03      [19]   32 	ld	e,3 (iy)
+   0015 FD 66 05      [19]   33 	ld	h,5 (iy)
+   0018 CDr00r00      [17]   34 	call	u_16_16_mul_8_8
+   001B E5            [11]   35 	push	hl
+                             36 
+                             37 	; Multiplication of lower bytes
+   001C FD 5E 02      [19]   38 	ld	e,2 (iy)
+   001F FD 66 04      [19]   39 	ld	h,4 (iy)
+   0022 CDr00r00      [17]   40 	call	u_16_16_mul_8_8
+   0025 E5            [11]   41 	push	hl
+                             42 
+                             43 	; Mixed multiplications - add them together, add them to the result.
+   0026 FD 5E 03      [19]   44 	ld	e,3 (iy)
+   0029 FD 66 04      [19]   45 	ld	h,4 (iy)
+   002C CDr00r00      [17]   46 	call	u_16_16_mul_8_8
+   002F 4D            [ 4]   47 	ld	c,l
+   0030 7C            [ 4]   48 	ld	a,h
+   0031 FD 5E 02      [19]   49 	ld	e,2 (iy)
+   0034 FD 66 05      [19]   50 	ld	h,5 (iy)
+   0037 CDr00r00      [17]   51 	call	u_16_16_mul_8_8
+   003A 47            [ 4]   52 	ld	b,a
+   003B 09            [11]   53 	add	hl,bc
+   003C FD 56 FF      [19]   54 	ld	d,-1 (iy)
+   003F 30 01         [12]   55 	jr	NC,forward
+   0041 14            [ 4]   56 	inc	d
+   0042                      57 forward:
+   0042 FD 4E FD      [19]   58 	ld	c,-3 (iy)
+   0045 FD 46 FE      [19]   59 	ld	b,-2 (iy)
+   0048 09            [11]   60 	add	hl,bc
+   0049 30 01         [12]   61 	jr	NC,forward2
+   004B 14            [ 4]   62 	inc	d
+   004C                      63 forward2:
+   004C 5C            [ 4]   64 	ld	e,h
+   004D 65            [ 4]   65 	ld	h,l
+   004E FD 6E FC      [19]   66 	ld	l,-4 (iy)
+                             67 
+   0051 FD F9         [10]   68 	ld	sp,iy
+   0053 C9            [10]   69 	ret
+                             70 

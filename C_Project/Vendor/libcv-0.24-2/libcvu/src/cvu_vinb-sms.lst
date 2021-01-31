@@ -1,0 +1,87 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_vinb
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_set_read_vram_address
+                             12 	.globl _cvu_vinb
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cvu_vinb.c:5: uint8_t cvu_vinb(const cv_vmemp dest)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cvu_vinb
+                             50 ; ---------------------------------
+                             51 ;	Register assignment is optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cvu_vinb::
+                             54 ;src/cvu_vinb.c:7: cv_set_read_vram_address(dest);
+                             55 ;	genIpush
+                             56 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             57 ;fetchPairLong
+   0000 C1            [10]   58 	pop	bc
+   0001 E1            [10]   59 	pop	hl
+   0002 E5            [11]   60 	push	hl
+   0003 C5            [11]   61 	push	bc
+   0004 E5            [11]   62 	push	hl
+                             63 ;	genCall
+   0005 CDr00r00      [17]   64 	call	_cv_set_read_vram_address
+   0008 F1            [10]   65 	pop	af
+                             66 ;../libcv/include/cv_graphics.h:228: __endasm;
+                             67 ;	genInline
+                             68 ;	genInline
+   0009 BE            [ 7]   69 	cp	a, (hl)
+   000A BE            [ 7]   70 	cp	a, (hl)
+   000B 00            [ 4]   71 	nop
+                             72 ;../libcv/include/cv_graphics.h:229: return(cv_graphics_port);
+                             73 ;	genAssign
+   000C DB BE         [11]   74 	in	a, (_cv_graphics_port)
+                             75 ;src/cvu_vinb.c:8: return(cv_vinb());
+                             76 ;	genRet
+                             77 ;	genMove_o
+   000E 6F            [ 4]   78 	ld	l, a
+                             79 ;	genMove_o
+                             80 ;	genLabel
+                             81 ; peephole 158 removed unused label 00102$.
+                             82 ;src/cvu_vinb.c:9: }
+                             83 ;	genEndFunction
+   000F C9            [10]   84 	ret
+                             85 	.area _CODE
+                             86 	.area _INITIALIZER
+                             87 	.area _CABS (ABS)

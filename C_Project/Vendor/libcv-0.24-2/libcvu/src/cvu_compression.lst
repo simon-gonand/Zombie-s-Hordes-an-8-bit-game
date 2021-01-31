@@ -1,0 +1,305 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_compression
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl __read_from_array
+                             12 	.globl _cvu_get_rle
+                             13 	.globl _cvu_init_rle
+                             14 	.globl _cvu_get_huffman
+                             15 	.globl _cvu_init_huffman
+                             16 	.globl _cv_set_write_vram_address
+                             17 	.globl __common_state
+                             18 	.globl _cvu_init_compression
+                             19 	.globl _cvu_get_compression
+                             20 	.globl _cvu_memtovmemcpy_compression
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
+                     00BE    24 _cv_graphics_port	=	0x00be
+                             25 ;--------------------------------------------------------
+                             26 ; ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DATA
+   0000                      29 __common_state::
+   0000                      30 	.ds 2
+                             31 ;--------------------------------------------------------
+                             32 ; ram data
+                             33 ;--------------------------------------------------------
+                             34 	.area _INITIALIZED
+                             35 ;--------------------------------------------------------
+                             36 ; absolute external ram data
+                             37 ;--------------------------------------------------------
+                             38 	.area _DABS (ABS)
+                             39 ;--------------------------------------------------------
+                             40 ; global & static initialisations
+                             41 ;--------------------------------------------------------
+                             42 	.area _HOME
+                             43 	.area _GSINIT
+                             44 	.area _GSFINAL
+                             45 	.area _GSINIT
+                             46 ;--------------------------------------------------------
+                             47 ; Home
+                             48 ;--------------------------------------------------------
+                             49 	.area _HOME
+                             50 	.area _HOME
+                             51 ;--------------------------------------------------------
+                             52 ; code
+                             53 ;--------------------------------------------------------
+                             54 	.area _CODE
+                             55 ;src/cvu_compression.c:29: static uint8_t read_from_huffman(void)
+                             56 ;	genLabel
+                             57 ;	genFunction
+                             58 ;	---------------------------------
+                             59 ; Function read_from_huffman
+                             60 ; ---------------------------------
+                             61 ;	Register assignment is optimal.
+                             62 ; Stack space usage: 0 bytes.
+   0000                      63 _read_from_huffman:
+                             64 ;src/cvu_compression.c:31: return(cvu_get_huffman(&_common_state->huffman));
+                             65 ;	genAssign
+                             66 ;fetchPairLong
+   0000 2Ar00r00      [16]   67 	ld	hl, (__common_state)
+                             68 ;	genIpush
+   0003 E5            [11]   69 	push	hl
+                             70 ;	genCall
+   0004 CDr00r00      [17]   71 	call	_cvu_get_huffman
+   0007 F1            [10]   72 	pop	af
+                             73 ;	genMove_o
+                             74 ;	genMove_o
+                             75 ;	genRet
+                             76 ;	genMove_o
+                             77 ;	genMove_o
+                             78 ;	genLabel
+                             79 ; peephole 158 removed unused label 00101$.
+                             80 ;src/cvu_compression.c:32: }
+                             81 ;	genEndFunction
+   0008 C9            [10]   82 	ret
+                             83 ;src/cvu_compression.c:34: void cvu_init_compression(const uint8_t *restrict data, struct cvu_compression_state *restrict state, const struct cvu_huffman_node *restrict tree, uint8_t root, uint8_t ls, uint8_t bs, uint8_t rs, uint8_t escape)
+                             84 ;	genLabel
+                             85 ;	genFunction
+                             86 ;	---------------------------------
+                             87 ; Function cvu_init_compression
+                             88 ; ---------------------------------
+                             89 ;	Register assignment is optimal.
+                             90 ; Stack space usage: 0 bytes.
+   0009                      91 _cvu_init_compression::
+   0009 CDr00r00      [17]   92 	call	___sdcc_enter_ix
+                             93 ;src/cvu_compression.c:36: state->data = data;
+                             94 ;	genAssign
+                             95 ;	AOP_STK for 
+                             96 ;fetchPairLong
+   000C DD 4E 06      [19]   97 	ld	c, 6 (ix)
+   000F DD 46 07      [19]   98 	ld	b, 7 (ix)
+                             99 ;	genPlus
+                            100 ;fetchPairLong
+                            101 ;fetchLitPair
+   0012 21 0F 00      [10]  102 	ld	hl, #0x000f
+   0015 09            [11]  103 	add	hl, bc
+                            104 ;	genAssign (pointer)
+                            105 ;	AOP_STK for 
+                            106 ;	isBitvar = 0
+                            107 ;fetchPairLong
+   0016 DD 7E 04      [19]  108 	ld	a, 4 (ix)
+   0019 77            [ 7]  109 	ld	(hl), a
+   001A 23            [ 6]  110 	inc	hl
+   001B DD 7E 05      [19]  111 	ld	a, 5 (ix)
+   001E 77            [ 7]  112 	ld	(hl), a
+                            113 ;src/cvu_compression.c:37: cvu_init_huffman(&state->huffman, &_read_from_array, tree, root, ls, bs, rs);
+                            114 ;	genIpush
+   001F C5            [11]  115 	push	bc
+                            116 ;	AOP_STK for 
+                            117 ;	genIpush
+                            118 ;	AOP_STK for 
+                            119 ; peephole 47 pushed 13 (ix), 12 (ix) through hl instead of af.
+   0020 DD 66 0D      [19]  120 	ld	h, 13 (ix)
+   0023 DD 6E 0C      [19]  121 	ld	l, 12 (ix)
+   0026 E5            [11]  122 	push	hl
+                            123 ;	genIpush
+                            124 ;	AOP_STK for 
+                            125 ;	genIpush
+                            126 ;	AOP_STK for 
+                            127 ; peephole 47 pushed 11 (ix), 10 (ix) through hl instead of af.
+   0027 DD 66 0B      [19]  128 	ld	h, 11 (ix)
+   002A DD 6E 0A      [19]  129 	ld	l, 10 (ix)
+   002D E5            [11]  130 	push	hl
+                            131 ;	genIpush
+                            132 ;	AOP_STK for 
+                            133 ;fetchPairLong
+   002E DD 6E 08      [19]  134 	ld	l, 8 (ix)
+   0031 DD 66 09      [19]  135 	ld	h, 9 (ix)
+   0034 E5            [11]  136 	push	hl
+                            137 ;	genIpush
+                            138 ;fetchPairLong
+                            139 ;fetchLitPair
+   0035 21r00r00      [10]  140 	ld	hl, #__read_from_array
+   0038 E5            [11]  141 	push	hl
+                            142 ;	genIpush
+   0039 C5            [11]  143 	push	bc
+                            144 ;	genCall
+   003A CDr00r00      [17]  145 	call	_cvu_init_huffman
+   003D 21 0A 00      [10]  146 	ld	hl, #10
+   0040 39            [11]  147 	add	hl, sp
+   0041 F9            [ 6]  148 	ld	sp, hl
+   0042 C1            [10]  149 	pop	bc
+                            150 ;src/cvu_compression.c:38: cvu_init_rle(&state->rle, &read_from_huffman, escape);
+                            151 ;	genPlus
+                            152 ;fetchPairLong
+                            153 ;fetchLitPair
+   0043 21 0A 00      [10]  154 	ld	hl, #0x000a
+   0046 09            [11]  155 	add	hl, bc
+   0047 EB            [ 4]  156 	ex	de, hl
+                            157 ;	genIpush
+                            158 ;	AOP_STK for 
+   0048 DD 7E 0E      [19]  159 	ld	a, 14 (ix)
+   004B F5            [11]  160 	push	af
+   004C 33            [ 6]  161 	inc	sp
+                            162 ;	genIpush
+                            163 ;fetchPairLong
+                            164 ;fetchLitPair
+   004D 21r00r00      [10]  165 	ld	hl, #_read_from_huffman
+   0050 E5            [11]  166 	push	hl
+                            167 ;	genIpush
+   0051 D5            [11]  168 	push	de
+                            169 ;	genCall
+   0052 CDr00r00      [17]  170 	call	_cvu_init_rle
+   0055 F1            [10]  171 	pop	af
+   0056 F1            [10]  172 	pop	af
+   0057 33            [ 6]  173 	inc	sp
+                            174 ;	genLabel
+                            175 ; peephole 158 removed unused label 00101$.
+                            176 ;src/cvu_compression.c:39: }
+                            177 ;	genEndFunction
+   0058 DD E1         [14]  178 	pop	ix
+   005A C9            [10]  179 	ret
+                            180 ;src/cvu_compression.c:41: uint8_t cvu_get_compression(struct cvu_compression_state *state)
+                            181 ;	genLabel
+                            182 ;	genFunction
+                            183 ;	---------------------------------
+                            184 ; Function cvu_get_compression
+                            185 ; ---------------------------------
+                            186 ;	Register assignment is optimal.
+                            187 ; Stack space usage: 0 bytes.
+   005B                     188 _cvu_get_compression::
+                            189 ;src/cvu_compression.c:43: _common_state = state;
+                            190 ;	genAssign
+                            191 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+   005B 11r00r00      [10]  192 	ld	de, #__common_state
+   005E 21 02 00      [10]  193 	ld	hl, #2
+   0061 39            [11]  194 	add	hl, sp
+   0062 ED A0         [16]  195 	ldi
+   0064 ED A0         [16]  196 	ldi
+                            197 ;src/cvu_compression.c:44: return(cvu_get_rle(&_common_state->rle));
+                            198 ;	genAssign
+                            199 ;fetchPairLong
+   0066 2Ar00r00      [16]  200 	ld	hl, (__common_state)
+                            201 ;	genPlus
+                            202 ;fetchPairLong
+                            203 ;fetchLitPair
+   0069 01 0A 00      [10]  204 	ld	bc, #0x000a
+   006C 09            [11]  205 	add	hl, bc
+                            206 ;	genIpush
+   006D E5            [11]  207 	push	hl
+                            208 ;	genCall
+   006E CDr00r00      [17]  209 	call	_cvu_get_rle
+   0071 F1            [10]  210 	pop	af
+                            211 ;	genMove_o
+                            212 ;	genMove_o
+                            213 ;	genRet
+                            214 ;	genMove_o
+                            215 ;	genMove_o
+                            216 ;	genLabel
+                            217 ; peephole 158 removed unused label 00101$.
+                            218 ;src/cvu_compression.c:45: }
+                            219 ;	genEndFunction
+   0072 C9            [10]  220 	ret
+                            221 ;src/cvu_compression.c:47: void cvu_memtovmemcpy_compression(cv_vmemp dest, struct cvu_compression_state *state, size_t n)
+                            222 ;	genLabel
+                            223 ;	genFunction
+                            224 ;	---------------------------------
+                            225 ; Function cvu_memtovmemcpy_compression
+                            226 ; ---------------------------------
+                            227 ;	Register assignment might be sub-optimal.
+                            228 ; Stack space usage: 0 bytes.
+   0073                     229 _cvu_memtovmemcpy_compression::
+   0073 CDr00r00      [17]  230 	call	___sdcc_enter_ix
+                            231 ;src/cvu_compression.c:49: _common_state = state;
+                            232 ;	genAssign
+                            233 ;	AOP_STK for 
+                            234 ;fetchPairLong
+   0076 DD 6E 06      [19]  235 	ld	l, 6 (ix)
+   0079 DD 66 07      [19]  236 	ld	h, 7 (ix)
+   007C 22r00r00      [16]  237 	ld	(__common_state), hl
+                            238 ;src/cvu_compression.c:50: cv_set_write_vram_address(dest);
+                            239 ;	genIpush
+                            240 ;	AOP_STK for 
+                            241 ;fetchPairLong
+   007F DD 6E 04      [19]  242 	ld	l, 4 (ix)
+   0082 DD 66 05      [19]  243 	ld	h, 5 (ix)
+   0085 E5            [11]  244 	push	hl
+                            245 ;	genCall
+   0086 CDr00r00      [17]  246 	call	_cv_set_write_vram_address
+   0089 F1            [10]  247 	pop	af
+                            248 ;	genAssign
+                            249 ;	AOP_STK for 
+                            250 ;fetchPairLong
+   008A DD 4E 08      [19]  251 	ld	c, 8 (ix)
+   008D DD 46 09      [19]  252 	ld	b, 9 (ix)
+                            253 ;	genLabel
+   0090                     254 00104$:
+                            255 ;src/cvu_compression.c:51: for(;n > 0; n--)
+                            256 ;	genIfx
+   0090 78            [ 4]  257 	ld	a, b
+   0091 B1            [ 4]  258 	or	a, c
+   0092 28 17         [12]  259 	jr	Z,00106$
+                            260 ; peephole 163 changed absolute to relative conditional jump.
+                            261 ;src/cvu_compression.c:52: cv_voutb(cvu_get_rle(&_common_state->rle));
+                            262 ;	genAssign
+                            263 ;fetchPairLong
+   0094 2Ar00r00      [16]  264 	ld	hl, (__common_state)
+                            265 ;	genPlus
+                            266 ;fetchPairLong
+                            267 ;fetchLitPair
+   0097 11 0A 00      [10]  268 	ld	de, #0x000a
+   009A 19            [11]  269 	add	hl, de
+                            270 ;	genIpush
+   009B C5            [11]  271 	push	bc
+   009C E5            [11]  272 	push	hl
+                            273 ;	genCall
+   009D CDr00r00      [17]  274 	call	_cvu_get_rle
+   00A0 F1            [10]  275 	pop	af
+                            276 ;	genMove_o
+   00A1 7D            [ 4]  277 	ld	a, l
+                            278 ;	genMove_o
+   00A2 C1            [10]  279 	pop	bc
+                            280 ;	genAssign
+                            281 ;	(locations are the same)
+                            282 ;../libcv/include/cv_graphics.h:218: __endasm;
+                            283 ;	genInline
+                            284 ;	genInline
+   00A3 BE            [ 7]  285 	cp	a, (hl)
+   00A4 BE            [ 7]  286 	cp	a, (hl)
+   00A5 00            [ 4]  287 	nop
+                            288 ;../libcv/include/cv_graphics.h:219: cv_graphics_port = value;
+                            289 ;	genAssign
+   00A6 D3 BE         [11]  290 	out	(_cv_graphics_port), a
+                            291 ;src/cvu_compression.c:51: for(;n > 0; n--)
+                            292 ;	genMinus
+   00A8 0B            [ 6]  293 	dec	bc
+                            294 ;	genGoto
+   00A9 18 E5         [12]  295 	jr	00104$
+                            296 ; peephole 162 changed absolute to relative unconditional jump.
+                            297 ;	genLabel
+   00AB                     298 00106$:
+                            299 ;src/cvu_compression.c:53: }
+                            300 ;	genEndFunction
+   00AB DD E1         [14]  301 	pop	ix
+   00AD C9            [10]  302 	ret
+                            303 	.area _CODE
+                            304 	.area _INITIALIZER
+                            305 	.area _CABS (ABS)

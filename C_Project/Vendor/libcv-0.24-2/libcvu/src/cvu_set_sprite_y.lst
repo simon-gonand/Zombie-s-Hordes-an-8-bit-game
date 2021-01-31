@@ -1,0 +1,64 @@
+                              1 ; (c) 2005 Philipp Krause pkk@spth.de
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 .module cvu_set_sprite_y
+                             18 
+                             19 .globl _cvu_set_sprite_y
+                             20 
+                             21 ; void cvu_set_sprite_y(struct cvu_sprite *sprite, int y);
+                             22 
+   0000                      23 _cvu_set_sprite_y:
+   0000 FD E1         [14]   24 	pop iy
+   0002 E1            [10]   25 	pop hl
+   0003 C1            [10]   26 	pop bc
+   0004 C5            [11]   27 	push bc
+   0005 E5            [11]   28 	push hl
+                             29 
+                             30 ;if(y > 207)
+                             31 ;	y = 207;
+   0006 3E CF         [ 7]   32 	ld a, #207
+   0008 91            [ 4]   33 	sub a, c
+   0009 3E 00         [ 7]   34 	ld a, #0
+   000B 98            [ 4]   35 	sbc a, b
+   000C F2r13r00      [10]   36 	jp p, g207c
+   000F 06 00         [ 7]   37 	ld b, #0
+   0011 0E CF         [ 7]   38 	ld c, #207
+   0013                      39 g207c:
+                             40 
+                             41 ;if(y < -32)
+                             42 ;	y = -32;
+   0013 79            [ 4]   43 	ld a, c
+   0014 D6 E0         [ 7]   44 	sub a, #0xe0
+   0016 78            [ 4]   45 	ld a, b
+   0017 DE FF         [ 7]   46 	sbc a, #0xff
+   0019 F2r20r00      [10]   47 	jp p, g32c
+   001C 06 FF         [ 7]   48 	ld b, #0xff
+   001E 0E E0         [ 7]   49 	ld c, #0xe0
+   0020                      50 g32c:
+                             51 
+                             52 ;if(y < 0)
+                             53 ;	y += 256;
+                             54 	;bit 7, b
+                             55 	;jp z, g0c
+                             56 	;dec c
+                             57 	;inc b
+                             58 ;g0c:
+                             59 
+                             60 ; sprite->y = y;
+   0020 71            [ 7]   61 	ld(hl), c
+                             62 
+   0021 FD E9         [ 8]   63 	jp(iy)
+                             64 

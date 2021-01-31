@@ -1,0 +1,219 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_get_spinner
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_spint_handler
+                             12 	.globl _cv_set_spint_handler
+                             13 	.globl _cvu_spinners
+                             14 	.globl _cvu_get_spinner
+                             15 ;--------------------------------------------------------
+                             16 ; special function registers
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+   0000                      22 _cvu_spinners::
+   0000                      23 	.ds 2
+                             24 ;--------------------------------------------------------
+                             25 ; ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _INITIALIZED
+                             28 ;--------------------------------------------------------
+                             29 ; absolute external ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _DABS (ABS)
+                             32 ;--------------------------------------------------------
+                             33 ; global & static initialisations
+                             34 ;--------------------------------------------------------
+                             35 	.area _HOME
+                             36 	.area _GSINIT
+                             37 	.area _GSFINAL
+                             38 	.area _GSINIT
+                             39 ;--------------------------------------------------------
+                             40 ; Home
+                             41 ;--------------------------------------------------------
+                             42 	.area _HOME
+                             43 	.area _HOME
+                             44 ;--------------------------------------------------------
+                             45 ; code
+                             46 ;--------------------------------------------------------
+                             47 	.area _CODE
+                             48 ;src/cvu_get_spinner.c:5: void cvu_spint_handler(uint_fast8_t port0, uint_fast8_t port1)
+                             49 ;	genLabel
+                             50 ;	genFunction
+                             51 ;	---------------------------------
+                             52 ; Function cvu_spint_handler
+                             53 ; ---------------------------------
+                             54 ;	Register assignment is optimal.
+                             55 ; Stack space usage: 0 bytes.
+   0000                      56 _cvu_spint_handler::
+                             57 ;src/cvu_get_spinner.c:7: if(!(port0 & 0x10))
+                             58 ;	genAssign
+                             59 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 1
+                             60 ; peephole 62 used hl instead of iy.
+   0000 21 02 00      [10]   61 	ld	hl, #2+0
+   0003 39            [11]   62 	add	hl, sp
+   0004 7E            [ 7]   63 	ld	a, (hl)
+                             64 ;	genAnd
+   0005 CB 67         [ 8]   65 	bit	4, a
+                             66 ; peephole 81 removed jp by using inverse jump logic
+                             67 ; peephole 158 removed unused label 00133$.
+   0007 20 12         [12]   68 	jr	NZ,00105$
+                             69 ; peephole 164 changed absolute to relative conditional jump.
+                             70 ; peephole 82 removed jp by using inverse jump logic
+                             71 ; peephole 158 removed unused label 00134$.
+                             72 ;src/cvu_get_spinner.c:9: if(port0 & 0x20)
+                             73 ;	genAnd
+   0009 CB 6F         [ 8]   74 	bit	5, a
+   000B 28 08         [12]   75 	jr	Z,00102$
+                             76 ; peephole 163 changed absolute to relative conditional jump.
+                             77 ; peephole 81 removed jp by using inverse jump logic
+                             78 ; peephole 158 removed unused label 00135$.
+                             79 ;src/cvu_get_spinner.c:10: cvu_spinners[0]++;
+                             80 ;	genAddrOf
+   000D 01r00r00      [10]   81 	ld	bc, #_cvu_spinners+0
+                             82 ;	genPointerGet
+   0010 0A            [ 7]   83 	ld	a, (bc)
+                             84 ;	genPlus
+   0011 3C            [ 4]   85 	inc	a
+                             86 ;	genAssign (pointer)
+                             87 ;	isBitvar = 0
+   0012 02            [ 7]   88 	ld	(bc), a
+                             89 ;	genGoto
+   0013 18 06         [12]   90 	jr	00105$
+                             91 ; peephole 162 changed absolute to relative unconditional jump.
+                             92 ;	genLabel
+   0015                      93 00102$:
+                             94 ;src/cvu_get_spinner.c:12: cvu_spinners[0]--;
+                             95 ;	genAddrOf
+   0015 01r00r00      [10]   96 	ld	bc, #_cvu_spinners+0
+                             97 ;	genPointerGet
+   0018 0A            [ 7]   98 	ld	a, (bc)
+                             99 ;	genMinus
+   0019 3D            [ 4]  100 	dec	a
+                            101 ;	genAssign (pointer)
+                            102 ;	isBitvar = 0
+   001A 02            [ 7]  103 	ld	(bc), a
+                            104 ;	genLabel
+   001B                     105 00105$:
+                            106 ;src/cvu_get_spinner.c:15: if(!(port1 & 0x10))
+                            107 ;	genAssign
+                            108 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 3, size 1
+                            109 ; peephole 62 used hl instead of iy.
+   001B 21 03 00      [10]  110 	ld	hl, #3+0
+   001E 39            [11]  111 	add	hl, sp
+   001F 7E            [ 7]  112 	ld	a, (hl)
+                            113 ;	genAnd
+   0020 CB 67         [ 8]  114 	bit	4, a
+                            115 ; peephole 81 removed jp by using inverse jump logic
+                            116 ; peephole 158 removed unused label 00136$.
+   0022 C0            [11]  117 	ret	NZ
+                            118 ; peephole 161 replaced jump by return.
+                            119 ; peephole 82 removed jp by using inverse jump logic
+                            120 ; peephole 158 removed unused label 00137$.
+                            121 ;src/cvu_get_spinner.c:17: if(port1 & 0x20)
+                            122 ;	genAnd
+   0023 CB 6F         [ 8]  123 	bit	5, a
+   0025 28 07         [12]  124 	jr	Z,00107$
+                            125 ; peephole 163 changed absolute to relative conditional jump.
+                            126 ; peephole 81 removed jp by using inverse jump logic
+                            127 ; peephole 158 removed unused label 00138$.
+                            128 ;src/cvu_get_spinner.c:18: cvu_spinners[1]++;
+                            129 ;	genAddrOf
+   0027 01r01r00      [10]  130 	ld	bc, #_cvu_spinners+1
+                            131 ;	genPointerGet
+   002A 0A            [ 7]  132 	ld	a, (bc)
+                            133 ;	genPlus
+   002B 3C            [ 4]  134 	inc	a
+                            135 ;	genAssign (pointer)
+                            136 ;	isBitvar = 0
+   002C 02            [ 7]  137 	ld	(bc), a
+                            138 ;	genGoto
+   002D C9            [10]  139 	ret
+                            140 ; peephole 160 replaced jump by return.
+                            141 ;	genLabel
+   002E                     142 00107$:
+                            143 ;src/cvu_get_spinner.c:20: cvu_spinners[1]--;
+                            144 ;	genAddrOf
+   002E 01r01r00      [10]  145 	ld	bc, #_cvu_spinners+1
+                            146 ;	genPointerGet
+   0031 0A            [ 7]  147 	ld	a, (bc)
+                            148 ;	genMinus
+   0032 3D            [ 4]  149 	dec	a
+                            150 ;	genAssign (pointer)
+                            151 ;	isBitvar = 0
+   0033 02            [ 7]  152 	ld	(bc), a
+                            153 ;	genLabel
+                            154 ; peephole 158 removed unused label 00111$.
+                            155 ;src/cvu_get_spinner.c:22: }
+                            156 ;	genEndFunction
+   0034 C9            [10]  157 	ret
+                            158 ;src/cvu_get_spinner.c:24: int_fast8_t cvu_get_spinner(uint_fast8_t controller)
+                            159 ;	genLabel
+                            160 ;	genFunction
+                            161 ;	---------------------------------
+                            162 ; Function cvu_get_spinner
+                            163 ; ---------------------------------
+                            164 ;	Register assignment is optimal.
+                            165 ; Stack space usage: 0 bytes.
+   0035                     166 _cvu_get_spinner::
+                            167 ;src/cvu_get_spinner.c:30: cv_set_spint_handler(0);
+                            168 ;	genIpush
+                            169 ;fetchPairLong
+                            170 ;fetchLitPair
+   0035 21 00 00      [10]  171 	ld	hl, #0x0000
+   0038 E5            [11]  172 	push	hl
+                            173 ;	genCall
+   0039 CDr00r00      [17]  174 	call	_cv_set_spint_handler
+   003C F1            [10]  175 	pop	af
+                            176 ;src/cvu_get_spinner.c:32: spinner = cvu_spinners[controller];
+                            177 ;	genPlus
+                            178 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 1
+   003D 3Er00         [ 7]  179 	ld	a, #<(_cvu_spinners)
+                            180 ;	Shift into pair
+   003F 21 02 00      [10]  181 	ld	hl, #2
+   0042 39            [11]  182 	add	hl, sp
+   0043 86            [ 7]  183 	add	a, (hl)
+   0044 4F            [ 4]  184 	ld	c, a
+   0045 3Es00         [ 7]  185 	ld	a, #>(_cvu_spinners)
+   0047 CE 00         [ 7]  186 	adc	a, #0x00
+   0049 47            [ 4]  187 	ld	b, a
+                            188 ;	genPointerGet
+   004A 0A            [ 7]  189 	ld	a, (bc)
+   004B 5F            [ 4]  190 	ld	e, a
+                            191 ;src/cvu_get_spinner.c:33: cvu_spinners[controller] = 0;
+                            192 ;	genAssign (pointer)
+                            193 ;	isBitvar = 0
+   004C AF            [ 4]  194 	xor	a, a
+   004D 02            [ 7]  195 	ld	(bc), a
+                            196 ;src/cvu_get_spinner.c:35: cv_set_spint_handler(cvu_spint_handler);
+                            197 ;	genIpush
+   004E D5            [11]  198 	push	de
+                            199 ;fetchPairLong
+                            200 ;fetchLitPair
+   004F 21r00r00      [10]  201 	ld	hl, #_cvu_spint_handler
+   0052 E5            [11]  202 	push	hl
+                            203 ;	genCall
+   0053 CDr00r00      [17]  204 	call	_cv_set_spint_handler
+   0056 F1            [10]  205 	pop	af
+   0057 D1            [10]  206 	pop	de
+                            207 ;src/cvu_get_spinner.c:37: return(spinner);
+                            208 ;	genRet
+                            209 ;	genMove_o
+   0058 6B            [ 4]  210 	ld	l, e
+                            211 ;	genMove_o
+                            212 ;	genLabel
+                            213 ; peephole 158 removed unused label 00101$.
+                            214 ;src/cvu_get_spinner.c:38: }
+                            215 ;	genEndFunction
+   0059 C9            [10]  216 	ret
+                            217 	.area _CODE
+                            218 	.area _INITIALIZER
+                            219 	.area _CABS (ABS)

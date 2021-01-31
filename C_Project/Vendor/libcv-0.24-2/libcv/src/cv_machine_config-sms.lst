@@ -1,0 +1,62 @@
+                              1 ; (c) 2016 Philipp Krause philipp@colecovision.eu
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 .module cv_machine_config
+                             18 
+                             19 .globl _cv_machine_config
+                             20 
+                             21 .area	_DATA
+   0000                      22 	_cv_machine_config:
+   0000                      23 	.ds 1
+                             24 
+                             25 .area   _GSINIT
+                             26 	; Check machine type by memory aliasing
+   0000 21 FF C3      [10]   27 	ld	hl, #0xc3ff
+   0003 46            [ 7]   28 	ld	b, (hl)	; Backup previous memory contents
+   0004 3E 55         [ 7]   29 	ld	a, #0x55
+   0006 77            [ 7]   30 	ld	(hl), a
+   0007 EB            [ 4]   31 	ex	de, hl
+   0008 21 FF C7      [10]   32 	ld	hl, #0xc7ff ; (#0xc7ff) aliases with (#0xc3ff) on SG-1000
+   000B BE            [ 7]   33 	cp	a, (hl)
+   000C 20 08         [12]   34 	jr	nz, notSG1000
+   000E EB            [ 4]   35 	ex	de, hl
+   000F 3E AA         [ 7]   36 	ld	a, #0xaa
+   0011 77            [ 7]   37 	ld	(hl), a
+   0012 EB            [ 4]   38 	ex	de, hl
+   0013 BE            [ 7]   39 	cp	a, (hl)
+   0014 28 17         [12]   40 	jr	z, end ; if we jump from here, (#0xc3ff) is the same as (#0xc7ff), i.e. we are running on a Sega SG-1000 or similar.
+   0016                      41 notSG1000:
+   0016 21 FF CB      [10]   42 	ld	hl, #0xcbff	; (#0xcbff) aliases with (#0xc3ff) on SC-3000
+   0019 BE            [ 7]   43 	cp	a, (hl)
+   001A 20 0C         [12]   44 	jr	nz, notSC3000
+   001C EB            [ 4]   45 	ex	de, hl
+   001D 3E 55         [ 7]   46 	ld	a, #0x55
+   001F 77            [ 7]   47 	ld	(hl), a
+   0020 EB            [ 4]   48 	ex	de, hl
+   0021 BE            [ 7]   49 	cp	a, (hl)
+   0022 20 04         [12]   50 	jr	nz, notSC3000
+                             51 	; if we reach here, (#0xc3ff) is the same as (#0xcbff), i.e. we are running on a Sega SC-3000 or similar.
+   0024 3E 40         [ 7]   52 	ld	a, #0x40
+   0026 18 02         [12]   53 	jr	endset
+   0028                      54 notSC3000:
+                             55 	; if we reach here, we are running on a Sega Mark III or Master System or similar.
+   0028 3E 80         [ 7]   56 	ld	a, #0x80
+   002A                      57 endset:
+   002A 32r00r00      [13]   58 	ld (_cv_machine_config), a
+   002D                      59 end:
+   002D EB            [ 4]   60 	ex	de, hl
+   002E 70            [ 7]   61 	ld	(hl), b
+                             62 

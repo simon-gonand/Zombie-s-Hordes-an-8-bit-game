@@ -1,0 +1,215 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_c
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_fmul2
+                             12 	.globl _cvu_cdot
+                             13 	.globl _cvu_cfmul
+                             14 ;--------------------------------------------------------
+                             15 ; special function registers
+                             16 ;--------------------------------------------------------
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cvu_c.c:3: cvu_f cvu_cdot(const struct cvu_c *l)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cvu_cdot
+                             50 ; ---------------------------------
+                             51 ;	Register assignment might be sub-optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cvu_cdot::
+   0000 CDr00r00      [17]   54 	call	___sdcc_enter_ix
+                             55 ;src/cvu_c.c:5: return(cvu_fmul2(l->r, l->r) + cvu_fmul2(l->i, l->i));
+                             56 ;	genAssign
+                             57 ;	AOP_STK for 
+                             58 ;fetchPairLong
+   0003 DD 6E 04      [19]   59 	ld	l, 4 (ix)
+   0006 DD 66 05      [19]   60 	ld	h, 5 (ix)
+                             61 ;	genPointerGet
+                             62 ;fetchPairLong
+                             63 ;	_moveFrom_tpair_()
+   0009 4E            [ 7]   64 	ld	c, (hl)
+   000A 23            [ 6]   65 	inc	hl
+                             66 ;	_moveFrom_tpair_()
+   000B 46            [ 7]   67 	ld	b, (hl)
+   000C 2B            [ 6]   68 	dec	hl
+                             69 ;	genIpush
+   000D E5            [11]   70 	push	hl
+   000E C5            [11]   71 	push	bc
+                             72 ;	genIpush
+   000F C5            [11]   73 	push	bc
+                             74 ;	genCall
+   0010 CDr00r00      [17]   75 	call	_cvu_fmul2
+   0013 F1            [10]   76 	pop	af
+   0014 F1            [10]   77 	pop	af
+                             78 ;	genMove_o
+   0015 4D            [ 4]   79 	ld	c, l
+   0016 44            [ 4]   80 	ld	b, h
+                             81 ;	genMove_o
+   0017 E1            [10]   82 	pop	hl
+                             83 ;	genAssign
+                             84 ;	(locations are the same)
+                             85 ;	genPointerGet
+                             86 ;fetchPairLong
+   0018 23            [ 6]   87 	inc	hl
+   0019 23            [ 6]   88 	inc	hl
+                             89 ;	_moveFrom_tpair_()
+   001A 5E            [ 7]   90 	ld	e, (hl)
+   001B 23            [ 6]   91 	inc	hl
+                             92 ;	_moveFrom_tpair_()
+   001C 56            [ 7]   93 	ld	d, (hl)
+                             94 ;	genIpush
+   001D C5            [11]   95 	push	bc
+   001E D5            [11]   96 	push	de
+                             97 ;	genIpush
+   001F D5            [11]   98 	push	de
+                             99 ;	genCall
+   0020 CDr00r00      [17]  100 	call	_cvu_fmul2
+   0023 F1            [10]  101 	pop	af
+   0024 F1            [10]  102 	pop	af
+                            103 ;	genMove_o
+                            104 ;	genMove_o
+   0025 C1            [10]  105 	pop	bc
+                            106 ;	genPlus
+   0026 09            [11]  107 	add	hl, bc
+                            108 ;	genRet
+                            109 ;fetchPairLong
+                            110 ;	genLabel
+                            111 ; peephole 158 removed unused label 00101$.
+                            112 ;src/cvu_c.c:6: }
+                            113 ;	genEndFunction
+   0027 DD E1         [14]  114 	pop	ix
+   0029 C9            [10]  115 	ret
+                            116 ;src/cvu_c.c:8: void cvu_cfmul(struct cvu_c *l, cvu_f r)
+                            117 ;	genLabel
+                            118 ;	genFunction
+                            119 ;	---------------------------------
+                            120 ; Function cvu_cfmul
+                            121 ; ---------------------------------
+                            122 ;	Register assignment might be sub-optimal.
+                            123 ; Stack space usage: 0 bytes.
+   002A                     124 _cvu_cfmul::
+                            125 ;src/cvu_c.c:10: l->r = cvu_fmul2(l->r, r);
+                            126 ;	genAssign
+                            127 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                            128 ;fetchPairLong
+   002A C1            [10]  129 	pop	bc
+   002B E1            [10]  130 	pop	hl
+   002C E5            [11]  131 	push	hl
+   002D C5            [11]  132 	push	bc
+                            133 ;	genPointerGet
+                            134 ;fetchPairLong
+                            135 ;	_moveFrom_tpair_()
+   002E 4E            [ 7]  136 	ld	c, (hl)
+   002F 23            [ 6]  137 	inc	hl
+                            138 ;	_moveFrom_tpair_()
+   0030 46            [ 7]  139 	ld	b, (hl)
+   0031 2B            [ 6]  140 	dec	hl
+                            141 ;	genIpush
+   0032 E5            [11]  142 	push	hl
+                            143 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 4, size 2
+                            144 ;fetchPairLong
+                            145 ; peephole 63 used hl instead of iy.
+   0033 21 06 00      [10]  146 	ld	hl, #6
+   0036 39            [11]  147 	add	hl, sp
+   0037 5E            [ 7]  148 	ld	e, (hl)
+   0038 23            [ 6]  149 	inc	hl
+   0039 56            [ 7]  150 	ld	d, (hl)
+   003A D5            [11]  151 	push	de
+                            152 ;	genIpush
+   003B C5            [11]  153 	push	bc
+                            154 ;	genCall
+   003C CDr00r00      [17]  155 	call	_cvu_fmul2
+   003F F1            [10]  156 	pop	af
+   0040 F1            [10]  157 	pop	af
+                            158 ;	genMove_o
+   0041 4D            [ 4]  159 	ld	c, l
+   0042 44            [ 4]  160 	ld	b, h
+                            161 ;	genMove_o
+   0043 E1            [10]  162 	pop	hl
+                            163 ;	genAssign (pointer)
+                            164 ;	isBitvar = 0
+   0044 71            [ 7]  165 	ld	(hl), c
+   0045 23            [ 6]  166 	inc	hl
+   0046 70            [ 7]  167 	ld	(hl), b
+                            168 ;src/cvu_c.c:11: l->i = cvu_fmul2(l->i, r);
+                            169 ;	genPlus
+                            170 ; peephole 155a removed inc hl / dec hl pair.
+   0047 23            [ 6]  171 	inc	hl
+                            172 ;	genPointerGet
+                            173 ;fetchPairLong
+                            174 ;	_moveFrom_tpair_()
+   0048 4E            [ 7]  175 	ld	c, (hl)
+   0049 23            [ 6]  176 	inc	hl
+                            177 ;	_moveFrom_tpair_()
+   004A 46            [ 7]  178 	ld	b, (hl)
+   004B 2B            [ 6]  179 	dec	hl
+                            180 ;	genIpush
+   004C E5            [11]  181 	push	hl
+                            182 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 4, size 2
+                            183 ;fetchPairLong
+                            184 ; peephole 63 used hl instead of iy.
+   004D 21 06 00      [10]  185 	ld	hl, #6
+   0050 39            [11]  186 	add	hl, sp
+   0051 5E            [ 7]  187 	ld	e, (hl)
+   0052 23            [ 6]  188 	inc	hl
+   0053 56            [ 7]  189 	ld	d, (hl)
+   0054 D5            [11]  190 	push	de
+                            191 ;	genIpush
+   0055 C5            [11]  192 	push	bc
+                            193 ;	genCall
+   0056 CDr00r00      [17]  194 	call	_cvu_fmul2
+   0059 F1            [10]  195 	pop	af
+   005A F1            [10]  196 	pop	af
+                            197 ;	genMove_o
+   005B 4D            [ 4]  198 	ld	c, l
+   005C 44            [ 4]  199 	ld	b, h
+                            200 ;	genMove_o
+   005D E1            [10]  201 	pop	hl
+                            202 ;	genAssign (pointer)
+                            203 ;	isBitvar = 0
+                            204 ;fetchPairLong
+   005E 71            [ 7]  205 	ld	(hl), c
+   005F 23            [ 6]  206 	inc	hl
+   0060 70            [ 7]  207 	ld	(hl), b
+                            208 ;	genLabel
+                            209 ; peephole 158 removed unused label 00101$.
+                            210 ;src/cvu_c.c:12: }
+                            211 ;	genEndFunction
+   0061 C9            [10]  212 	ret
+                            213 	.area _CODE
+                            214 	.area _INITIALIZER
+                            215 	.area _CABS (ABS)

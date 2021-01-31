@@ -1,0 +1,86 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_image_table
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_vdpout
+                             12 	.globl _cv_set_image_table
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cv_set_image_table.c:5: void cv_set_image_table(cv_vmemp loc)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cv_set_image_table
+                             50 ; ---------------------------------
+                             51 ;	Register assignment is optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cv_set_image_table::
+                             54 ;src/cv_set_image_table.c:7: cv_vdpout(0x2, loc >> 10);
+                             55 ;	genRightShift
+                             56 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             57 ; peephole 62 used hl instead of iy.
+   0000 21 03 00      [10]   58 	ld	hl, #2+1
+   0003 39            [11]   59 	add	hl, sp
+   0004 7E            [ 7]   60 	ld	a, (hl)
+   0005 0F            [ 4]   61 	rrca
+   0006 0F            [ 4]   62 	rrca
+   0007 E6 3F         [ 7]   63 	and	a, #0x3f
+   0009 47            [ 4]   64 	ld	b, a
+   000A 0E 00         [ 7]   65 	ld	c, #0x00
+                             66 ;	genCast
+                             67 ;	genMove_o
+                             68 ;	genMove_o
+                             69 ;	genIpush
+   000C C5            [11]   70 	push	bc
+   000D 33            [ 6]   71 	inc	sp
+                             72 ;	genIpush
+   000E 3E 02         [ 7]   73 	ld	a, #0x02
+   0010 F5            [11]   74 	push	af
+   0011 33            [ 6]   75 	inc	sp
+                             76 ;	genCall
+   0012 CDr00r00      [17]   77 	call	_cv_vdpout
+   0015 F1            [10]   78 	pop	af
+                             79 ;	genLabel
+                             80 ; peephole 158 removed unused label 00101$.
+                             81 ;src/cv_set_image_table.c:8: }
+                             82 ;	genEndFunction
+   0016 C9            [10]   83 	ret
+                             84 	.area _CODE
+                             85 	.area _INITIALIZER
+                             86 	.area _CABS (ABS)

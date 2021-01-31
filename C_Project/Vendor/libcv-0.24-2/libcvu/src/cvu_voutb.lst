@@ -1,0 +1,92 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_voutb
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_set_write_vram_address
+                             12 	.globl _cvu_voutb
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cvu_voutb.c:5: void cvu_voutb(const uint8_t value, const cv_vmemp dest)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cvu_voutb
+                             50 ; ---------------------------------
+                             51 ;	Register assignment is optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cvu_voutb::
+                             54 ;src/cvu_voutb.c:7: cv_set_write_vram_address(dest);
+                             55 ;	genIpush
+                             56 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 3, size 2
+                             57 ;fetchPairLong
+                             58 ; peephole 64 used hl instead of iy.
+   0000 21 03 00      [10]   59 	ld	hl, #3
+   0003 39            [11]   60 	add	hl, sp
+   0004 7E            [ 7]   61 	ld	a, (hl)
+   0005 23            [ 6]   62 	inc	hl
+   0006 66            [ 7]   63 	ld	h, (hl)
+   0007 6F            [ 4]   64 	ld	l, a
+   0008 E5            [11]   65 	push	hl
+                             66 ;	genCall
+   0009 CDr00r00      [17]   67 	call	_cv_set_write_vram_address
+   000C F1            [10]   68 	pop	af
+                             69 ;src/cvu_voutb.c:8: cv_voutb(value);
+                             70 ;	genAssign
+                             71 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 1
+   000D FD 21 02 00   [14]   72 	ld	iy, #2
+   0011 FD 39         [15]   73 	add	iy, sp
+   0013 FD 7E 00      [19]   74 	ld	a, 0 (iy)
+                             75 ;../libcv/include/cv_graphics.h:218: __endasm;
+                             76 ;	genInline
+                             77 ;	genInline
+   0016 BE            [ 7]   78 	cp	a, (hl)
+   0017 BE            [ 7]   79 	cp	a, (hl)
+   0018 00            [ 4]   80 	nop
+                             81 ;../libcv/include/cv_graphics.h:219: cv_graphics_port = value;
+                             82 ;	genAssign
+   0019 D3 BE         [11]   83 	out	(_cv_graphics_port), a
+                             84 ;src/cvu_voutb.c:8: cv_voutb(value);
+                             85 ;	genLabel
+                             86 ; peephole 158 removed unused label 00102$.
+                             87 ;src/cvu_voutb.c:9: }
+                             88 ;	genEndFunction
+   001B C9            [10]   89 	ret
+                             90 	.area _CODE
+                             91 	.area _INITIALIZER
+                             92 	.area _CABS (ABS)

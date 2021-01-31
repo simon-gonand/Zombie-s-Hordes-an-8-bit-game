@@ -1,0 +1,33 @@
+XL2
+H 9 areas 2 global symbols
+M cv_set_frequency
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 46 flags 0 addr 0
+S _cv_set_frequency Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 FD 21 03 00 FD 39 FD 7E 00 FD 77 00 FD 7E
+R 00 00 00 00
+T 0E 00 01 FD 77 01 06 05
+R 00 00 00 00
+T 14 00
+R 00 00 00 00
+T 14 00 FD CB 01 3E FD CB 00 1E 10 F6 FD 2B FD 7E
+R 00 00 00 00
+T 22 00 00 87 87 87 87 4F CB F9 FD 23 FD 7E 00 E6
+R 00 00 00 00
+T 30 00 0F B1 D3 7F FD 4E 00 FD 5E 01 06 04
+R 00 00 00 00
+T 3C 00
+R 00 00 00 00
+T 3C 00 CB 3B CB 19 10 FA 79 D3 7F C9
+R 00 00 00 00

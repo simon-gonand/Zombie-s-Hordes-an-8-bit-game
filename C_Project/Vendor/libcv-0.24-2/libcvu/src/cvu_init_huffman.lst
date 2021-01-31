@@ -1,0 +1,148 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_init_huffman
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_init_huffman
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                     00BE    15 _cv_graphics_port	=	0x00be
+                             16 ;--------------------------------------------------------
+                             17 ; ram data
+                             18 ;--------------------------------------------------------
+                             19 	.area _DATA
+                             20 ;--------------------------------------------------------
+                             21 ; ram data
+                             22 ;--------------------------------------------------------
+                             23 	.area _INITIALIZED
+                             24 ;--------------------------------------------------------
+                             25 ; absolute external ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DABS (ABS)
+                             28 ;--------------------------------------------------------
+                             29 ; global & static initialisations
+                             30 ;--------------------------------------------------------
+                             31 	.area _HOME
+                             32 	.area _GSINIT
+                             33 	.area _GSFINAL
+                             34 	.area _GSINIT
+                             35 ;--------------------------------------------------------
+                             36 ; Home
+                             37 ;--------------------------------------------------------
+                             38 	.area _HOME
+                             39 	.area _HOME
+                             40 ;--------------------------------------------------------
+                             41 ; code
+                             42 ;--------------------------------------------------------
+                             43 	.area _CODE
+                             44 ;src/cvu_init_huffman.c:3: void cvu_init_huffman(struct cvu_huffman_state *restrict state, uint8_t (* input)(void), const struct cvu_huffman_node *restrict tree, uint8_t root, uint8_t ls, uint8_t bs, uint8_t rs)
+                             45 ;	genLabel
+                             46 ;	genFunction
+                             47 ;	---------------------------------
+                             48 ; Function cvu_init_huffman
+                             49 ; ---------------------------------
+                             50 ;	Register assignment might be sub-optimal.
+                             51 ; Stack space usage: 0 bytes.
+   0000                      52 _cvu_init_huffman::
+   0000 CDr00r00      [17]   53 	call	___sdcc_enter_ix
+                             54 ;src/cvu_init_huffman.c:5: state->input = input;
+                             55 ;	genAssign
+                             56 ;	AOP_STK for 
+                             57 ;fetchPairLong
+   0003 DD 4E 04      [19]   58 	ld	c, 4 (ix)
+   0006 DD 46 05      [19]   59 	ld	b, 5 (ix)
+                             60 ;	genAssign (pointer)
+                             61 ;	AOP_STK for 
+                             62 ;	isBitvar = 0
+                             63 ;fetchPairLong
+   0009 69            [ 4]   64 	ld	l, c
+   000A 60            [ 4]   65 	ld	h, b
+   000B DD 7E 06      [19]   66 	ld	a, 6 (ix)
+   000E 77            [ 7]   67 	ld	(hl), a
+   000F 23            [ 6]   68 	inc	hl
+   0010 DD 7E 07      [19]   69 	ld	a, 7 (ix)
+   0013 77            [ 7]   70 	ld	(hl), a
+                             71 ;src/cvu_init_huffman.c:6: state->nodes = tree;
+                             72 ;	genPlus
+                             73 ;fetchPairLong
+   0014 59            [ 4]   74 	ld	e, c
+   0015 50            [ 4]   75 	ld	d, b
+   0016 13            [ 6]   76 	inc	de
+   0017 13            [ 6]   77 	inc	de
+                             78 ;	genAssign (pointer)
+                             79 ;	AOP_STK for 
+                             80 ;	isBitvar = 0
+                             81 ;fetchPairLong
+   0018 DD 7E 08      [19]   82 	ld	a, 8 (ix)
+   001B 12            [ 7]   83 	ld	(de), a
+   001C 13            [ 6]   84 	inc	de
+   001D DD 7E 09      [19]   85 	ld	a, 9 (ix)
+   0020 12            [ 7]   86 	ld	(de), a
+                             87 ;src/cvu_init_huffman.c:7: state->root = root;
+                             88 ;	genPlus
+                             89 ;fetchPairLong
+                             90 ;fetchLitPair
+   0021 21 04 00      [10]   91 	ld	hl, #0x0004
+   0024 09            [11]   92 	add	hl, bc
+                             93 ;	genAssign (pointer)
+                             94 ;	AOP_STK for 
+                             95 ;	isBitvar = 0
+   0025 DD 7E 0A      [19]   96 	ld	a, 10 (ix)
+   0028 77            [ 7]   97 	ld	(hl), a
+                             98 ;src/cvu_init_huffman.c:8: state->ls = ls;
+                             99 ;	genPlus
+                            100 ;fetchPairLong
+                            101 ;fetchLitPair
+   0029 21 05 00      [10]  102 	ld	hl, #0x0005
+   002C 09            [11]  103 	add	hl, bc
+                            104 ;	genAssign (pointer)
+                            105 ;	AOP_STK for 
+                            106 ;	isBitvar = 0
+   002D DD 7E 0B      [19]  107 	ld	a, 11 (ix)
+   0030 77            [ 7]  108 	ld	(hl), a
+                            109 ;src/cvu_init_huffman.c:9: state->bs = bs;
+                            110 ;	genPlus
+                            111 ;fetchPairLong
+                            112 ;fetchLitPair
+   0031 21 06 00      [10]  113 	ld	hl, #0x0006
+   0034 09            [11]  114 	add	hl, bc
+                            115 ;	genAssign (pointer)
+                            116 ;	AOP_STK for 
+                            117 ;	isBitvar = 0
+   0035 DD 7E 0C      [19]  118 	ld	a, 12 (ix)
+   0038 77            [ 7]  119 	ld	(hl), a
+                            120 ;src/cvu_init_huffman.c:10: state->rs = rs;
+                            121 ;	genPlus
+                            122 ;fetchPairLong
+                            123 ;fetchLitPair
+   0039 21 07 00      [10]  124 	ld	hl, #0x0007
+   003C 09            [11]  125 	add	hl, bc
+                            126 ;	genAssign (pointer)
+                            127 ;	AOP_STK for 
+                            128 ;	isBitvar = 0
+   003D DD 7E 0D      [19]  129 	ld	a, 13 (ix)
+   0040 77            [ 7]  130 	ld	(hl), a
+                            131 ;src/cvu_init_huffman.c:11: state->bit = 8;
+                            132 ;	genPlus
+                            133 ;fetchPairLong
+                            134 ;fetchLitPair
+   0041 21 08 00      [10]  135 	ld	hl, #0x0008
+   0044 09            [11]  136 	add	hl, bc
+                            137 ;	genAssign (pointer)
+                            138 ;	isBitvar = 0
+   0045 36 08         [10]  139 	ld	(hl), #0x08
+                            140 ;	genLabel
+                            141 ; peephole 158 removed unused label 00101$.
+                            142 ;src/cvu_init_huffman.c:15: }
+                            143 ;	genEndFunction
+   0047 DD E1         [14]  144 	pop	ix
+   0049 C9            [10]  145 	ret
+                            146 	.area _CODE
+                            147 	.area _INITIALIZER
+                            148 	.area _CABS (ABS)
