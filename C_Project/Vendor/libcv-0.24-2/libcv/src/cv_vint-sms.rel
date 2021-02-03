@@ -1,0 +1,24 @@
+XL2
+H 9 areas 5 global symbols
+M cv_vint
+O -mz80
+S _cv_vint_handler Ref0000
+S _cv_vdpstat Ref0000
+S .__.ABS. Def0000
+S _cv_vint_indicator Ref0000
+A _CODE size 19 flags 0 addr 0
+S _cv_vint Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 21 00 00 36 FF DB BF 32 00 00 FD 21 00 00
+R 00 00 00 00 02 03 03 00 02 0A 01 00 02 0E 00 00
+T 0E 00 FD 7E 01 FD B6 00 C8 2A 00 00 E9
+R 00 00 00 00 02 0A 00 00

@@ -1,0 +1,9 @@
+*.asm
+*.lst
+*.rel
+*.sym
+*.ihx
+*.lk
+*.map
+*.noi
+Test.png.sprite.c

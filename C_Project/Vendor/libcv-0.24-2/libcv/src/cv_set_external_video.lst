@@ -1,0 +1,91 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_external_video
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_vdpout
+                             12 	.globl _cv_set_external_video
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cv_set_external_video.c:9: void cv_set_external_video(bool status)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cv_set_external_video
+                             50 ; ---------------------------------
+                             51 ;	Register assignment might be sub-optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cv_set_external_video::
+                             54 ;src/cv_set_external_video.c:11: cv_vdpout(0x0, cv_vdpreg[0] = status | (cv_vdpreg[0] & ~0x01));
+                             55 ;	genAddrOf
+   0000 01r00r00      [10]   56 	ld	bc, #_cv_vdpreg+0
+                             57 ;	genPointerGet
+   0003 0A            [ 7]   58 	ld	a, (bc)
+                             59 ;	genAnd
+   0004 CB 87         [ 8]   60 	res	0, a
+                             61 ;	genCast
+                             62 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 1
+                             63 ; peephole 62 used hl instead of iy.
+   0006 21 02 00      [10]   64 	ld	hl, #2+0
+   0009 39            [11]   65 	add	hl, sp
+   000A 5E            [ 7]   66 	ld	e, (hl)
+                             67 ;	genCast
+                             68 ;	(locations are the same)
+                             69 ;	genOr
+   000B B3            [ 4]   70 	or	a, e
+                             71 ;	genAssign (pointer)
+                             72 ;	isBitvar = 0
+   000C 02            [ 7]   73 	ld	(bc), a
+                             74 ;	genIpush
+   000D F5            [11]   75 	push	af
+   000E 33            [ 6]   76 	inc	sp
+                             77 ;	genIpush
+   000F AF            [ 4]   78 	xor	a, a
+   0010 F5            [11]   79 	push	af
+   0011 33            [ 6]   80 	inc	sp
+                             81 ;	genCall
+   0012 CDr00r00      [17]   82 	call	_cv_vdpout
+   0015 F1            [10]   83 	pop	af
+                             84 ;	genLabel
+                             85 ; peephole 158 removed unused label 00101$.
+                             86 ;src/cv_set_external_video.c:12: }
+                             87 ;	genEndFunction
+   0016 C9            [10]   88 	ret
+                             89 	.area _CODE
+                             90 	.area _INITIALIZER
+                             91 	.area _CABS (ABS)

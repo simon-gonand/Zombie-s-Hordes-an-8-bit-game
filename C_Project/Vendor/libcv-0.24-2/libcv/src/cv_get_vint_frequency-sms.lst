@@ -1,0 +1,70 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_get_vint_frequency
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_get_vint_frequency
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; ram data
+                             17 ;--------------------------------------------------------
+                             18 	.area _DATA
+                             19 ;--------------------------------------------------------
+                             20 ; ram data
+                             21 ;--------------------------------------------------------
+                             22 	.area _INITIALIZED
+                             23 ;--------------------------------------------------------
+                             24 ; absolute external ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DABS (ABS)
+                             27 ;--------------------------------------------------------
+                             28 ; global & static initialisations
+                             29 ;--------------------------------------------------------
+                             30 	.area _HOME
+                             31 	.area _GSINIT
+                             32 	.area _GSFINAL
+                             33 	.area _GSINIT
+                             34 ;--------------------------------------------------------
+                             35 ; Home
+                             36 ;--------------------------------------------------------
+                             37 	.area _HOME
+                             38 	.area _HOME
+                             39 ;--------------------------------------------------------
+                             40 ; code
+                             41 ;--------------------------------------------------------
+                             42 	.area _CODE
+                             43 ;src/cv_get_vint_frequency.c:9: unsigned char cv_get_vint_frequency(void)
+                             44 ;	genLabel
+                             45 ;	genFunction
+                             46 ;	---------------------------------
+                             47 ; Function cv_get_vint_frequency
+                             48 ; ---------------------------------
+                             49 ;	Register assignment is optimal.
+                             50 ; Stack space usage: 0 bytes.
+   0000                      51 _cv_get_vint_frequency::
+                             52 ;src/cv_get_vint_frequency.c:14: return(cv_machine_config & 0x03f);
+                             53 ;	genAssign
+                             54 ;fetchLitPair
+                             55 ; peephole 16 loaded _cv_machine_config into a directly instead of going through iy.
+   0000 3Ar00r00      [13]   56 	ld	a,(#_cv_machine_config + 0)
+                             57 ;	genAnd
+   0003 E6 3F         [ 7]   58 	and	a, #0x3f
+                             59 ;	genRet
+                             60 ;	genMove_o
+   0005 6F            [ 4]   61 	ld	l, a
+                             62 ;	genMove_o
+                             63 ;	genLabel
+                             64 ; peephole 158 removed unused label 00101$.
+                             65 ;src/cv_get_vint_frequency.c:16: }
+                             66 ;	genEndFunction
+   0006 C9            [10]   67 	ret
+                             68 	.area _CODE
+                             69 	.area _INITIALIZER
+                             70 	.area _CABS (ABS)

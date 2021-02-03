@@ -1,0 +1,109 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_left_column_blank
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_vdpout
+                             12 	.globl _cv_set_left_column_blank
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cv_set_left_column_blank.c:7: void cv_set_left_column_blank(bool status)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cv_set_left_column_blank
+                             50 ; ---------------------------------
+                             51 ;	Register assignment might be sub-optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cv_set_left_column_blank::
+   0000 CDr00r00      [17]   54 	call	___sdcc_enter_ix
+                             55 ;src/cv_set_left_column_blank.c:9: cv_vdpout(0x0, cv_vdpreg[0] = (status ? 0x20 : 0x0) | (cv_vdpreg[0] & ~0x20));
+                             56 ;	genIfx
+                             57 ;	AOP_STK for 
+   0003 DD CB 04 46   [20]   58 	bit	0, 4 (ix)
+   0007 28 05         [12]   59 	jr	Z,00103$
+                             60 ; peephole 163 changed absolute to relative conditional jump.
+                             61 ;	genAssign
+                             62 ;fetchPairLong
+                             63 ;fetchLitPair
+   0009 01 20 00      [10]   64 	ld	bc, #0x0020
+                             65 ;	genGoto
+   000C 18 03         [12]   66 	jr	00104$
+                             67 ; peephole 162 changed absolute to relative unconditional jump.
+                             68 ;	genLabel
+   000E                      69 00103$:
+                             70 ;	genAssign
+                             71 ;fetchPairLong
+                             72 ;fetchLitPair
+   000E 01 00 00      [10]   73 	ld	bc, #0x0000
+                             74 ;	genLabel
+   0011                      75 00104$:
+                             76 ;	genPointerGet
+   0011 3Ar00r00      [13]   77 	ld	a, (#_cv_vdpreg + 0)
+                             78 ;	genAnd
+   0014 CB AF         [ 8]   79 	res	5, a
+                             80 ;	genCast
+                             81 ;	genMove_o
+                             82 ;	genMove_o
+                             83 ;	genOr
+   0016 B1            [ 4]   84 	or	a, c
+                             85 ;	genAssign (pointer)
+                             86 ;	isBitvar = 0
+                             87 ;fetchPairLong
+                             88 ;fetchLitPair
+   0017 32r00r00      [13]   89 	ld	(#_cv_vdpreg),a
+                             90 ; peephole 19 loaded (#_cv_vdpreg) from a directly instead of using hl.
+                             91 ;	genIpush
+   001A F5            [11]   92 	push	af
+   001B 33            [ 6]   93 	inc	sp
+                             94 ;	genIpush
+   001C AF            [ 4]   95 	xor	a, a
+   001D F5            [11]   96 	push	af
+   001E 33            [ 6]   97 	inc	sp
+                             98 ;	genCall
+   001F CDr00r00      [17]   99 	call	_cv_vdpout
+   0022 F1            [10]  100 	pop	af
+                            101 ;	genLabel
+                            102 ; peephole 158 removed unused label 00101$.
+                            103 ;src/cv_set_left_column_blank.c:10: }
+                            104 ;	genEndFunction
+   0023 DD E1         [14]  105 	pop	ix
+   0025 C9            [10]  106 	ret
+                            107 	.area _CODE
+                            108 	.area _INITIALIZER
+                            109 	.area _CABS (ABS)

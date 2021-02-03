@@ -1,0 +1,83 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_spint_handler
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_set_spint_handler
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; ram data
+                             17 ;--------------------------------------------------------
+                             18 	.area _DATA
+                             19 ;--------------------------------------------------------
+                             20 ; ram data
+                             21 ;--------------------------------------------------------
+                             22 	.area _INITIALIZED
+                             23 ;--------------------------------------------------------
+                             24 ; absolute external ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DABS (ABS)
+                             27 ;--------------------------------------------------------
+                             28 ; global & static initialisations
+                             29 ;--------------------------------------------------------
+                             30 	.area _HOME
+                             31 	.area _GSINIT
+                             32 	.area _GSFINAL
+                             33 	.area _GSINIT
+                             34 ;--------------------------------------------------------
+                             35 ; Home
+                             36 ;--------------------------------------------------------
+                             37 	.area _HOME
+                             38 	.area _HOME
+                             39 ;--------------------------------------------------------
+                             40 ; code
+                             41 ;--------------------------------------------------------
+                             42 	.area _CODE
+                             43 ;src/cv_set_spint_handler.c:5: void cv_set_spint_handler(void (*handler)(uint_fast8_t, uint_fast8_t))
+                             44 ;	genLabel
+                             45 ;	genFunction
+                             46 ;	---------------------------------
+                             47 ; Function cv_set_spint_handler
+                             48 ; ---------------------------------
+                             49 ;	Register assignment is optimal.
+                             50 ; Stack space usage: 0 bytes.
+   0000                      51 _cv_set_spint_handler::
+                             52 ;src/cv_set_spint_handler.c:9: __endasm;
+                             53 ;	genInline
+                             54 ;	genInline
+   0000 F3            [ 4]   55 	di
+                             56 ;src/cv_set_spint_handler.c:10: cv_spint_handler = handler;
+                             57 ;	genAssign
+                             58 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             59 ;fetchPairLong
+   0001 D1            [10]   60 	pop	de
+   0002 C1            [10]   61 	pop	bc
+   0003 C5            [11]   62 	push	bc
+   0004 D5            [11]   63 	push	de
+                             64 ;	genAssign
+   0005 ED 43r00r00   [20]   65 	ld	(_cv_spint_handler), bc
+                             66 ;src/cv_set_spint_handler.c:11: if(handler)
+                             67 ;	genIfx
+   0009 78            [ 4]   68 	ld	a, b
+   000A B1            [ 4]   69 	or	a, c
+   000B C8            [11]   70 	ret	Z
+                             71 ; peephole 161 replaced jump by return.
+                             72 ;src/cv_set_spint_handler.c:15: __endasm;
+                             73 ;	genInline
+                             74 ;	genInline
+   000C FB            [ 4]   75 	ei
+                             76 ;	genLabel
+                             77 ; peephole 158 removed unused label 00103$.
+                             78 ;src/cv_set_spint_handler.c:17: }
+                             79 ;	genEndFunction
+   000D C9            [10]   80 	ret
+                             81 	.area _CODE
+                             82 	.area _INITIALIZER
+                             83 	.area _CABS (ABS)

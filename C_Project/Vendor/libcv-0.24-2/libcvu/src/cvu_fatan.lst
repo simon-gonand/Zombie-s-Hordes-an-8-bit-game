@@ -1,0 +1,363 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_fatan
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _abs
+                             12 	.globl _cvu_fdiv2
+                             13 	.globl _cvu_fmul2
+                             14 	.globl _cvu_fatan2
+                             15 ;--------------------------------------------------------
+                             16 ; special function registers
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+                             22 ;--------------------------------------------------------
+                             23 ; ram data
+                             24 ;--------------------------------------------------------
+                             25 	.area _INITIALIZED
+                             26 ;--------------------------------------------------------
+                             27 ; absolute external ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _DABS (ABS)
+                             30 ;--------------------------------------------------------
+                             31 ; global & static initialisations
+                             32 ;--------------------------------------------------------
+                             33 	.area _HOME
+                             34 	.area _GSINIT
+                             35 	.area _GSFINAL
+                             36 	.area _GSINIT
+                             37 ;--------------------------------------------------------
+                             38 ; Home
+                             39 ;--------------------------------------------------------
+                             40 	.area _HOME
+                             41 	.area _HOME
+                             42 ;--------------------------------------------------------
+                             43 ; code
+                             44 ;--------------------------------------------------------
+                             45 	.area _CODE
+                             46 ;src/cvu_fatan.c:8: static cvu_f cvu_fatan_approx1(cvu_f x)
+                             47 ;	genLabel
+                             48 ;	genFunction
+                             49 ;	---------------------------------
+                             50 ; Function cvu_fatan_approx1
+                             51 ; ---------------------------------
+                             52 ;	Register assignment is optimal.
+                             53 ; Stack space usage: 0 bytes.
+   0000                      54 _cvu_fatan_approx1:
+                             55 ;src/cvu_fatan.c:10: return(x - cvu_fmul2(CVU_I2F(2) / 9, cvu_fmul2(x, cvu_fmul2(x, x))));
+                             56 ;	genIpush
+                             57 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             58 ;fetchPairLong
+   0000 C1            [10]   59 	pop	bc
+   0001 E1            [10]   60 	pop	hl
+   0002 E5            [11]   61 	push	hl
+   0003 C5            [11]   62 	push	bc
+   0004 E5            [11]   63 	push	hl
+                             64 ;	genIpush
+                             65 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             66 ;fetchPairLong
+                             67 ; peephole 64 used hl instead of iy.
+   0005 21 04 00      [10]   68 	ld	hl, #4
+   0008 39            [11]   69 	add	hl, sp
+                             70 ; peephole 49 pushed bc instead of hl.
+   0009 4E            [ 7]   71 	ld	c, (hl)
+   000A 23            [ 6]   72 	inc	hl
+   000B 46            [ 7]   73 	ld	b, (hl)
+   000C C5            [11]   74 	push	bc
+                             75 ;	genCall
+   000D CDr00r00      [17]   76 	call	_cvu_fmul2
+   0010 F1            [10]   77 	pop	af
+                             78 ;	genMove_o
+                             79 ;	genMove_o
+                             80 ;	genIpush
+                             81 ; peephole 142 used ex to move hl onto the stack.
+   0011 E3            [19]   82 	ex	(sp),hl
+                             83 ;	genIpush
+                             84 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             85 ;fetchPairLong
+                             86 ; peephole 64 used hl instead of iy.
+   0012 21 04 00      [10]   87 	ld	hl, #4
+   0015 39            [11]   88 	add	hl, sp
+                             89 ; peephole 49 pushed bc instead of hl.
+   0016 4E            [ 7]   90 	ld	c, (hl)
+   0017 23            [ 6]   91 	inc	hl
+   0018 46            [ 7]   92 	ld	b, (hl)
+   0019 C5            [11]   93 	push	bc
+                             94 ;	genCall
+   001A CDr00r00      [17]   95 	call	_cvu_fmul2
+   001D F1            [10]   96 	pop	af
+                             97 ;	genMove_o
+                             98 ;	genMove_o
+                             99 ;	genIpush
+                            100 ; peephole 142 used ex to move hl onto the stack.
+   001E E3            [19]  101 	ex	(sp),hl
+                            102 ;	genIpush
+                            103 ;fetchPairLong
+                            104 ;fetchLitPair
+   001F 21 0E 00      [10]  105 	ld	hl, #0x000e
+   0022 E5            [11]  106 	push	hl
+                            107 ;	genCall
+   0023 CDr00r00      [17]  108 	call	_cvu_fmul2
+   0026 F1            [10]  109 	pop	af
+   0027 F1            [10]  110 	pop	af
+                            111 ;	genMove_o
+   0028 4D            [ 4]  112 	ld	c, l
+   0029 44            [ 4]  113 	ld	b, h
+                            114 ;	genMove_o
+                            115 ;	genMinus
+                            116 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+   002A FD 21 02 00   [14]  117 	ld	iy, #2
+   002E FD 39         [15]  118 	add	iy, sp
+   0030 FD 7E 00      [19]  119 	ld	a, 0 (iy)
+   0033 91            [ 4]  120 	sub	a, c
+   0034 4F            [ 4]  121 	ld	c, a
+   0035 FD 7E 01      [19]  122 	ld	a, 1 (iy)
+   0038 98            [ 4]  123 	sbc	a, b
+   0039 47            [ 4]  124 	ld	b, a
+                            125 ;	genRet
+                            126 ;fetchPairLong
+   003A 69            [ 4]  127 	ld	l, c
+   003B 60            [ 4]  128 	ld	h, b
+                            129 ;	genLabel
+                            130 ; peephole 158 removed unused label 00101$.
+                            131 ;src/cvu_fatan.c:11: }
+                            132 ;	genEndFunction
+   003C C9            [10]  133 	ret
+                            134 ;src/cvu_fatan.c:13: cvu_f cvu_fatan2(cvu_f y, cvu_f x)
+                            135 ;	genLabel
+                            136 ;	genFunction
+                            137 ;	---------------------------------
+                            138 ; Function cvu_fatan2
+                            139 ; ---------------------------------
+                            140 ;	Register assignment might be sub-optimal.
+                            141 ; Stack space usage: 2 bytes.
+   003D                     142 _cvu_fatan2::
+   003D CDr00r00      [17]  143 	call	___sdcc_enter_ix
+   0040 F5            [11]  144 	push	af
+                            145 ;src/cvu_fatan.c:17: if(abs(y) <= abs(x))
+                            146 ;	genCast
+                            147 ;	AOP_STK for 
+                            148 ;fetchPairLong
+   0041 DD 4E 04      [19]  149 	ld	c, 4 (ix)
+   0044 DD 46 05      [19]  150 	ld	b, 5 (ix)
+                            151 ;	genIpush
+   0047 C5            [11]  152 	push	bc
+                            153 ;	genCall
+                            154 ;	AOP_STK for _cvu_fatan2_sloc0_1_0
+   0048 CDr00r00      [17]  155 	call	_abs
+   004B F1            [10]  156 	pop	af
+                            157 ;	genMove_o
+   004C DD 75 FE      [19]  158 	ld	-2 (ix), l
+   004F DD 74 FF      [19]  159 	ld	-1 (ix), h
+                            160 ;	genMove_o
+                            161 ;	genCast
+                            162 ;	AOP_STK for 
+                            163 ;fetchPairLong
+   0052 DD 5E 06      [19]  164 	ld	e, 6 (ix)
+   0055 DD 56 07      [19]  165 	ld	d, 7 (ix)
+                            166 ;	genIpush
+   0058 D5            [11]  167 	push	de
+   0059 D5            [11]  168 	push	de
+                            169 ;	genCall
+   005A CDr00r00      [17]  170 	call	_abs
+   005D F1            [10]  171 	pop	af
+                            172 ;	genMove_o
+                            173 ;	genMove_o
+   005E D1            [10]  174 	pop	de
+                            175 ;src/cvu_fatan.c:20: tmp = (((x < 0)^(y < 0)) ? -CVU_F_PI_2 : CVU_F_PI_2) - cvu_fatan_approx1(cvu_fdiv2(x, y));
+                            176 ;	genCmpLt
+   005F 7A            [ 4]  177 	ld	a, d
+   0060 07            [ 4]  178 	rlca
+   0061 E6 01         [ 7]  179 	and	a,#0x01
+                            180 ; peephole 109 replaced zero load, rla by and since rlca writes the same value to carry bit and least significant bit.
+   0063 5F            [ 4]  181 	ld	e, a
+                            182 ;	genMove_o
+                            183 ;	genCmpLt
+   0064 78            [ 4]  184 	ld	a, b
+   0065 07            [ 4]  185 	rlca
+   0066 E6 01         [ 7]  186 	and	a,#0x01
+                            187 ; peephole 109 replaced zero load, rla by and since rlca writes the same value to carry bit and least significant bit.
+   0068 57            [ 4]  188 	ld	d, a
+                            189 ;	genMove_o
+                            190 ;src/cvu_fatan.c:17: if(abs(y) <= abs(x))
+                            191 ;	genCmpGt
+                            192 ;	AOP_STK for _cvu_fatan2_sloc0_1_0
+   0069 7D            [ 4]  193 	ld	a, l
+   006A DD 96 FE      [19]  194 	sub	a, -2 (ix)
+   006D 7C            [ 4]  195 	ld	a, h
+   006E DD 9E FF      [19]  196 	sbc	a, -1 (ix)
+   0071 E2r76r00      [10]  197 	jp	PO, 00133$
+   0074 EE 80         [ 7]  198 	xor	a, #0x80
+   0076                     199 00133$:
+   0076 FAr96r00      [10]  200 	jp	M, 00102$
+                            201 ;src/cvu_fatan.c:18: tmp = cvu_fatan_approx1(cvu_fdiv2(y, x));
+                            202 ;	genIpush
+   0079 D5            [11]  203 	push	de
+                            204 ;	AOP_STK for 
+                            205 ;fetchPairLong
+   007A DD 6E 06      [19]  206 	ld	l, 6 (ix)
+   007D DD 66 07      [19]  207 	ld	h, 7 (ix)
+   0080 E5            [11]  208 	push	hl
+                            209 ;	genIpush
+                            210 ;	AOP_STK for 
+                            211 ;fetchPairLong
+   0081 DD 6E 04      [19]  212 	ld	l, 4 (ix)
+   0084 DD 66 05      [19]  213 	ld	h, 5 (ix)
+   0087 E5            [11]  214 	push	hl
+                            215 ;	genCall
+   0088 CDr00r00      [17]  216 	call	_cvu_fdiv2
+   008B F1            [10]  217 	pop	af
+                            218 ;	genMove_o
+                            219 ;	genMove_o
+                            220 ;	genIpush
+                            221 ; peephole 50 eleminated dead pop/push pair.
+                            222 ; peephole 142 used ex to move hl onto the stack.
+   008C E3            [19]  223 	ex	(sp),hl
+                            224 ;	genCall
+   008D CDr00r00      [17]  225 	call	_cvu_fatan_approx1
+   0090 F1            [10]  226 	pop	af
+                            227 ;	genMove_o
+                            228 ;	genMove_o
+   0091 D1            [10]  229 	pop	de
+                            230 ;	genAssign
+                            231 ;fetchPairLong
+   0092 4D            [ 4]  232 	ld	c, l
+   0093 44            [ 4]  233 	ld	b, h
+                            234 ;	genGoto
+   0094 18 2D         [12]  235 	jr	00103$
+                            236 ; peephole 162 changed absolute to relative unconditional jump.
+                            237 ;	genLabel
+   0096                     238 00102$:
+                            239 ;src/cvu_fatan.c:20: tmp = (((x < 0)^(y < 0)) ? -CVU_F_PI_2 : CVU_F_PI_2) - cvu_fatan_approx1(cvu_fdiv2(x, y));
+                            240 ;	genXor
+   0096 7B            [ 4]  241 	ld	a, e
+                            242 ;	genIfx
+   0097 AA            [ 4]  243 	xor	a,d
+                            244 ; peephole 101 removed redundant or after xor.
+   0098 28 05         [12]  245 	jr	Z,00111$
+                            246 ; peephole 163 changed absolute to relative conditional jump.
+                            247 ;	genAssign
+                            248 ;fetchPairLong
+                            249 ;fetchLitPair
+   009A 01 9C FF      [10]  250 	ld	bc, #0xff9c
+                            251 ;	genGoto
+   009D 18 03         [12]  252 	jr	00112$
+                            253 ; peephole 162 changed absolute to relative unconditional jump.
+                            254 ;	genLabel
+   009F                     255 00111$:
+                            256 ;	genAssign
+                            257 ;fetchPairLong
+                            258 ;fetchLitPair
+   009F 01 64 00      [10]  259 	ld	bc, #0x0064
+                            260 ;	genLabel
+   00A2                     261 00112$:
+                            262 ;	genIpush
+   00A2 C5            [11]  263 	push	bc
+   00A3 D5            [11]  264 	push	de
+                            265 ;	AOP_STK for 
+                            266 ;fetchPairLong
+   00A4 DD 6E 04      [19]  267 	ld	l, 4 (ix)
+   00A7 DD 66 05      [19]  268 	ld	h, 5 (ix)
+   00AA E5            [11]  269 	push	hl
+                            270 ;	genIpush
+                            271 ;	AOP_STK for 
+                            272 ;fetchPairLong
+   00AB DD 6E 06      [19]  273 	ld	l, 6 (ix)
+   00AE DD 66 07      [19]  274 	ld	h, 7 (ix)
+   00B1 E5            [11]  275 	push	hl
+                            276 ;	genCall
+   00B2 CDr00r00      [17]  277 	call	_cvu_fdiv2
+   00B5 F1            [10]  278 	pop	af
+                            279 ;	genMove_o
+                            280 ;	genMove_o
+                            281 ;	genIpush
+                            282 ; peephole 50 eleminated dead pop/push pair.
+                            283 ; peephole 50 eleminated dead pop/push pair.
+                            284 ; peephole 142 used ex to move hl onto the stack.
+   00B6 E3            [19]  285 	ex	(sp),hl
+                            286 ;	genCall
+   00B7 CDr00r00      [17]  287 	call	_cvu_fatan_approx1
+   00BA F1            [10]  288 	pop	af
+                            289 ;	genMove_o
+                            290 ;	genMove_o
+   00BB D1            [10]  291 	pop	de
+   00BC C1            [10]  292 	pop	bc
+                            293 ;	genCast
+                            294 ;	(locations are the same)
+                            295 ;	genMinus
+   00BD 79            [ 4]  296 	ld	a, c
+   00BE 95            [ 4]  297 	sub	a, l
+   00BF 4F            [ 4]  298 	ld	c, a
+   00C0 78            [ 4]  299 	ld	a, b
+   00C1 9C            [ 4]  300 	sbc	a, h
+   00C2 47            [ 4]  301 	ld	b, a
+                            302 ;	genAssign
+                            303 ;	(locations are the same)
+                            304 ;	genLabel
+   00C3                     305 00103$:
+                            306 ;src/cvu_fatan.c:22: if(x < 0)
+                            307 ;	genIfx
+   00C3 7B            [ 4]  308 	ld	a, e
+   00C4 B7            [ 4]  309 	or	a, a
+   00C5 28 14         [12]  310 	jr	Z,00108$
+                            311 ; peephole 163 changed absolute to relative conditional jump.
+                            312 ;src/cvu_fatan.c:25: tmp += CVU_F_PI;
+                            313 ;	genCast
+                            314 ;	(locations are the same)
+                            315 ;src/cvu_fatan.c:24: if(y >= 0)
+                            316 ;	genAssign
+                            317 ;	(locations are the same)
+                            318 ;	genIfx
+   00C7 CB 42         [ 8]  319 	bit	0, d
+   00C9 20 08         [12]  320 	jr	NZ,00105$
+                            321 ; peephole 164 changed absolute to relative conditional jump.
+                            322 ;src/cvu_fatan.c:25: tmp += CVU_F_PI;
+                            323 ;	genPlus
+                            324 ;fetchPairLong
+                            325 ;fetchLitPair
+   00CB 21 C9 00      [10]  326 	ld	hl, #0x00c9
+   00CE 09            [11]  327 	add	hl, bc
+                            328 ;	genCast
+                            329 ;fetchPairLong
+   00CF 4D            [ 4]  330 	ld	c, l
+   00D0 44            [ 4]  331 	ld	b, h
+                            332 ;	genGoto
+   00D1 18 08         [12]  333 	jr	00108$
+                            334 ; peephole 162 changed absolute to relative unconditional jump.
+                            335 ;	genLabel
+   00D3                     336 00105$:
+                            337 ;src/cvu_fatan.c:27: tmp -= CVU_F_PI;
+                            338 ;	genMinus
+   00D3 79            [ 4]  339 	ld	a, c
+   00D4 C6 37         [ 7]  340 	add	a, #0x37
+   00D6 4F            [ 4]  341 	ld	c, a
+   00D7 78            [ 4]  342 	ld	a, b
+   00D8 CE FF         [ 7]  343 	adc	a, #0xff
+                            344 ;	genCast
+                            345 ;fetchPairLong
+   00DA 47            [ 4]  346 	ld	b, a
+                            347 ;	genLabel
+   00DB                     348 00108$:
+                            349 ;src/cvu_fatan.c:30: return(tmp);
+                            350 ;	genRet
+                            351 ;fetchPairLong
+   00DB 69            [ 4]  352 	ld	l, c
+   00DC 60            [ 4]  353 	ld	h, b
+                            354 ;	genLabel
+                            355 ; peephole 158 removed unused label 00109$.
+                            356 ;src/cvu_fatan.c:31: }
+                            357 ;	genEndFunction
+   00DD F1            [10]  358 	pop	af
+   00DE DD E1         [14]  359 	pop	ix
+   00E0 C9            [10]  360 	ret
+                            361 	.area _CODE
+                            362 	.area _INITIALIZER
+                            363 	.area _CABS (ABS)

@@ -1,0 +1,122 @@
+                              1 ; (c) 2006 Philipp Klaus Krause philipp@colecovision.eu
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 .module cvu_get_huffman
+                             18 
+                             19 .globl _cvu_get_huffman
+                             20 
+                             21 ; uint8_t cvu_get_huffman(struct cvu_huffman_state *state);
+                             22 
+   0000                      23 _cvu_get_huffman:
+   0000 E1            [10]   24 	pop hl
+   0001 FD E1         [14]   25 	pop iy
+   0003 FD E5         [15]   26 	push iy
+   0005 E5            [11]   27 	push hl
+                             28 
+                             29 	; current = state->root;
+   0006 06 00         [ 7]   30 	ld b, #0
+   0008 FD 4E 04      [19]   31 	ld c, 4(iy)
+                             32 
+   000B FD 5E 08      [19]   33 	ld e, 8(iy)	; load state->bit
+   000E FD 56 09      [19]   34 	ld d, 9(iy)	; load state->buffer
+                             35 	
+                             36 	; for(;;)
+                             37 	; {
+   0011                      38 for:
+                             39 
+                             40 	; state->buffer >>= 1;
+   0011 CB 3A         [ 8]   41 	srl d
+                             42 
+                             43 	; if(state->bit == 8)
+                             44 	; {
+   0013 3E 08         [ 7]   45 	ld a, #8
+   0015 BB            [ 4]   46 	cp a, e
+   0016 C2r2Dr00      [10]   47 	jp nz, #next1
+                             48 
+                             49 	; state->buffer = (state->input)();
+   0019 FD E5         [15]   50 	push iy
+   001B C5            [11]   51 	push bc
+   001C 21r27r00      [10]   52 	ld hl, #next2
+   001F E5            [11]   53 	push hl
+   0020 FD 6E 00      [19]   54 	ld l, 0(iy)
+   0023 FD 66 01      [19]   55 	ld h, 1(iy)
+   0026 E9            [ 4]   56 	jp (hl)
+   0027                      57 next2:
+   0027 C1            [10]   58 	pop bc
+   0028 FD E1         [14]   59 	pop iy
+   002A 55            [ 4]   60 	ld d, l
+                             61 
+                             62 	; state->bit = 0;
+   002B 1E 00         [ 7]   63 	ld e, #0
+                             64 
+                             65 	; }
+   002D                      66 next1:
+                             67 
+                             68 	; state->bit++;
+   002D 1C            [ 4]   69 	inc e
+                             70 
+                             71 	; if(!(state->buffer & 0x01))	// Left
+                             72 	; {
+                             73 	; if(current >= state->ls && current < state->rs)
+                             74 	; {
+                             75 	; ret = state->nodes[current].left;
+                             76 	; break;
+                             77 	; }
+                             78 	; current = state->nodes[current].left;
+                             79 	; }
+                             80 	; else	// Right
+                             81 	; {
+                             82 	; if(current >= state->bs)
+                             83 	; {
+                             84 	; ret = state->nodes[current].right;
+                             85 	; break;
+                             86 	; }
+                             87 	; current = state->nodes[current].right;
+                             88 	; }
+                             89 
+   002E FD 6E 02      [19]   90 	ld l, 2(iy)
+   0031 FD 66 03      [19]   91 	ld h, 3(iy)
+   0034 09            [11]   92 	add hl, bc
+   0035 09            [11]   93 	add hl, bc	; &(state->nodes[current]) in hl
+   0036 3E 01         [ 7]   94 	ld a, #1
+   0038 A2            [ 4]   95 	and a, d
+   0039 79            [ 4]   96 	ld a, c
+   003A 20 0E         [12]   97 	jr nz, #right
+   003C                      98 left:
+   003C FD BE 05      [19]   99 	cp a, 5(iy)
+   003F 38 05         [12]  100 	jr c, next3
+   0041 FD BE 07      [19]  101 	cp a, 7(iy)
+   0044 38 0B         [12]  102 	jr c, end
+   0046                     103 next3:
+   0046 4E            [ 7]  104 	ld c, (hl)
+   0047 C3r11r00      [10]  105 	jp for
+   004A                     106 right:
+   004A 23            [ 6]  107 	inc hl
+   004B FD BE 06      [19]  108 	cp a, 6(iy)
+   004E DAr46r00      [10]  109 	jp c, next3
+                            110 
+                            111 	; return(ret);
+   0051                     112 end:
+   0051 FD 73 08      [19]  113 	ld 8(iy), e	; store state->bit
+   0054 FD 72 09      [19]  114 	ld 9(iy), d	; store state->buffer
+   0057 6E            [ 7]  115 	ld l, (hl)
+   0058 C9            [10]  116 	ret
+                            117 
+                            118 
+                            119 
+                            120 
+                            121 	
+                            122 	

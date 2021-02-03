@@ -1,0 +1,130 @@
+                              1 ; crt0.s for Colecovision cart
+                              2 
+                              3 	.module crt0
+                              4 	.globl _main
+                              5 	.globl _cv_init
+                              6 	.globl _cv_spint_handler
+                              7 	.globl _cv_vint
+                              8 	.globl _cv_start
+                              9 	.globl ___sdcc_call_hl
+                             10 
+                             11 	.area _HEADER(ABS)
+   8000                      12 	.org 0x8000
+                             13 
+   8000 55 AA                14 	.db 0x55, 0xaa			; Title screen and 12 second delay - swap 0x55 and 0xaa not to skip it.
+   8002 00 00                15 	.dw 0								; Sprite name table for BIOS
+   8004 00 00                16 	.dw 0								; Sprite order table for BIOS.
+   8006 00 00                17 	.dw 0								; Buffer for BIOS.
+   8008 00 00                18 	.dw 0								; Controller map for BIOS.
+   800Ar00r00                19 	.dw _cv_start						; where to start execution of program.
+   800C C3 00 00      [10]   20 	jp	0x0		; RST 0x08			
+   800F C3 00 00      [10]   21 	jp	0x0		; RST 0x10
+   8012 C3 00 00      [10]   22 	jp	0x0		; RST 0x18
+   8015 C3 00 00      [10]   23 	jp	0x0		; RST 0x20
+   8018 C3 00 00      [10]   24 	jp	0x0		; RST 0x28
+   801B C3 00 00      [10]   25 	jp	0x0		; RST 0x30
+   801E C3r21r00      [10]   26 	jp spint	; RST 0x38 - spinner - maskable interrupt
+   8021 C3r10r00      [10]   27 	jp vint		; Vertical retrace - NMI
+   8024 20 2F 20 2F 20 4E    28 	.ascii " / / NOT"
+        4F 54
+                             29 
+                             30 	; Ordering of segments for the linker - copied from sdcc crt0.s
+                             31 	.area	_CODE
+                             32 	.area	_INITIALIZER
+                             33 	.area	_HOME
+                             34 	.area	_GSINIT
+                             35 	.area	_GSFINAL
+                             36 	.area	_DATA
+                             37 	.area	_INITIALIZED
+                             38 	.area	_BSEG
+                             39 	.area	_BSS
+                             40 	.area	_HEAP
+                             41 
+                             42 	.area	_CODE
+                             43 
+   0000                      44 _cv_start:
+   0000 F3            [ 4]   45 	di
+   0001 31 00 74      [10]   46 	ld sp, #0x7400			; Set stack pointer directly above top of memory.
+   0004 ED 56         [ 8]   47 	im	1
+                             48 
+   0006 CDr00r00      [17]   49 	call gsinit				; Initialize global and static variables.
+                             50 
+   0009 CDr00r00      [17]   51 	call _cv_init			; Initialize Colecovision specific stuff.
+   000C CDr00r00      [17]   52 	call _main
+   000F C7            [11]   53 	rst 0x0				; Restart when main() returns.
+                             54 
+   0010                      55 vint:
+   0010 F5            [11]   56 	push	af
+   0011 C5            [11]   57 	push	bc
+   0012 D5            [11]   58 	push	de
+   0013 E5            [11]   59 	push	hl
+   0014 FD E5         [15]   60 	push	iy
+   0016 CDr00r00      [17]   61 	call	_cv_vint
+   0019 FD E1         [14]   62 	pop	iy
+   001B E1            [10]   63 	pop	hl
+   001C D1            [10]   64 	pop	de
+   001D C1            [10]   65 	pop	bc
+   001E F1            [10]   66 	pop	af
+   001F ED 45         [14]   67 	retn
+                             68 
+   0021                      69 spint:
+   0021 E5            [11]   70 	push	hl
+   0022 2Ar00r00      [16]   71 	ld	hl, (#_cv_spint_handler)
+   0025 7D            [ 4]   72 	ld	a, l
+   0026 B4            [ 4]   73 	or	a, h
+   0027 28 15         [12]   74 	jr	Z, skip
+   0029 F5            [11]   75 	push	af
+   002A C5            [11]   76 	push	bc
+   002B D5            [11]   77 	push	de
+   002C FD E5         [15]   78 	push	iy
+   002E DB FC         [11]   79 	in	a, (#0xfc)
+   0030 4F            [ 4]   80 	ld	c, a
+   0031 DB FF         [11]   81 	in	a, (#0xff)
+   0033 47            [ 4]   82 	ld	b, a
+   0034 C5            [11]   83 	push	bc
+   0035 CDr00r00      [17]   84 	call	___sdcc_call_hl
+   0038 F1            [10]   85 	pop	af
+   0039 FD E1         [14]   86 	pop	iy
+   003B D1            [10]   87 	pop	de
+   003C C1            [10]   88 	pop	bc
+   003D F1            [10]   89 	pop	af
+   003E                      90 skip:
+   003E E1            [10]   91 	pop	hl
+   003F FB            [ 4]   92 	ei
+   0040 ED 4D         [14]   93 	reti
+                             94 
+                             95 	.area   _GSINIT
+   0000                      96 gsinit::
+   0000 01r00r00      [10]   97 	ld	bc, #l__DATA
+   0003 78            [ 4]   98 	ld	a, b
+   0004 B1            [ 4]   99 	or	a, c
+   0005 28 0F         [12]  100 	jr	Z, zeroed_data
+   0007 21r00r00      [10]  101 	ld	hl,	#s__DATA
+   000A 36 00         [10]  102 	ld	(hl), #0x00
+   000C 0B            [ 6]  103 	dec	bc
+   000D 78            [ 4]  104 	ld	a, b
+   000E B1            [ 4]  105 	or	a, c
+   000F 28 05         [12]  106 	jr	Z, zeroed_data
+   0011 5D            [ 4]  107 	ld	e, l
+   0012 54            [ 4]  108 	ld	d, h
+   0013 13            [ 6]  109 	inc	de
+   0014 ED B0         [21]  110 	ldir
+   0016                     111 zeroed_data:
+                            112 
+                            113 	; Explicitly initialized global variables.
+   0016 01r00r00      [10]  114 	ld	bc, #l__INITIALIZER
+   0019 78            [ 4]  115 	ld	a, b
+   001A B1            [ 4]  116 	or	a, c
+   001B 28 08         [12]  117 	jr	Z, gsinit_static
+   001D 11r00r00      [10]  118 	ld	de, #s__INITIALIZED
+   0020 21r00r00      [10]  119 	ld	hl, #s__INITIALIZER
+   0023 ED B0         [21]  120 	ldir
+                            121 
+   0025                     122 gsinit_static:
+                            123 	; Explicitly initialized static variables inserted by compiler here.
+                            124 
+                            125 	.area   _GSFINAL
+   0000 C9            [10]  126 	ret
+                            127 
+                            128 	.area _HOME
+                            129 

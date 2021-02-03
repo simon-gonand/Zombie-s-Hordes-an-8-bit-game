@@ -1,0 +1,1036 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_play_music
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_get_vint_frequency
+                             12 	.globl _cv_set_frequency
+                             13 	.globl _cv_set_attenuation
+                             14 	.globl _cvu_play_music
+                             15 ;--------------------------------------------------------
+                             16 ; special function registers
+                             17 ;--------------------------------------------------------
+                     00BE    18 _cv_graphics_port	=	0x00be
+                             19 ;--------------------------------------------------------
+                             20 ; ram data
+                             21 ;--------------------------------------------------------
+                             22 	.area _DATA
+                             23 ;--------------------------------------------------------
+                             24 ; ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _INITIALIZED
+                             27 ;--------------------------------------------------------
+                             28 ; absolute external ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _DABS (ABS)
+                             31 ;--------------------------------------------------------
+                             32 ; global & static initialisations
+                             33 ;--------------------------------------------------------
+                             34 	.area _HOME
+                             35 	.area _GSINIT
+                             36 	.area _GSFINAL
+                             37 	.area _GSINIT
+                             38 ;--------------------------------------------------------
+                             39 ; Home
+                             40 ;--------------------------------------------------------
+                             41 	.area _HOME
+                             42 	.area _HOME
+                             43 ;--------------------------------------------------------
+                             44 ; code
+                             45 ;--------------------------------------------------------
+                             46 	.area _CODE
+                             47 ;src/cvu_play_music.c:20: bool cvu_play_music(struct cvu_music *restrict music)
+                             48 ;	genLabel
+                             49 ;	genFunction
+                             50 ;	---------------------------------
+                             51 ; Function cvu_play_music
+                             52 ; ---------------------------------
+                             53 ;	Register assignment might be sub-optimal.
+                             54 ; Stack space usage: 15 bytes.
+   0000                      55 _cvu_play_music::
+   0000 CDr00r00      [17]   56 	call	___sdcc_enter_ix
+   0003 21 F1 FF      [10]   57 	ld	hl, #-15
+   0006 39            [11]   58 	add	hl, sp
+   0007 F9            [ 6]   59 	ld	sp, hl
+                             60 ;src/cvu_play_music.c:22: if(music->note_ticks_remaining >= music->sixteenth_notes_per_second)
+                             61 ;	genAssign
+                             62 ;	AOP_STK for 
+                             63 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                             64 ;	genMove_o
+   0008 DD 7E 04      [19]   65 	ld	a, 4 (ix)
+   000B DD 77 F5      [19]   66 	ld	-11 (ix), a
+   000E DD 7E 05      [19]   67 	ld	a, 5 (ix)
+   0011 DD 77 F6      [19]   68 	ld	-10 (ix), a
+                             69 ;	genMove_o
+                             70 ;	genPlus
+                             71 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                             72 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+   0014 DD 7E F5      [19]   73 	ld	a, -11 (ix)
+   0017 C6 08         [ 7]   74 	add	a, #0x08
+   0019 DD 77 F3      [19]   75 	ld	-13 (ix), a
+   001C DD 7E F6      [19]   76 	ld	a, -10 (ix)
+   001F CE 00         [ 7]   77 	adc	a, #0x00
+   0021 DD 77 F4      [19]   78 	ld	-12 (ix), a
+                             79 ;	genPointerGet
+                             80 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                             81 ;	AOP_STK for _cvu_play_music_sloc2_1_0
+                             82 ;fetchPairLong
+   0024 DD 6E F3      [19]   83 	ld	l, -13 (ix)
+   0027 DD 66 F4      [19]   84 	ld	h, -12 (ix)
+                             85 ;	_moveFrom_tpair_()
+   002A 7E            [ 7]   86 	ld	a, (hl)
+   002B DD 77 FB      [19]   87 	ld	-5 (ix), a
+   002E 23            [ 6]   88 	inc	hl
+                             89 ;	_moveFrom_tpair_()
+   002F 7E            [ 7]   90 	ld	a, (hl)
+   0030 DD 77 FC      [19]   91 	ld	-4 (ix), a
+                             92 ;	genPlus
+                             93 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                             94 ;	AOP_STK for _cvu_play_music_sloc3_1_0
+   0033 DD 7E F5      [19]   95 	ld	a, -11 (ix)
+   0036 C6 05         [ 7]   96 	add	a, #0x05
+   0038 DD 77 F1      [19]   97 	ld	-15 (ix), a
+   003B DD 7E F6      [19]   98 	ld	a, -10 (ix)
+   003E CE 00         [ 7]   99 	adc	a, #0x00
+   0040 DD 77 F2      [19]  100 	ld	-14 (ix), a
+                            101 ;	genPointerGet
+                            102 ;	AOP_STK for _cvu_play_music_sloc3_1_0
+                            103 ;	AOP_STK for _cvu_play_music_sloc4_1_0
+                            104 ;fetchPairLong
+   0043 E1            [10]  105 	pop	hl
+   0044 E5            [11]  106 	push	hl
+                            107 ;	_moveFrom_tpair_()
+   0045 7E            [ 7]  108 	ld	a, (hl)
+                            109 ;	genCast
+                            110 ;	AOP_STK for _cvu_play_music_sloc4_1_0
+                            111 ;	AOP_STK for _cvu_play_music_sloc5_1_0
+                            112 ;	genMove_o
+                            113 ;	genMove_o
+                            114 ; peephole 33 loaded a from a instead of going through -3 (ix).
+   0046 DD 77 FD      [19]  115 	ld	-3 (ix), a
+                            116 ; peephole 0 removed redundant load from a into a.
+   0049 DD 77 FE      [19]  117 	ld	-2 (ix), a
+                            118 ;	genMove_o
+   004C AF            [ 4]  119 	xor	a, a
+   004D DD 77 FF      [19]  120 	ld	-1 (ix), a
+                            121 ;	genCmpLt
+                            122 ;	AOP_STK for _cvu_play_music_sloc2_1_0
+                            123 ;	AOP_STK for _cvu_play_music_sloc5_1_0
+   0050 DD 7E FB      [19]  124 	ld	a, -5 (ix)
+   0053 DD 96 FE      [19]  125 	sub	a, -2 (ix)
+   0056 DD 7E FC      [19]  126 	ld	a, -4 (ix)
+   0059 DD 9E FF      [19]  127 	sbc	a, -1 (ix)
+   005C 38 1A         [12]  128 	jr	C,00116$
+                            129 ; peephole 165 changed absolute to relative conditional jump.
+                            130 ;src/cvu_play_music.c:23: music->note_ticks_remaining -= music->sixteenth_notes_per_second;
+                            131 ;	genCast
+                            132 ;	AOP_STK for _cvu_play_music_sloc4_1_0
+                            133 ;	genMove_o
+                            134 ;	genMove_o
+   005E DD 4E FD      [19]  135 	ld	c, -3 (ix)
+                            136 ;	genMove_o
+   0061 06 00         [ 7]  137 	ld	b, #0x00
+                            138 ;	genCast
+                            139 ;	AOP_STK for _cvu_play_music_sloc2_1_0
+                            140 ;fetchPairLong
+   0063 DD 6E FB      [19]  141 	ld	l, -5 (ix)
+   0066 DD 66 FC      [19]  142 	ld	h, -4 (ix)
+                            143 ;	genCast
+                            144 ;	(locations are the same)
+                            145 ;	genMinus
+   0069 BF            [ 4]  146 	cp	a, a
+   006A ED 42         [15]  147 	sbc	hl, bc
+                            148 ;	genCast
+                            149 ;fetchPairLong
+   006C 4D            [ 4]  150 	ld	c, l
+   006D 44            [ 4]  151 	ld	b, h
+                            152 ;	genAssign (pointer)
+                            153 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            154 ;	isBitvar = 0
+                            155 ;fetchPairLong
+   006E D1            [10]  156 	pop	de
+   006F E1            [10]  157 	pop	hl
+   0070 E5            [11]  158 	push	hl
+   0071 D5            [11]  159 	push	de
+   0072 71            [ 7]  160 	ld	(hl), c
+   0073 23            [ 6]  161 	inc	hl
+   0074 70            [ 7]  162 	ld	(hl), b
+                            163 ;	genGoto
+   0075 C3r58r03      [10]  164 	jp	00117$
+                            165 ;	genLabel
+   0078                     166 00116$:
+                            167 ;src/cvu_play_music.c:24: else if(music->pause_ticks_remaining >= music->sixteenth_notes_per_second)
+                            168 ;	genPlus
+                            169 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                            170 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+   0078 DD 7E F5      [19]  171 	ld	a, -11 (ix)
+   007B C6 0A         [ 7]  172 	add	a, #0x0a
+   007D DD 77 FB      [19]  173 	ld	-5 (ix), a
+   0080 DD 7E F6      [19]  174 	ld	a, -10 (ix)
+   0083 CE 00         [ 7]  175 	adc	a, #0x00
+   0085 DD 77 FC      [19]  176 	ld	-4 (ix), a
+                            177 ;	genPointerGet
+                            178 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+                            179 ;fetchPairLong
+   0088 DD 6E FB      [19]  180 	ld	l, -5 (ix)
+   008B DD 66 FC      [19]  181 	ld	h, -4 (ix)
+                            182 ;	_moveFrom_tpair_()
+   008E 4E            [ 7]  183 	ld	c, (hl)
+   008F 23            [ 6]  184 	inc	hl
+                            185 ;	_moveFrom_tpair_()
+   0090 46            [ 7]  186 	ld	b, (hl)
+                            187 ;src/cvu_play_music.c:26: cv_set_attenuation(music->channel, 0);
+                            188 ;	genPointerGet
+                            189 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                            190 ;	AOP_STK for _cvu_play_music_sloc7_1_0
+                            191 ;fetchPairLong
+   0091 DD 6E F5      [19]  192 	ld	l, -11 (ix)
+   0094 DD 66 F6      [19]  193 	ld	h, -10 (ix)
+                            194 ;	_moveFrom_tpair_()
+   0097 7E            [ 7]  195 	ld	a, (hl)
+   0098 DD 77 FD      [19]  196 	ld	-3 (ix), a
+                            197 ;src/cvu_play_music.c:24: else if(music->pause_ticks_remaining >= music->sixteenth_notes_per_second)
+                            198 ;	genCmpLt
+                            199 ;	AOP_STK for _cvu_play_music_sloc5_1_0
+   009B 79            [ 4]  200 	ld	a, c
+   009C DD 96 FE      [19]  201 	sub	a, -2 (ix)
+   009F 78            [ 4]  202 	ld	a, b
+   00A0 DD 9E FF      [19]  203 	sbc	a, -1 (ix)
+   00A3 38 70         [12]  204 	jr	C,00113$
+                            205 ; peephole 165 changed absolute to relative conditional jump.
+                            206 ;src/cvu_play_music.c:26: cv_set_attenuation(music->channel, 0);
+                            207 ;	genIpush
+   00A5 AF            [ 4]  208 	xor	a, a
+   00A6 F5            [11]  209 	push	af
+   00A7 33            [ 6]  210 	inc	sp
+                            211 ;	genIpush
+                            212 ;	AOP_STK for _cvu_play_music_sloc7_1_0
+   00A8 DD 7E FD      [19]  213 	ld	a, -3 (ix)
+   00AB F5            [11]  214 	push	af
+   00AC 33            [ 6]  215 	inc	sp
+                            216 ;	genCall
+   00AD CDr00r00      [17]  217 	call	_cv_set_attenuation
+   00B0 F1            [10]  218 	pop	af
+                            219 ;src/cvu_play_music.c:27: music->pause_ticks_remaining -= music->sixteenth_notes_per_second;
+                            220 ;	genPointerGet
+                            221 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+                            222 ;	AOP_STK for _cvu_play_music_sloc8_1_0
+                            223 ;fetchPairLong
+   00B1 DD 6E FB      [19]  224 	ld	l, -5 (ix)
+   00B4 DD 66 FC      [19]  225 	ld	h, -4 (ix)
+                            226 ;	_moveFrom_tpair_()
+   00B7 7E            [ 7]  227 	ld	a, (hl)
+   00B8 DD 77 FD      [19]  228 	ld	-3 (ix), a
+   00BB 23            [ 6]  229 	inc	hl
+                            230 ;	_moveFrom_tpair_()
+   00BC 7E            [ 7]  231 	ld	a, (hl)
+   00BD DD 77 FE      [19]  232 	ld	-2 (ix), a
+                            233 ;	genPointerGet
+                            234 ;	AOP_STK for _cvu_play_music_sloc3_1_0
+                            235 ;	AOP_STK for _cvu_play_music_sloc9_1_0
+                            236 ;fetchPairLong
+   00C0 E1            [10]  237 	pop	hl
+   00C1 E5            [11]  238 	push	hl
+                            239 ;	_moveFrom_tpair_()
+   00C2 7E            [ 7]  240 	ld	a, (hl)
+                            241 ;	genCast
+                            242 ;	AOP_STK for _cvu_play_music_sloc9_1_0
+                            243 ;	AOP_STK for _cvu_play_music_sloc10_1_0
+                            244 ;	genMove_o
+                            245 ;	genMove_o
+                            246 ; peephole 33 loaded a from a instead of going through -1 (ix).
+   00C3 DD 77 FF      [19]  247 	ld	-1 (ix), a
+                            248 ; peephole 0 removed redundant load from a into a.
+   00C6 DD 77 F9      [19]  249 	ld	-7 (ix), a
+                            250 ;	genMove_o
+   00C9 AF            [ 4]  251 	xor	a, a
+   00CA DD 77 FA      [19]  252 	ld	-6 (ix), a
+                            253 ;	genCast
+                            254 ;	AOP_STK for _cvu_play_music_sloc8_1_0
+                            255 ;	AOP_STK for _cvu_play_music_sloc11_1_0
+                            256 ;	genMove_o
+   00CD DD 7E FD      [19]  257 	ld	a, -3 (ix)
+   00D0 DD 77 F7      [19]  258 	ld	-9 (ix), a
+   00D3 DD 7E FE      [19]  259 	ld	a, -2 (ix)
+   00D6 DD 77 F8      [19]  260 	ld	-8 (ix), a
+                            261 ;	genMove_o
+                            262 ;	genCast
+                            263 ;	AOP_STK for _cvu_play_music_sloc10_1_0
+                            264 ;	AOP_STK for _cvu_play_music_sloc12_1_0
+                            265 ;	genMove_o
+   00D9 DD 7E F9      [19]  266 	ld	a, -7 (ix)
+   00DC DD 77 FE      [19]  267 	ld	-2 (ix), a
+   00DF DD 7E FA      [19]  268 	ld	a, -6 (ix)
+   00E2 DD 77 FF      [19]  269 	ld	-1 (ix), a
+                            270 ;	genMove_o
+                            271 ;	genMinus
+                            272 ;	AOP_STK for _cvu_play_music_sloc11_1_0
+                            273 ;	AOP_STK for _cvu_play_music_sloc12_1_0
+                            274 ;	AOP_STK for _cvu_play_music_sloc13_1_0
+   00E5 DD 7E F7      [19]  275 	ld	a, -9 (ix)
+   00E8 DD 96 FE      [19]  276 	sub	a, -2 (ix)
+   00EB DD 77 F9      [19]  277 	ld	-7 (ix), a
+   00EE DD 7E F8      [19]  278 	ld	a, -8 (ix)
+   00F1 DD 9E FF      [19]  279 	sbc	a, -1 (ix)
+   00F4 DD 77 FA      [19]  280 	ld	-6 (ix), a
+                            281 ;	genCast
+                            282 ;	AOP_STK for _cvu_play_music_sloc13_1_0
+                            283 ;	AOP_STK for _cvu_play_music_sloc14_1_0
+                            284 ;	genMove_o
+   00F7 DD 7E F9      [19]  285 	ld	a, -7 (ix)
+   00FA DD 77 FE      [19]  286 	ld	-2 (ix), a
+   00FD DD 7E FA      [19]  287 	ld	a, -6 (ix)
+   0100 DD 77 FF      [19]  288 	ld	-1 (ix), a
+                            289 ;	genMove_o
+                            290 ;	genAssign (pointer)
+                            291 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+                            292 ;	AOP_STK for _cvu_play_music_sloc14_1_0
+                            293 ;	isBitvar = 0
+                            294 ;fetchPairLong
+   0103 DD 6E FB      [19]  295 	ld	l, -5 (ix)
+   0106 DD 66 FC      [19]  296 	ld	h, -4 (ix)
+   0109 DD 7E FE      [19]  297 	ld	a, -2 (ix)
+   010C 77            [ 7]  298 	ld	(hl), a
+   010D 23            [ 6]  299 	inc	hl
+   010E DD 7E FF      [19]  300 	ld	a, -1 (ix)
+   0111 77            [ 7]  301 	ld	(hl), a
+                            302 ;	genGoto
+   0112 C3r58r03      [10]  303 	jp	00117$
+                            304 ;	genLabel
+   0115                     305 00113$:
+                            306 ;src/cvu_play_music.c:32: const uint16_t note = *(music->notes);
+                            307 ;	genPlus
+                            308 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                            309 ;	AOP_STK for _cvu_play_music_sloc15_1_0
+   0115 DD 7E F5      [19]  310 	ld	a, -11 (ix)
+   0118 C6 06         [ 7]  311 	add	a, #0x06
+   011A DD 77 F7      [19]  312 	ld	-9 (ix), a
+   011D DD 7E F6      [19]  313 	ld	a, -10 (ix)
+   0120 CE 00         [ 7]  314 	adc	a, #0x00
+   0122 DD 77 F8      [19]  315 	ld	-8 (ix), a
+                            316 ;	genPointerGet
+                            317 ;	AOP_STK for _cvu_play_music_sloc15_1_0
+                            318 ;fetchPairLong
+   0125 DD 6E F7      [19]  319 	ld	l, -9 (ix)
+   0128 DD 66 F8      [19]  320 	ld	h, -8 (ix)
+                            321 ;	_moveFrom_tpair_()
+   012B 4E            [ 7]  322 	ld	c, (hl)
+   012C 23            [ 6]  323 	inc	hl
+                            324 ;	_moveFrom_tpair_()
+   012D 46            [ 7]  325 	ld	b, (hl)
+                            326 ;	genPointerGet
+                            327 ;	AOP_STK for _cvu_play_music_sloc16_1_0
+                            328 ;	_moveFrom_tpair_()
+   012E 0A            [ 7]  329 	ld	a, (bc)
+   012F DD 77 FE      [19]  330 	ld	-2 (ix), a
+   0132 03            [ 6]  331 	inc	bc
+                            332 ;	_moveFrom_tpair_()
+   0133 0A            [ 7]  333 	ld	a, (bc)
+   0134 DD 77 FF      [19]  334 	ld	-1 (ix), a
+                            335 ;src/cvu_play_music.c:34: cv_set_attenuation(music->channel, 0);
+                            336 ;	genIpush
+   0137 AF            [ 4]  337 	xor	a, a
+   0138 F5            [11]  338 	push	af
+   0139 33            [ 6]  339 	inc	sp
+                            340 ;	genIpush
+                            341 ;	AOP_STK for _cvu_play_music_sloc7_1_0
+   013A DD 7E FD      [19]  342 	ld	a, -3 (ix)
+   013D F5            [11]  343 	push	af
+   013E 33            [ 6]  344 	inc	sp
+                            345 ;	genCall
+   013F CDr00r00      [17]  346 	call	_cv_set_attenuation
+   0142 F1            [10]  347 	pop	af
+                            348 ;src/cvu_play_music.c:36: if(note == 0xffff)
+                            349 ;	genCast
+                            350 ;	AOP_STK for _cvu_play_music_sloc16_1_0
+                            351 ;	AOP_STK for _cvu_play_music_sloc17_1_0
+                            352 ;	genMove_o
+   0143 DD 7E FE      [19]  353 	ld	a, -2 (ix)
+   0146 DD 77 F9      [19]  354 	ld	-7 (ix), a
+   0149 DD 7E FF      [19]  355 	ld	a, -1 (ix)
+   014C DD 77 FA      [19]  356 	ld	-6 (ix), a
+                            357 ;	genMove_o
+                            358 ;	genCmpEq
+                            359 ;	AOP_STK for _cvu_play_music_sloc17_1_0
+   014F DD 7E F9      [19]  360 	ld	a, -7 (ix)
+   0152 DD A6 FA      [19]  361 	and	a, -6 (ix)
+                            362 ; peephole 81 removed jp by using inverse jump logic
+                            363 ; peephole 158 removed unused label 00174$.
+                            364 ; peephole 82 removed jp by using inverse jump logic
+                            365 ; peephole 158 removed unused label 00175$.
+                            366 ;src/cvu_play_music.c:37: return(false);
+                            367 ;	genRet
+   0155 3C            [ 4]  368 	inc	a
+   0156 20 04         [12]  369 	jr	NZ,00102$
+                            370 ; peephole 164 changed absolute to relative conditional jump.
+   0158 6F            [ 4]  371 	ld	l,a
+                            372 ; peephole 124 replaced constant #0x00 by a (which has just been tested to be #0x00).
+   0159 C3r5Ar03      [10]  373 	jp	00118$
+                            374 ;	genLabel
+   015C                     375 00102$:
+                            376 ;src/cvu_play_music.c:42: uint16_t leftover_ticks = music->note_ticks_remaining + music->pause_ticks_remaining; // Avoid desynchronization of multi-voice music.
+                            377 ;	genPointerGet
+                            378 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            379 ;fetchPairLong
+   015C DD 6E F3      [19]  380 	ld	l, -13 (ix)
+   015F DD 66 F4      [19]  381 	ld	h, -12 (ix)
+                            382 ;	_moveFrom_tpair_()
+   0162 4E            [ 7]  383 	ld	c, (hl)
+   0163 23            [ 6]  384 	inc	hl
+                            385 ;	_moveFrom_tpair_()
+   0164 46            [ 7]  386 	ld	b, (hl)
+                            387 ;	genPointerGet
+                            388 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+                            389 ;fetchPairLong
+   0165 DD 6E FB      [19]  390 	ld	l, -5 (ix)
+   0168 DD 66 FC      [19]  391 	ld	h, -4 (ix)
+                            392 ;	_moveFrom_tpair_()
+   016B 5E            [ 7]  393 	ld	e, (hl)
+   016C 23            [ 6]  394 	inc	hl
+                            395 ;	_moveFrom_tpair_()
+   016D 66            [ 7]  396 	ld	h, (hl)
+                            397 ;	genPlus
+                            398 ;fetchPairLong
+   016E 6B            [ 4]  399 	ld	l, e
+   016F 09            [11]  400 	add	hl, bc
+                            401 ;	genAssign
+                            402 ;fetchPairLong
+   0170 4D            [ 4]  403 	ld	c, l
+   0171 44            [ 4]  404 	ld	b, h
+                            405 ;src/cvu_play_music.c:44: length = (note >> 4) & 0xf;
+                            406 ;	genRightShift
+                            407 ;	AOP_STK for _cvu_play_music_sloc16_1_0
+                            408 ;fetchPairLong
+   0172 DD 5E FE      [19]  409 	ld	e, -2 (ix)
+   0175 DD 56 FF      [19]  410 	ld	d, -1 (ix)
+   0178 3E 04         [ 7]  411 	ld	a, #0x04
+   017A                     412 00176$:
+   017A CB 3A         [ 8]  413 	srl	d
+   017C CB 1B         [ 8]  414 	rr	e
+   017E 3D            [ 4]  415 	dec	a
+   017F 20 F9         [12]  416 	jr	NZ,00176$
+                            417 ; peephole 164 changed absolute to relative conditional jump.
+                            418 ;	genCast
+                            419 ;	genMove_o
+   0181 7B            [ 4]  420 	ld	a, e
+                            421 ;	genMove_o
+                            422 ;	genAnd
+   0182 E6 0F         [ 7]  423 	and	a, #0x0f
+                            424 ;	genAssign
+                            425 ;	genMove_o
+   0184 5F            [ 4]  426 	ld	e, a
+                            427 ;	genMove_o
+                            428 ;src/cvu_play_music.c:45: if(!length)
+                            429 ;	genIfx
+   0185 B7            [ 4]  430 	or	a, a
+   0186 20 02         [12]  431 	jr	NZ,00104$
+                            432 ; peephole 164 changed absolute to relative conditional jump.
+                            433 ;src/cvu_play_music.c:46: length = 0x10;
+                            434 ;	genAssign
+                            435 ;	genMove_o
+   0188 1E 10         [ 7]  436 	ld	e, #0x10
+                            437 ;	genLabel
+   018A                     438 00104$:
+                            439 ;src/cvu_play_music.c:47: music->note_ticks_remaining = length * cv_get_vint_frequency();
+                            440 ;	genCall
+   018A C5            [11]  441 	push	bc
+   018B D5            [11]  442 	push	de
+   018C CDr00r00      [17]  443 	call	_cv_get_vint_frequency
+                            444 ;	genMove_o
+   018F 7D            [ 4]  445 	ld	a, l
+                            446 ;	genMove_o
+   0190 D1            [10]  447 	pop	de
+                            448 ;	genMult
+                            449 ; peephole 50 eleminated dead pop/push pair.
+   0191 67            [ 4]  450 	ld	h, a
+   0192 2E 00         [ 7]  451 	ld	l, #0x00
+   0194 55            [ 4]  452 	ld	d, l
+   0195 06 08         [ 7]  453 	ld	b, #0x08
+   0197                     454 00177$:
+   0197 29            [11]  455 	add	hl, hl
+   0198 30 01         [12]  456 	jr	NC,00178$
+                            457 ; peephole 166 changed absolute to relative conditional jump.
+   019A 19            [11]  458 	add	hl, de
+   019B                     459 00178$:
+   019B 10 FA         [13]  460 	djnz	00177$
+   019D C1            [10]  461 	pop	bc
+   019E EB            [ 4]  462 	ex	de, hl
+                            463 ;	genCast
+                            464 ;	(locations are the same)
+                            465 ;	genAssign (pointer)
+                            466 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            467 ;	isBitvar = 0
+                            468 ;fetchPairLong
+   019F DD 6E F3      [19]  469 	ld	l, -13 (ix)
+   01A2 DD 66 F4      [19]  470 	ld	h, -12 (ix)
+   01A5 73            [ 7]  471 	ld	(hl), e
+   01A6 23            [ 6]  472 	inc	hl
+   01A7 72            [ 7]  473 	ld	(hl), d
+                            474 ;src/cvu_play_music.c:48: music->note_ticks_remaining += leftover_ticks;
+                            475 ;	genPlus
+   01A8 7B            [ 4]  476 	ld	a, e
+   01A9 81            [ 4]  477 	add	a, c
+   01AA 4F            [ 4]  478 	ld	c, a
+   01AB 7A            [ 4]  479 	ld	a, d
+   01AC 88            [ 4]  480 	adc	a, b
+   01AD 47            [ 4]  481 	ld	b, a
+                            482 ;	genAssign (pointer)
+                            483 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            484 ;	isBitvar = 0
+                            485 ;fetchPairLong
+   01AE D1            [10]  486 	pop	de
+   01AF E1            [10]  487 	pop	hl
+   01B0 E5            [11]  488 	push	hl
+   01B1 D5            [11]  489 	push	de
+   01B2 71            [ 7]  490 	ld	(hl), c
+   01B3 23            [ 6]  491 	inc	hl
+   01B4 70            [ 7]  492 	ld	(hl), b
+                            493 ;src/cvu_play_music.c:49: music->note_ticks_remaining -= music->sixteenth_notes_per_second;
+                            494 ;	genPointerGet
+                            495 ;	AOP_STK for _cvu_play_music_sloc3_1_0
+                            496 ;fetchPairLong
+   01B5 E1            [10]  497 	pop	hl
+   01B6 E5            [11]  498 	push	hl
+                            499 ;	_moveFrom_tpair_()
+   01B7 5E            [ 7]  500 	ld	e, (hl)
+                            501 ;	genCast
+                            502 ;	genMove_o
+                            503 ;	genMove_o
+                            504 ;	genMove_o
+   01B8 16 00         [ 7]  505 	ld	d, #0x00
+                            506 ;	genCast
+                            507 ;	(locations are the same)
+                            508 ;	genCast
+                            509 ;	(locations are the same)
+                            510 ;	genMinus
+   01BA 79            [ 4]  511 	ld	a, c
+   01BB 93            [ 4]  512 	sub	a, e
+   01BC 4F            [ 4]  513 	ld	c, a
+   01BD 78            [ 4]  514 	ld	a, b
+   01BE 9A            [ 4]  515 	sbc	a, d
+   01BF 47            [ 4]  516 	ld	b, a
+                            517 ;	genCast
+                            518 ;	(locations are the same)
+                            519 ;	genAssign (pointer)
+                            520 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            521 ;	isBitvar = 0
+                            522 ;fetchPairLong
+   01C0 D1            [10]  523 	pop	de
+   01C1 E1            [10]  524 	pop	hl
+   01C2 E5            [11]  525 	push	hl
+   01C3 D5            [11]  526 	push	de
+   01C4 71            [ 7]  527 	ld	(hl), c
+   01C5 23            [ 6]  528 	inc	hl
+   01C6 70            [ 7]  529 	ld	(hl), b
+                            530 ;src/cvu_play_music.c:51: rel_length = (note >> 2) & 0x3;
+                            531 ;	genRightShift
+                            532 ;	AOP_STK for _cvu_play_music_sloc16_1_0
+                            533 ;fetchPairLong
+   01C7 DD 4E FE      [19]  534 	ld	c, -2 (ix)
+   01CA DD 46 FF      [19]  535 	ld	b, -1 (ix)
+   01CD CB 38         [ 8]  536 	srl	b
+   01CF CB 19         [ 8]  537 	rr	c
+   01D1 CB 38         [ 8]  538 	srl	b
+   01D3 CB 19         [ 8]  539 	rr	c
+                            540 ;	genCast
+                            541 ;	genMove_o
+   01D5 79            [ 4]  542 	ld	a, c
+                            543 ;	genMove_o
+                            544 ;	genAnd
+                            545 ;	AOP_STK for _cvu_play_music_sloc18_1_0
+   01D6 E6 03         [ 7]  546 	and	a, #0x03
+                            547 ;src/cvu_play_music.c:52: switch(rel_length)
+                            548 ;	genCmpEq
+                            549 ;	AOP_STK for _cvu_play_music_sloc18_1_0
+                            550 ; peephole 33 loaded a from a instead of going through -3 (ix).
+   01D8 DD 77 FD      [19]  551 	ld	-3 (ix), a
+                            552 ; peephole 0 removed redundant load from a into a.
+   01DB B7            [ 4]  553 	or	a, a
+   01DC CAr77r02      [10]  554 	jp	Z,00109$
+                            555 ; peephole 81 removed jp by using inverse jump logic
+                            556 ; peephole 158 removed unused label 00179$.
+                            557 ;src/cvu_play_music.c:22: if(music->note_ticks_remaining >= music->sixteenth_notes_per_second)
+                            558 ;	genPointerGet
+                            559 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            560 ;fetchPairLong
+   01DF DD 6E F3      [19]  561 	ld	l, -13 (ix)
+   01E2 DD 66 F4      [19]  562 	ld	h, -12 (ix)
+                            563 ;	_moveFrom_tpair_()
+   01E5 4E            [ 7]  564 	ld	c, (hl)
+   01E6 23            [ 6]  565 	inc	hl
+                            566 ;	_moveFrom_tpair_()
+   01E7 46            [ 7]  567 	ld	b, (hl)
+                            568 ;src/cvu_play_music.c:52: switch(rel_length)
+                            569 ;	genCmpEq
+                            570 ;	AOP_STK for _cvu_play_music_sloc18_1_0
+   01E8 DD 7E FD      [19]  571 	ld	a, -3 (ix)
+   01EB 3D            [ 4]  572 	dec	a
+   01EC 28 09         [12]  573 	jr	Z,00106$
+                            574 ; peephole 163 changed absolute to relative conditional jump.
+                            575 ; peephole 81 removed jp by using inverse jump logic
+                            576 ; peephole 158 removed unused label 00180$.
+                            577 ;	genCmpEq
+                            578 ;	AOP_STK for _cvu_play_music_sloc18_1_0
+   01EE DD 7E FD      [19]  579 	ld	a, -3 (ix)
+   01F1 D6 02         [ 7]  580 	sub	a, #0x02
+   01F3 28 36         [12]  581 	jr	Z,00107$
+                            582 ; peephole 163 changed absolute to relative conditional jump.
+                            583 ; peephole 81 removed jp by using inverse jump logic
+                            584 ; peephole 158 removed unused label 00181$.
+                            585 ;	genGoto
+   01F5 18 59         [12]  586 	jr	00108$
+                            587 ; peephole 162 changed absolute to relative unconditional jump.
+                            588 ;src/cvu_play_music.c:56: case 1:	// Staccato
+                            589 ;	genLabel
+   01F7                     590 00106$:
+                            591 ;src/cvu_play_music.c:57: music->pause_ticks_remaining = music->note_ticks_remaining;
+                            592 ;	genAssign (pointer)
+                            593 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+                            594 ;	isBitvar = 0
+                            595 ;fetchPairLong
+   01F7 DD 6E FB      [19]  596 	ld	l, -5 (ix)
+   01FA DD 66 FC      [19]  597 	ld	h, -4 (ix)
+   01FD 71            [ 7]  598 	ld	(hl), c
+   01FE 23            [ 6]  599 	inc	hl
+   01FF 70            [ 7]  600 	ld	(hl), b
+                            601 ;src/cvu_play_music.c:58: music->note_ticks_remaining = music->note_ticks_remaining >> 2;
+                            602 ;	genPointerGet
+                            603 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            604 ;fetchPairLong
+   0200 DD 6E F3      [19]  605 	ld	l, -13 (ix)
+   0203 DD 66 F4      [19]  606 	ld	h, -12 (ix)
+                            607 ;	_moveFrom_tpair_()
+   0206 5E            [ 7]  608 	ld	e, (hl)
+   0207 23            [ 6]  609 	inc	hl
+                            610 ;	_moveFrom_tpair_()
+   0208 56            [ 7]  611 	ld	d, (hl)
+                            612 ;	genRightShift
+                            613 ;fetchPairLong
+   0209 CB 3A         [ 8]  614 	srl	d
+   020B CB 1B         [ 8]  615 	rr	e
+   020D CB 3A         [ 8]  616 	srl	d
+   020F CB 1B         [ 8]  617 	rr	e
+                            618 ;	genAssign (pointer)
+                            619 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            620 ;	isBitvar = 0
+                            621 ;fetchPairLong
+   0211 DD 6E F3      [19]  622 	ld	l, -13 (ix)
+   0214 DD 66 F4      [19]  623 	ld	h, -12 (ix)
+   0217 73            [ 7]  624 	ld	(hl), e
+   0218 23            [ 6]  625 	inc	hl
+   0219 72            [ 7]  626 	ld	(hl), d
+                            627 ;src/cvu_play_music.c:59: music->pause_ticks_remaining -= music->note_ticks_remaining;
+                            628 ;	genMinus
+   021A 79            [ 4]  629 	ld	a, c
+   021B 93            [ 4]  630 	sub	a, e
+   021C 4F            [ 4]  631 	ld	c, a
+   021D 78            [ 4]  632 	ld	a, b
+   021E 9A            [ 4]  633 	sbc	a, d
+   021F 47            [ 4]  634 	ld	b, a
+                            635 ;	genAssign (pointer)
+                            636 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+                            637 ;	isBitvar = 0
+                            638 ;fetchPairLong
+   0220 DD 6E FB      [19]  639 	ld	l, -5 (ix)
+   0223 DD 66 FC      [19]  640 	ld	h, -4 (ix)
+   0226 71            [ 7]  641 	ld	(hl), c
+   0227 23            [ 6]  642 	inc	hl
+   0228 70            [ 7]  643 	ld	(hl), b
+                            644 ;src/cvu_play_music.c:60: break;
+                            645 ;	genGoto
+   0229 18 4C         [12]  646 	jr	00109$
+                            647 ; peephole 162 changed absolute to relative unconditional jump.
+                            648 ;src/cvu_play_music.c:61: case 2:
+                            649 ;	genLabel
+   022B                     650 00107$:
+                            651 ;src/cvu_play_music.c:62: music->pause_ticks_remaining = music->note_ticks_remaining >> 1;
+                            652 ;	genRightShift
+                            653 ;fetchPairLong
+   022B CB 38         [ 8]  654 	srl	b
+   022D CB 19         [ 8]  655 	rr	c
+                            656 ;	genAssign (pointer)
+                            657 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+                            658 ;	isBitvar = 0
+                            659 ;fetchPairLong
+   022F DD 6E FB      [19]  660 	ld	l, -5 (ix)
+   0232 DD 66 FC      [19]  661 	ld	h, -4 (ix)
+   0235 71            [ 7]  662 	ld	(hl), c
+   0236 23            [ 6]  663 	inc	hl
+   0237 70            [ 7]  664 	ld	(hl), b
+                            665 ;src/cvu_play_music.c:63: music->note_ticks_remaining -= music->pause_ticks_remaining;
+                            666 ;	genPointerGet
+                            667 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            668 ;fetchPairLong
+   0238 DD 6E F3      [19]  669 	ld	l, -13 (ix)
+   023B DD 66 F4      [19]  670 	ld	h, -12 (ix)
+                            671 ;	_moveFrom_tpair_()
+   023E 5E            [ 7]  672 	ld	e, (hl)
+   023F 23            [ 6]  673 	inc	hl
+                            674 ;	_moveFrom_tpair_()
+   0240 56            [ 7]  675 	ld	d, (hl)
+                            676 ;	genMinus
+   0241 7B            [ 4]  677 	ld	a, e
+   0242 91            [ 4]  678 	sub	a, c
+   0243 4F            [ 4]  679 	ld	c, a
+   0244 7A            [ 4]  680 	ld	a, d
+   0245 98            [ 4]  681 	sbc	a, b
+   0246 47            [ 4]  682 	ld	b, a
+                            683 ;	genAssign (pointer)
+                            684 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            685 ;	isBitvar = 0
+                            686 ;fetchPairLong
+   0247 D1            [10]  687 	pop	de
+   0248 E1            [10]  688 	pop	hl
+   0249 E5            [11]  689 	push	hl
+   024A D5            [11]  690 	push	de
+   024B 71            [ 7]  691 	ld	(hl), c
+   024C 23            [ 6]  692 	inc	hl
+   024D 70            [ 7]  693 	ld	(hl), b
+                            694 ;src/cvu_play_music.c:64: break;
+                            695 ;	genGoto
+   024E 18 27         [12]  696 	jr	00109$
+                            697 ; peephole 162 changed absolute to relative unconditional jump.
+                            698 ;src/cvu_play_music.c:65: default:	// Standard
+                            699 ;	genLabel
+   0250                     700 00108$:
+                            701 ;src/cvu_play_music.c:66: music->pause_ticks_remaining = music->note_ticks_remaining >> 2;
+                            702 ;	genRightShift
+                            703 ;fetchPairLong
+   0250 CB 38         [ 8]  704 	srl	b
+   0252 CB 19         [ 8]  705 	rr	c
+   0254 CB 38         [ 8]  706 	srl	b
+   0256 CB 19         [ 8]  707 	rr	c
+                            708 ;	genAssign (pointer)
+                            709 ;	AOP_STK for _cvu_play_music_sloc6_1_0
+                            710 ;	isBitvar = 0
+                            711 ;fetchPairLong
+   0258 DD 6E FB      [19]  712 	ld	l, -5 (ix)
+   025B DD 66 FC      [19]  713 	ld	h, -4 (ix)
+   025E 71            [ 7]  714 	ld	(hl), c
+   025F 23            [ 6]  715 	inc	hl
+   0260 70            [ 7]  716 	ld	(hl), b
+                            717 ;src/cvu_play_music.c:67: music->note_ticks_remaining -= music->pause_ticks_remaining;
+                            718 ;	genPointerGet
+                            719 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            720 ;fetchPairLong
+   0261 DD 6E F3      [19]  721 	ld	l, -13 (ix)
+   0264 DD 66 F4      [19]  722 	ld	h, -12 (ix)
+                            723 ;	_moveFrom_tpair_()
+   0267 5E            [ 7]  724 	ld	e, (hl)
+   0268 23            [ 6]  725 	inc	hl
+                            726 ;	_moveFrom_tpair_()
+   0269 56            [ 7]  727 	ld	d, (hl)
+                            728 ;	genMinus
+   026A 7B            [ 4]  729 	ld	a, e
+   026B 91            [ 4]  730 	sub	a, c
+   026C 4F            [ 4]  731 	ld	c, a
+   026D 7A            [ 4]  732 	ld	a, d
+   026E 98            [ 4]  733 	sbc	a, b
+   026F 47            [ 4]  734 	ld	b, a
+                            735 ;	genAssign (pointer)
+                            736 ;	AOP_STK for _cvu_play_music_sloc1_1_0
+                            737 ;	isBitvar = 0
+                            738 ;fetchPairLong
+   0270 D1            [10]  739 	pop	de
+   0271 E1            [10]  740 	pop	hl
+   0272 E5            [11]  741 	push	hl
+   0273 D5            [11]  742 	push	de
+   0274 71            [ 7]  743 	ld	(hl), c
+   0275 23            [ 6]  744 	inc	hl
+   0276 70            [ 7]  745 	ld	(hl), b
+                            746 ;src/cvu_play_music.c:69: }
+                            747 ;	genLabel
+   0277                     748 00109$:
+                            749 ;src/cvu_play_music.c:77: halftone = (note >> 8) & 0xf;
+                            750 ;	genRightShift
+                            751 ;	AOP_STK for _cvu_play_music_sloc16_1_0
+                            752 ; peephole 1 removed dead load from #0x00 into b.
+                            753 ;	genCast
+                            754 ;	genMove_o
+                            755 ; peephole 12 loaded -1 (ix) into a directly instead of going through c.
+   0277 DD 7E FF      [19]  756 	ld	a, -1 (ix)
+                            757 ;	genMove_o
+                            758 ;	genAnd
+                            759 ;	AOP_STK for _cvu_play_music_sloc19_1_0
+   027A E6 0F         [ 7]  760 	and	a, #0x0f
+                            761 ;src/cvu_play_music.c:78: pause = (halftone == 0xf);
+                            762 ;	genCmpEq
+                            763 ;	AOP_STK for _cvu_play_music_sloc19_1_0
+                            764 ; peephole 33 loaded a from a instead of going through -4 (ix).
+   027C DD 77 FC      [19]  765 	ld	-4 (ix), a
+                            766 ; peephole 0 removed redundant load from a into a.
+   027F D6 0F         [ 7]  767 	sub	a, #0x0f
+   0281 3E 01         [ 7]  768 	ld	a, #0x01
+   0283 28 01         [12]  769 	jr	Z,00183$
+                            770 ; peephole 163 changed absolute to relative conditional jump.
+                            771 ; peephole 169xnz used double assignment in case of NZ condition.
+                            772 ; peephole 158 removed unused label 00182$.
+   0285 AF            [ 4]  773 	xor	a, a
+   0286                     774 00183$:
+   0286 4F            [ 4]  775 	ld	c, a
+                            776 ;	genMove_o
+                            777 ;	genAssign
+                            778 ;	AOP_STK for _cvu_play_music_sloc20_1_0
+                            779 ;	genMove_o
+   0287 DD 71 FD      [19]  780 	ld	-3 (ix), c
+                            781 ;	genMove_o
+                            782 ;src/cvu_play_music.c:79: if(!pause)
+                            783 ;	genIfx
+   028A CB 41         [ 8]  784 	bit	0, c
+   028C C2r15r03      [10]  785 	jp	NZ, 00111$
+                            786 ;src/cvu_play_music.c:81: frequency_divider = music->tuning[halftone];
+                            787 ;	genAssign
+                            788 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                            789 ;fetchPairLong
+   028F DD 6E F5      [19]  790 	ld	l, -11 (ix)
+   0292 DD 66 F6      [19]  791 	ld	h, -10 (ix)
+                            792 ;	genPointerGet
+                            793 ;fetchPairLong
+   0295 23            [ 6]  794 	inc	hl
+   0296 23            [ 6]  795 	inc	hl
+   0297 23            [ 6]  796 	inc	hl
+                            797 ;	_moveFrom_tpair_()
+   0298 4E            [ 7]  798 	ld	c, (hl)
+   0299 23            [ 6]  799 	inc	hl
+                            800 ;	_moveFrom_tpair_()
+   029A 46            [ 7]  801 	ld	b, (hl)
+                            802 ;	genCast
+                            803 ;	AOP_STK for _cvu_play_music_sloc19_1_0
+                            804 ;	genMove_o
+                            805 ;	genMove_o
+   029B DD 6E FC      [19]  806 	ld	l, -4 (ix)
+                            807 ;	genMove_o
+   029E 26 00         [ 7]  808 	ld	h, #0x00
+                            809 ;	genLeftShift
+   02A0 29            [11]  810 	add	hl, hl
+                            811 ;fetchPairLong
+                            812 ;	genPlus
+   02A1 09            [11]  813 	add	hl, bc
+                            814 ;	genPointerGet
+                            815 ;	AOP_STK for _cvu_play_music_sloc21_1_0
+                            816 ;fetchPairLong
+                            817 ;	_moveFrom_tpair_()
+   02A2 7E            [ 7]  818 	ld	a, (hl)
+   02A3 DD 77 FB      [19]  819 	ld	-5 (ix), a
+   02A6 23            [ 6]  820 	inc	hl
+                            821 ;	_moveFrom_tpair_()
+   02A7 7E            [ 7]  822 	ld	a, (hl)
+   02A8 DD 77 FC      [19]  823 	ld	-4 (ix), a
+                            824 ;src/cvu_play_music.c:83: octave = (note >> 12);
+                            825 ;	genRightShift
+                            826 ;	AOP_STK for _cvu_play_music_sloc16_1_0
+   02AB DD 7E FF      [19]  827 	ld	a, -1 (ix)
+   02AE 07            [ 4]  828 	rlca
+   02AF 07            [ 4]  829 	rlca
+   02B0 07            [ 4]  830 	rlca
+   02B1 07            [ 4]  831 	rlca
+   02B2 E6 0F         [ 7]  832 	and	a, #0x0f
+                            833 ; peephole 1 removed dead load from #0x00 into b.
+                            834 ;	genCast
+                            835 ;	AOP_STK for _cvu_play_music_sloc22_1_0
+                            836 ;	genMove_o
+                            837 ; peephole 13 loaded a into -12 (ix) directly instead of going through c.
+                            838 ;	genMove_o
+                            839 ;src/cvu_play_music.c:84: cv_set_frequency(music->channel, (frequency_divider >> octave) <= 32736 ? frequency_divider >> octave : frequency_divider >> (octave + 1));
+                            840 ;	genRightShift
+                            841 ;	AOP_STK for _cvu_play_music_sloc22_1_0
+                            842 ;	AOP_STK for _cvu_play_music_sloc23_1_0
+                            843 ;	AOP_STK for _cvu_play_music_sloc21_1_0
+                            844 ; peephole 33 loaded b from a instead of going through -12 (ix).
+   02B4 DD 77 F4      [19]  845 	ld	-12 (ix), a
+   02B7 47            [ 4]  846 	ld	b, a
+                            847 ;	genMove_o
+   02B8 DD 7E FB      [19]  848 	ld	a, -5 (ix)
+   02BB DD 77 FE      [19]  849 	ld	-2 (ix), a
+   02BE DD 7E FC      [19]  850 	ld	a, -4 (ix)
+   02C1 DD 77 FF      [19]  851 	ld	-1 (ix), a
+                            852 ;	genMove_o
+                            853 ;	genMove_o
+   02C4 04            [ 4]  854 	inc	b
+   02C5 18 08         [12]  855 	jr	00185$
+                            856 ; peephole 162 changed absolute to relative unconditional jump.
+   02C7                     857 00184$:
+   02C7 DD CB FF 3E   [23]  858 	srl	-1 (ix)
+   02CB DD CB FE 1E   [23]  859 	rr	-2 (ix)
+   02CF                     860 00185$:
+   02CF 10 F6         [13]  861 	djnz	00184$
+                            862 ;	genCast
+                            863 ;	AOP_STK for _cvu_play_music_sloc23_1_0
+                            864 ;fetchPairLong
+   02D1 DD 4E FE      [19]  865 	ld	c, -2 (ix)
+   02D4 DD 46 FF      [19]  866 	ld	b, -1 (ix)
+                            867 ;	genCmpGt
+   02D7 3E E0         [ 7]  868 	ld	a, #0xe0
+   02D9 B9            [ 4]  869 	cp	a, c
+   02DA 3E 7F         [ 7]  870 	ld	a, #0x7f
+   02DC 98            [ 4]  871 	sbc	a, b
+                            872 ;	genAssign
+                            873 ;	AOP_STK for _cvu_play_music_sloc23_1_0
+                            874 ;	AOP_STK for _cvu_play_music_sloc24_1_0
+                            875 ;	(locations are the same)
+                            876 ;	genGoto
+                            877 ;	genLabel
+   02DD 30 21         [12]  878 	jr	NC,00121$
+                            879 ; peephole 166 changed absolute to relative conditional jump.
+                            880 ; peephole 80 removed jp by using inverse jump logic
+                            881 ; peephole 158 removed unused label 00120$.
+                            882 ;	genPlus
+                            883 ;	AOP_STK for _cvu_play_music_sloc22_1_0
+                            884 ;	AOP_STK for _cvu_play_music_sloc25_1_0
+   02DF DD 7E F4      [19]  885 	ld	a, -12 (ix)
+   02E2 3C            [ 4]  886 	inc	a
+                            887 ;	genRightShift
+                            888 ;	AOP_STK for _cvu_play_music_sloc25_1_0
+                            889 ;	AOP_STK for _cvu_play_music_sloc24_1_0
+                            890 ;	AOP_STK for _cvu_play_music_sloc21_1_0
+                            891 ; peephole 33 loaded b from a instead of going through -1 (ix).
+   02E3 DD 77 FF      [19]  892 	ld	-1 (ix), a
+   02E6 47            [ 4]  893 	ld	b, a
+                            894 ;	genMove_o
+   02E7 DD 7E FB      [19]  895 	ld	a, -5 (ix)
+   02EA DD 77 FE      [19]  896 	ld	-2 (ix), a
+   02ED DD 7E FC      [19]  897 	ld	a, -4 (ix)
+   02F0 DD 77 FF      [19]  898 	ld	-1 (ix), a
+                            899 ;	genMove_o
+                            900 ;	genMove_o
+   02F3 04            [ 4]  901 	inc	b
+   02F4 18 08         [12]  902 	jr	00187$
+                            903 ; peephole 162 changed absolute to relative unconditional jump.
+   02F6                     904 00186$:
+   02F6 DD CB FF 3E   [23]  905 	srl	-1 (ix)
+   02FA DD CB FE 1E   [23]  906 	rr	-2 (ix)
+   02FE                     907 00187$:
+   02FE 10 F6         [13]  908 	djnz	00186$
+                            909 ;	genLabel
+   0300                     910 00121$:
+                            911 ;	genPointerGet
+                            912 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                            913 ;fetchPairLong
+   0300 DD 6E F5      [19]  914 	ld	l, -11 (ix)
+   0303 DD 66 F6      [19]  915 	ld	h, -10 (ix)
+                            916 ;	_moveFrom_tpair_()
+   0306 46            [ 7]  917 	ld	b, (hl)
+                            918 ;	genIpush
+                            919 ;	AOP_STK for _cvu_play_music_sloc24_1_0
+                            920 ;fetchPairLong
+   0307 DD 6E FE      [19]  921 	ld	l, -2 (ix)
+   030A DD 66 FF      [19]  922 	ld	h, -1 (ix)
+   030D E5            [11]  923 	push	hl
+                            924 ;	genIpush
+   030E C5            [11]  925 	push	bc
+   030F 33            [ 6]  926 	inc	sp
+                            927 ;	genCall
+   0310 CDr00r00      [17]  928 	call	_cv_set_frequency
+   0313 F1            [10]  929 	pop	af
+   0314 33            [ 6]  930 	inc	sp
+                            931 ;	genLabel
+   0315                     932 00111$:
+                            933 ;src/cvu_play_music.c:90: cv_set_attenuation(music->channel, pause ? 0 : (music->volume[note & 0x3]));
+                            934 ;	genIfx
+                            935 ;	AOP_STK for _cvu_play_music_sloc20_1_0
+   0315 DD CB FD 46   [20]  936 	bit	0, -3 (ix)
+   0319 28 05         [12]  937 	jr	Z,00122$
+                            938 ; peephole 163 changed absolute to relative conditional jump.
+                            939 ;	genAssign
+                            940 ;fetchPairLong
+                            941 ;fetchLitPair
+   031B 01 00 00      [10]  942 	ld	bc, #0x0000
+                            943 ;	genGoto
+   031E 18 14         [12]  944 	jr	00123$
+                            945 ; peephole 162 changed absolute to relative unconditional jump.
+                            946 ;	genLabel
+   0320                     947 00122$:
+                            948 ;	genAssign
+                            949 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                            950 ;fetchPairLong
+   0320 DD 6E F5      [19]  951 	ld	l, -11 (ix)
+   0323 DD 66 F6      [19]  952 	ld	h, -10 (ix)
+                            953 ;	genPointerGet
+                            954 ;fetchPairLong
+   0326 23            [ 6]  955 	inc	hl
+                            956 ;	_moveFrom_tpair_()
+   0327 4E            [ 7]  957 	ld	c, (hl)
+   0328 23            [ 6]  958 	inc	hl
+                            959 ;	_moveFrom_tpair_()
+   0329 46            [ 7]  960 	ld	b, (hl)
+                            961 ;	genAnd
+                            962 ;	AOP_STK for _cvu_play_music_sloc17_1_0
+   032A DD 7E F9      [19]  963 	ld	a, -7 (ix)
+   032D E6 03         [ 7]  964 	and	a, #0x03
+   032F 26 00         [ 7]  965 	ld	h, #0x00
+                            966 ;	genPlus
+                            967 ;fetchPairLong
+   0331 6F            [ 4]  968 	ld	l, a
+   0332 09            [11]  969 	add	hl, bc
+                            970 ;	genPointerGet
+   0333 4E            [ 7]  971 	ld	c, (hl)
+                            972 ;	genCast
+                            973 ;	genMove_o
+                            974 ;	genMove_o
+                            975 ;	genMove_o
+                            976 ; peephole 1 removed dead load from #0x00 into b.
+                            977 ;	genLabel
+   0334                     978 00123$:
+                            979 ;	genCast
+                            980 ;	genMove_o
+   0334 79            [ 4]  981 	ld	a, c
+                            982 ;	genMove_o
+                            983 ;	genPointerGet
+                            984 ;	AOP_STK for _cvu_play_music_sloc0_1_0
+                            985 ;fetchPairLong
+   0335 DD 6E F5      [19]  986 	ld	l, -11 (ix)
+   0338 DD 66 F6      [19]  987 	ld	h, -10 (ix)
+                            988 ;	_moveFrom_tpair_()
+   033B 46            [ 7]  989 	ld	b, (hl)
+                            990 ;	genIpush
+   033C F5            [11]  991 	push	af
+   033D 33            [ 6]  992 	inc	sp
+                            993 ;	genIpush
+   033E C5            [11]  994 	push	bc
+   033F 33            [ 6]  995 	inc	sp
+                            996 ;	genCall
+   0340 CDr00r00      [17]  997 	call	_cv_set_attenuation
+   0343 F1            [10]  998 	pop	af
+                            999 ;src/cvu_play_music.c:92: music->notes++;
+                           1000 ;	genPointerGet
+                           1001 ;	AOP_STK for _cvu_play_music_sloc15_1_0
+                           1002 ;fetchPairLong
+   0344 DD 6E F7      [19] 1003 	ld	l, -9 (ix)
+   0347 DD 66 F8      [19] 1004 	ld	h, -8 (ix)
+                           1005 ;	_moveFrom_tpair_()
+   034A 4E            [ 7] 1006 	ld	c, (hl)
+   034B 23            [ 6] 1007 	inc	hl
+                           1008 ;	_moveFrom_tpair_()
+   034C 46            [ 7] 1009 	ld	b, (hl)
+                           1010 ;	genPlus
+   034D 03            [ 6] 1011 	inc	bc
+   034E 03            [ 6] 1012 	inc	bc
+                           1013 ;	genAssign (pointer)
+                           1014 ;	AOP_STK for _cvu_play_music_sloc15_1_0
+                           1015 ;	isBitvar = 0
+                           1016 ;fetchPairLong
+   034F DD 6E F7      [19] 1017 	ld	l, -9 (ix)
+   0352 DD 66 F8      [19] 1018 	ld	h, -8 (ix)
+   0355 71            [ 7] 1019 	ld	(hl), c
+   0356 23            [ 6] 1020 	inc	hl
+   0357 70            [ 7] 1021 	ld	(hl), b
+                           1022 ;	genLabel
+   0358                    1023 00117$:
+                           1024 ;src/cvu_play_music.c:94: return(true);
+                           1025 ;	genRet
+   0358 2E 01         [ 7] 1026 	ld	l, #0x01
+                           1027 ;	genLabel
+   035A                    1028 00118$:
+                           1029 ;src/cvu_play_music.c:95: }
+                           1030 ;	genEndFunction
+   035A DD F9         [10] 1031 	ld	sp, ix
+   035C DD E1         [14] 1032 	pop	ix
+   035E C9            [10] 1033 	ret
+                           1034 	.area _CODE
+                           1035 	.area _INITIALIZER
+                           1036 	.area _CABS (ABS)

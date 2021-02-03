@@ -1,0 +1,20 @@
+XL2
+H 9 areas 3 global symbols
+M cv_set_vint_handler
+O -mz80
+S _cv_vint_handler Ref0000
+S .__.ABS. Def0000
+A _CODE size E flags 0 addr 0
+S _cv_set_vint_handler Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 F3 11 00 00 21 02 00 39 ED A0 ED A0 FB C9
+R 00 00 00 00 02 04 00 00

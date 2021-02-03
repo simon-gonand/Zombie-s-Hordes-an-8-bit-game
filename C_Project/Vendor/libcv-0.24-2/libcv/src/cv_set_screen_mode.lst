@@ -1,0 +1,121 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_screen_mode
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_vdpout
+                             12 	.globl _cv_set_screen_mode
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                     00BE    16 _cv_graphics_port	=	0x00be
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cv_set_screen_mode.c:7: void cv_set_screen_mode(enum cv_screenmode mode)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cv_set_screen_mode
+                             50 ; ---------------------------------
+                             51 ;	Register assignment might be sub-optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cv_set_screen_mode::
+   0000 CDr00r00      [17]   54 	call	___sdcc_enter_ix
+                             55 ;src/cv_set_screen_mode.c:9: cv_vdpout(0x0, cv_vdpreg[0] = (mode & 0x06) | (cv_vdpreg[0] & ~0x06));
+                             56 ;	genAddrOf
+   0003 01r00r00      [10]   57 	ld	bc, #_cv_vdpreg+0
+                             58 ;	genAssign
+                             59 ;	AOP_STK for 
+                             60 ;	genMove_o
+   0006 DD 5E 04      [19]   61 	ld	e, 4 (ix)
+                             62 ;	genMove_o
+                             63 ;	genAnd
+   0009 7B            [ 4]   64 	ld	a, e
+   000A E6 06         [ 7]   65 	and	a, #0x06
+   000C 57            [ 4]   66 	ld	d, a
+                             67 ;	genPointerGet
+   000D 0A            [ 7]   68 	ld	a, (bc)
+                             69 ;	genAnd
+   000E E6 F9         [ 7]   70 	and	a, #0xf9
+                             71 ;	genOr
+   0010 B2            [ 4]   72 	or	a, d
+                             73 ;	genAssign (pointer)
+                             74 ;	isBitvar = 0
+   0011 02            [ 7]   75 	ld	(bc), a
+                             76 ;	genIpush
+   0012 C5            [11]   77 	push	bc
+   0013 F5            [11]   78 	push	af
+   0014 33            [ 6]   79 	inc	sp
+                             80 ;	genIpush
+   0015 AF            [ 4]   81 	xor	a, a
+   0016 F5            [11]   82 	push	af
+   0017 33            [ 6]   83 	inc	sp
+                             84 ;	genCall
+   0018 CDr00r00      [17]   85 	call	_cv_vdpout
+   001B F1            [10]   86 	pop	af
+   001C C1            [10]   87 	pop	bc
+                             88 ;src/cv_set_screen_mode.c:10: cv_vdpout(0x1, cv_vdpreg[1] = (mode & 0x18) | (cv_vdpreg[1] & ~0x18));
+                             89 ;	genPlus
+   001D 03            [ 6]   90 	inc	bc
+                             91 ;	genAnd
+   001E 7B            [ 4]   92 	ld	a, e
+   001F E6 18         [ 7]   93 	and	a, #0x18
+   0021 5F            [ 4]   94 	ld	e, a
+                             95 ;	genPointerGet
+   0022 0A            [ 7]   96 	ld	a, (bc)
+                             97 ;	genAnd
+   0023 E6 E7         [ 7]   98 	and	a, #0xe7
+                             99 ;	genOr
+   0025 B3            [ 4]  100 	or	a, e
+                            101 ;	genAssign (pointer)
+                            102 ;	isBitvar = 0
+   0026 02            [ 7]  103 	ld	(bc), a
+                            104 ;	genIpush
+                            105 ;	genIpush
+                            106 ; peephole 37 pushed de instead of pushing a twice.
+   0027 57            [ 4]  107 	ld	d,a
+   0028 1E 01         [ 7]  108 	ld	e,#0x01
+   002A D5            [11]  109 	push	de
+                            110 ;	genCall
+   002B CDr00r00      [17]  111 	call	_cv_vdpout
+   002E F1            [10]  112 	pop	af
+                            113 ;	genLabel
+                            114 ; peephole 158 removed unused label 00101$.
+                            115 ;src/cv_set_screen_mode.c:11: }
+                            116 ;	genEndFunction
+   002F DD E1         [14]  117 	pop	ix
+   0031 C9            [10]  118 	ret
+                            119 	.area _CODE
+                            120 	.area _INITIALIZER
+                            121 	.area _CABS (ABS)

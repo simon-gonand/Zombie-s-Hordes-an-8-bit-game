@@ -1,0 +1,37 @@
+                              1 ; (c) 2006 Philipp Krause pkk@spth.de
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 .module _read_from_array
+                             18 
+                             19 .globl __read_from_array
+                             20 
+                             21 ; uint8_t _read_from_array(void);
+                             22 
+   0000                      23 __read_from_array:
+   0000 2Ar00r00      [16]   24 	ld	hl, (__common_state)
+   0003 01 0F 00      [10]   25 	ld	bc, #0xf
+   0006 09            [11]   26 	add	hl, bc
+   0007 5E            [ 7]   27 	ld	e, (hl)
+   0008 23            [ 6]   28 	inc	hl
+   0009 56            [ 7]   29 	ld	d, (hl)
+   000A 1A            [ 7]   30 	ld	a, (de)
+   000B 13            [ 6]   31 	inc	de
+   000C 72            [ 7]   32 	ld	(hl), d
+   000D 2B            [ 6]   33 	dec	hl
+   000E 73            [ 7]   34 	ld	(hl), e
+   000F 6F            [ 4]   35 	ld	l, a
+   0010 C9            [10]   36 	ret
+                             37 

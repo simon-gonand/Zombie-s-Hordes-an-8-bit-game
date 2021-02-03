@@ -1,0 +1,20 @@
+XL2
+H 1 areas 2 global symbols
+M cvu_set_sprite_y
+S .__.ABS. Def0000
+A _CODE size 23 flags 0 addr 0
+S _cvu_set_sprite_y Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 FD E1 E1 C1 C5 E5 3E CF 91 3E 00 98 F2
+R 00 00 00 00
+T 0D 00 13 00 06 00 0E CF
+R 00 00 00 00 00 02 00 00
+T 13 00
+R 00 00 00 00
+T 13 00 79 D6 E0 78 DE FF F2 20 00 06 FF 0E E0
+R 00 00 00 00 00 09 00 00
+T 20 00
+R 00 00 00 00
+T 20 00 71 FD E9
+R 00 00 00 00

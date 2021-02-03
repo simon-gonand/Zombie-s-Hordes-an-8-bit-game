@@ -1,0 +1,131 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_init_lzk
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_init_lzk
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                     00BE    15 _cv_graphics_port	=	0x00be
+                             16 ;--------------------------------------------------------
+                             17 ; ram data
+                             18 ;--------------------------------------------------------
+                             19 	.area _DATA
+                             20 ;--------------------------------------------------------
+                             21 ; ram data
+                             22 ;--------------------------------------------------------
+                             23 	.area _INITIALIZED
+                             24 ;--------------------------------------------------------
+                             25 ; absolute external ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DABS (ABS)
+                             28 ;--------------------------------------------------------
+                             29 ; global & static initialisations
+                             30 ;--------------------------------------------------------
+                             31 	.area _HOME
+                             32 	.area _GSINIT
+                             33 	.area _GSFINAL
+                             34 	.area _GSINIT
+                             35 ;--------------------------------------------------------
+                             36 ; Home
+                             37 ;--------------------------------------------------------
+                             38 	.area _HOME
+                             39 	.area _HOME
+                             40 ;--------------------------------------------------------
+                             41 ; code
+                             42 ;--------------------------------------------------------
+                             43 	.area _CODE
+                             44 ;src/cvu_init_lzk.c:5: void cvu_init_lzk(struct cvu_lzk_state *restrict state, uint8_t (* input)(void), uint8_t escape)
+                             45 ;	genLabel
+                             46 ;	genFunction
+                             47 ;	---------------------------------
+                             48 ; Function cvu_init_lzk
+                             49 ; ---------------------------------
+                             50 ;	Register assignment might be sub-optimal.
+                             51 ; Stack space usage: 0 bytes.
+   0000                      52 _cvu_init_lzk::
+                             53 ;src/cvu_init_lzk.c:7: state->input = input;
+                             54 ;	genAssign
+                             55 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             56 ;fetchPairLong
+   0000 D1            [10]   57 	pop	de
+   0001 C1            [10]   58 	pop	bc
+   0002 C5            [11]   59 	push	bc
+   0003 D5            [11]   60 	push	de
+                             61 ;	genAssign (pointer)
+                             62 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 4, size 2
+                             63 ;	isBitvar = 0
+                             64 ;fetchPairLong
+   0004 69            [ 4]   65 	ld	l, c
+   0005 60            [ 4]   66 	ld	h, b
+   0006 FD 21 04 00   [14]   67 	ld	iy, #4
+   000A FD 39         [15]   68 	add	iy, sp
+   000C FD 7E 00      [19]   69 	ld	a, 0 (iy)
+   000F 77            [ 7]   70 	ld	(hl), a
+   0010 23            [ 6]   71 	inc	hl
+   0011 FD 7E 01      [19]   72 	ld	a, 1 (iy)
+   0014 77            [ 7]   73 	ld	(hl), a
+                             74 ;src/cvu_init_lzk.c:8: state->escape = escape;
+                             75 ;	genPlus
+                             76 ;fetchPairLong
+   0015 59            [ 4]   77 	ld	e, c
+   0016 50            [ 4]   78 	ld	d, b
+   0017 13            [ 6]   79 	inc	de
+   0018 13            [ 6]   80 	inc	de
+                             81 ;	genAssign (pointer)
+                             82 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 6, size 1
+                             83 ;	isBitvar = 0
+   0019 FD 23         [10]   84 	inc	iy
+   001B FD 23         [10]   85 	inc	iy
+   001D FD 7E 00      [19]   86 	ld	a, 0 (iy)
+   0020 12            [ 7]   87 	ld	(de), a
+                             88 ;src/cvu_init_lzk.c:9: state->left = 0;
+                             89 ;	genPlus
+                             90 ;fetchPairLong
+   0021 59            [ 4]   91 	ld	e, c
+   0022 50            [ 4]   92 	ld	d, b
+   0023 13            [ 6]   93 	inc	de
+   0024 13            [ 6]   94 	inc	de
+   0025 13            [ 6]   95 	inc	de
+                             96 ;	genAssign (pointer)
+                             97 ;	isBitvar = 0
+   0026 AF            [ 4]   98 	xor	a, a
+   0027 12            [ 7]   99 	ld	(de), a
+                            100 ;src/cvu_init_lzk.c:10: state->start = 0;
+                            101 ;	genPlus
+                            102 ;fetchPairLong
+                            103 ;fetchLitPair
+   0028 21 05 00      [10]  104 	ld	hl, #0x0005
+   002B 09            [11]  105 	add	hl, bc
+                            106 ;	genAssign (pointer)
+                            107 ;	isBitvar = 0
+   002C 36 00         [10]  108 	ld	(hl), #0x00
+                            109 ;src/cvu_init_lzk.c:11: memset(state->buffer, 0, 64);
+                            110 ;	genPlus
+                            111 ;fetchPairLong
+                            112 ;fetchLitPair
+   002E 21 06 00      [10]  113 	ld	hl, #0x0006
+   0031 09            [11]  114 	add	hl, bc
+                            115 ;	genCast
+                            116 ;	(locations are the same)
+                            117 ;	genBuiltIn
+                            118 ;fetchPairLong
+   0032 06 40         [ 7]  119 	ld	b, #0x40
+   0034                     120 00103$:
+   0034 36 00         [10]  121 	ld	(hl), #0x00
+   0036 23            [ 6]  122 	inc	hl
+   0037 10 FB         [13]  123 	djnz	00103$
+                            124 ;	genLabel
+                            125 ; peephole 158 removed unused label 00101$.
+                            126 ;src/cvu_init_lzk.c:12: }
+                            127 ;	genEndFunction
+   0039 C9            [10]  128 	ret
+                            129 	.area _CODE
+                            130 	.area _INITIALIZER
+                            131 	.area _CABS (ABS)

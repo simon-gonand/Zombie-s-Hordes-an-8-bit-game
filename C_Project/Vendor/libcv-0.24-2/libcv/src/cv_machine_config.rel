@@ -1,0 +1,12 @@
+XL2
+H 3 areas 2 global symbols
+M cv_machine_config
+S .__.ABS. Def0000
+A _CODE size 0 flags 0 addr 0
+A _DATA size 1 flags 0 addr 0
+S _cv_machine_config Def0000
+A _GSINIT size 0 flags 0 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00

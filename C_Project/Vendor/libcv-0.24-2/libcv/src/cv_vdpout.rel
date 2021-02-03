@@ -1,0 +1,17 @@
+XL2
+H 1 areas 3 global symbols
+M cv_vdpout
+S .__.ABS. Def0000
+S _cv_vint_indicator Ref0000
+A _CODE size 18 flags 0 addr 0
+S _cv_vdpout Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 E1 C1 C5
+R 00 00 00 00
+T 03 00
+R 00 00 00 00
+T 03 00 DB BF AF 32 00 00 78 D3 BF 3E 80 B1 D3 BF
+R 00 00 00 00 02 06 01 00
+T 11 00 3A 00 00 B7 20 EC E9
+R 00 00 00 00 02 03 01 00

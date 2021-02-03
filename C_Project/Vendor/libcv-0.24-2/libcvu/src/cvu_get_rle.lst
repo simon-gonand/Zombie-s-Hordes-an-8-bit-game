@@ -1,0 +1,82 @@
+                              1 ; (c) 2006 Philipp Klaus Krause philipp@colecovision.eu
+                              2 
+                              3 ;	This library is free software; you can redistribute it and/or modify it
+                              4 ;	under the terms of the GNU Library General Public License as published by the
+                              5 ;	Free Software Foundation; either version 2, or (at your option) any
+                              6 ;	later version.
+                              7    
+                              8 ;	This library is distributed in the hope that it will be useful,
+                              9 ;	but WITHOUT ANY WARRANTY; without even the implied warranty of
+                             10 ;	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                             11 ;	GNU Library General Public License for more details.
+                             12    
+                             13 ;	You should have received a copy of the GNU Library General Public License
+                             14 ;	along with this program; if not, write to the Free Software
+                             15 ;	Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+                             16 
+                             17 .module cvu_get_rle
+                             18 
+                             19 .globl _cvu_get_rle
+                             20 
+                             21 ; uint8_t cvu_get_rle(struct cvu_rle_state *state);
+                             22 
+   0000                      23 _cvu_get_rle:
+   0000 E1            [10]   24 	pop hl
+   0001 FD E1         [14]   25 	pop iy
+   0003 FD E5         [15]   26 	push iy
+   0005 E5            [11]   27 	push hl
+                             28 
+                             29 	; if(state->left)
+                             30 	; goto output;
+   0006 FD 7E 03      [19]   31 	ld a, 3(iy)
+   0009 B7            [ 4]   32 	or a
+   000A C2r45r00      [10]   33 	jp nz, output
+                             34 
+                             35 	; next = (state->input)();
+   000D FD E5         [15]   36 	push iy
+   000F 21r1Ar00      [10]   37 	ld hl, #next1
+   0012 E5            [11]   38 	push hl
+   0013 FD 6E 00      [19]   39 	ld l, 0(iy)
+   0016 FD 66 01      [19]   40 	ld h, 1(iy)
+   0019 E9            [ 4]   41 	jp (hl)
+   001A                      42 next1:
+   001A FD E1         [14]   43 	pop iy
+                             44 
+                             45 	; if(next != state->escape)
+                             46 	;	return(next);
+   001C FD 7E 02      [19]   47 	ld a, 2(iy)
+   001F BD            [ 4]   48 	cp a, l
+   0020 C0            [11]   49 	ret nz
+                             50 
+                             51 	; state->left = (state->input)();
+   0021 FD E5         [15]   52 	push iy
+   0023 21r2Er00      [10]   53 	ld hl, #next2
+   0026 E5            [11]   54 	push hl
+   0027 FD 6E 00      [19]   55 	ld l, 0(iy)
+   002A FD 66 01      [19]   56 	ld h, 1(iy)
+   002D E9            [ 4]   57 	jp (hl)
+   002E                      58 next2:
+   002E FD E1         [14]   59 	pop iy
+   0030 FD 75 03      [19]   60 	ld 3(iy), l
+                             61 
+                             62 	; state->buffer = (state->input)();
+   0033 FD E5         [15]   63 	push iy
+   0035 21r40r00      [10]   64 	ld hl, #next3
+   0038 E5            [11]   65 	push hl
+   0039 FD 6E 00      [19]   66 	ld l, 0(iy)
+   003C FD 66 01      [19]   67 	ld h, 1(iy)
+   003F E9            [ 4]   68 	jp (hl)
+   0040                      69 next3:
+   0040 FD E1         [14]   70 	pop iy
+   0042 FD 75 04      [19]   71 	ld 4(iy), l
+                             72 
+                             73 	; output:
+   0045                      74 output:
+                             75 
+                             76 	; state->left--;
+   0045 FD 35 03      [23]   77 	dec 3(iy)
+                             78 
+                             79 	; return(state->buffer);
+   0048 FD 6E 04      [19]   80 	ld l, 4(iy)
+   004B C9            [10]   81 	ret
+                             82 

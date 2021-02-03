@@ -1,0 +1,28 @@
+XL2
+H 9 areas 3 global symbols
+M cv_get_sprite_invalid
+O -mz80
+S _cv_vdpstat Ref0000
+S .__.ABS. Def0000
+A _CODE size 22 flags 0 addr 0
+S _cv_get_sprite_invalid Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 21 03 00 39 7E 2B B6 28 0A D1 C1 C5 D5 3A
+R 00 00 00 00
+T 0E 00 00 00 E6 1F 02
+R 00 00 00 00 02 02 00 00
+T 13 00
+R 00 00 00 00
+T 13 00 3A 00 00 E6 40 0E 00 B1 C6 FF 3E 00 17 6F
+R 00 00 00 00 02 03 00 00
+T 21 00 C9
+R 00 00 00 00

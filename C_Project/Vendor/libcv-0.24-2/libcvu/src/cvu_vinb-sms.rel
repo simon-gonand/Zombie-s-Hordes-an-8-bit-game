@@ -1,0 +1,22 @@
+XL2
+H 9 areas 3 global symbols
+M cvu_vinb
+O -mz80
+S .__.ABS. Def0000
+S _cv_set_read_vram_address Ref0000
+A _CODE size 10 flags 0 addr 0
+S _cvu_vinb Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 C1 E1 E5 C5 E5 CD 00 00 F1 BE BE 00 DB BE
+R 00 00 00 00 02 08 01 00
+T 0E 00 6F C9
+R 00 00 00 00

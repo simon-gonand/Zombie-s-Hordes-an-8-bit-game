@@ -1,0 +1,18 @@
+0.4:
+	-Minor bugfixes.
+
+0.5:
+	-Improved usage and error messages, updated author's email address.
+
+0.6:
+	-Fixed missing array dimension on non-binary mode.
+	-Use PKG_CHECK_MODULES to for libpng12 and to build reliably on Cygwin.
+
+0.7:
+	-configure.ac cleanup.
+
+0.8:
+	-Updated to automake 1.15.1
+	-Update for libpng 1.6 (vs. old 1.2)
+	-Improved error messages.
+

@@ -1,0 +1,146 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_fdiv2
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _abs
+                             12 	.globl _cvu_fdiv2
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                             16 ;--------------------------------------------------------
+                             17 ; ram data
+                             18 ;--------------------------------------------------------
+                             19 	.area _DATA
+                             20 ;--------------------------------------------------------
+                             21 ; ram data
+                             22 ;--------------------------------------------------------
+                             23 	.area _INITIALIZED
+                             24 ;--------------------------------------------------------
+                             25 ; absolute external ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DABS (ABS)
+                             28 ;--------------------------------------------------------
+                             29 ; global & static initialisations
+                             30 ;--------------------------------------------------------
+                             31 	.area _HOME
+                             32 	.area _GSINIT
+                             33 	.area _GSFINAL
+                             34 	.area _GSINIT
+                             35 ;--------------------------------------------------------
+                             36 ; Home
+                             37 ;--------------------------------------------------------
+                             38 	.area _HOME
+                             39 	.area _HOME
+                             40 ;--------------------------------------------------------
+                             41 ; code
+                             42 ;--------------------------------------------------------
+                             43 	.area _CODE
+                             44 ;src/cvu_fdiv2.c:21: cvu_f cvu_fdiv2(cvu_f l_arg, cvu_f r)
+                             45 ;	genLabel
+                             46 ;	genFunction
+                             47 ;	---------------------------------
+                             48 ; Function cvu_fdiv2
+                             49 ; ---------------------------------
+                             50 ;	Register assignment might be sub-optimal.
+                             51 ; Stack space usage: 0 bytes.
+   0000                      52 _cvu_fdiv2::
+                             53 ;src/cvu_fdiv2.c:23: register cvu_f l = l_arg;
+                             54 ;	genAssign
+                             55 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             56 ;fetchPairLong
+   0000 C1            [10]   57 	pop	bc
+   0001 D1            [10]   58 	pop	de
+   0002 D5            [11]   59 	push	de
+   0003 C5            [11]   60 	push	bc
+                             61 ;src/cvu_fdiv2.c:26: for(shift = CVU_F_R; shift && abs(l) <= (INT16_MAX >> 1); shift--)
+                             62 ;	genAssign
+                             63 ;	genMove_o
+   0004 06 06         [ 7]   64 	ld	b, #0x06
+                             65 ;	genLabel
+   0006                      66 00104$:
+                             67 ;	genIfx
+   0006 78            [ 4]   68 	ld	a, b
+   0007 B7            [ 4]   69 	or	a, a
+   0008 28 1E         [12]   70 	jr	Z,00101$
+                             71 ; peephole 163 changed absolute to relative conditional jump.
+                             72 ;	genCast
+                             73 ;fetchPairLong
+   000A 6B            [ 4]   74 	ld	l, e
+   000B 62            [ 4]   75 	ld	h, d
+                             76 ;	genIpush
+   000C D5            [11]   77 	push	de
+   000D E5            [11]   78 	push	hl
+                             79 ;	genCall
+   000E CDr00r00      [17]   80 	call	_abs
+   0011 F1            [10]   81 	pop	af
+                             82 ;	genMove_o
+                             83 ;	genMove_o
+   0012 D1            [10]   84 	pop	de
+                             85 ;	genCmpGt
+   0013 3E FF         [ 7]   86 	ld	a, #0xff
+   0015 BD            [ 4]   87 	cp	a, l
+   0016 3E 3F         [ 7]   88 	ld	a, #0x3f
+   0018 9C            [ 4]   89 	sbc	a, h
+   0019 E2r1Er00      [10]   90 	jp	PO, 00124$
+   001C EE 80         [ 7]   91 	xor	a, #0x80
+   001E                      92 00124$:
+   001E FAr28r00      [10]   93 	jp	M, 00101$
+                             94 ;src/cvu_fdiv2.c:27: l <<= 1;
+                             95 ;	genLeftShift
+                             96 ;fetchPairLong
+   0021 CB 23         [ 8]   97 	sla	e
+   0023 CB 12         [ 8]   98 	rl	d
+                             99 ;src/cvu_fdiv2.c:26: for(shift = CVU_F_R; shift && abs(l) <= (INT16_MAX >> 1); shift--)
+                            100 ;	genMinus
+   0025 05            [ 4]  101 	dec	b
+                            102 ;	genGoto
+   0026 18 DE         [12]  103 	jr	00104$
+                            104 ; peephole 162 changed absolute to relative unconditional jump.
+                            105 ;	genLabel
+   0028                     106 00101$:
+                            107 ;src/cvu_fdiv2.c:29: return((l / r) << shift);
+                            108 ;	genIpush
+   0028 C5            [11]  109 	push	bc
+                            110 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 4, size 2
+                            111 ;fetchPairLong
+                            112 ; peephole 64 used hl instead of iy.
+   0029 21 06 00      [10]  113 	ld	hl, #6
+   002C 39            [11]  114 	add	hl, sp
+                            115 ; peephole 49 pushed bc instead of hl.
+   002D 4E            [ 7]  116 	ld	c, (hl)
+   002E 23            [ 6]  117 	inc	hl
+   002F 46            [ 7]  118 	ld	b, (hl)
+   0030 C5            [11]  119 	push	bc
+                            120 ;	genIpush
+   0031 D5            [11]  121 	push	de
+                            122 ;	genCall
+   0032 CDr00r00      [17]  123 	call	__divsint
+   0035 F1            [10]  124 	pop	af
+   0036 F1            [10]  125 	pop	af
+                            126 ;	genMove_o
+                            127 ;	genMove_o
+   0037 C1            [10]  128 	pop	bc
+                            129 ;	genLeftShift
+   0038 04            [ 4]  130 	inc	b
+   0039 18 01         [12]  131 	jr	00128$
+                            132 ; peephole 162 changed absolute to relative unconditional jump.
+   003B                     133 00127$:
+   003B 29            [11]  134 	add	hl, hl
+   003C                     135 00128$:
+   003C 10 FD         [13]  136 	djnz	00127$
+                            137 ;	genRet
+                            138 ;fetchPairLong
+                            139 ;	genLabel
+                            140 ; peephole 158 removed unused label 00106$.
+                            141 ;src/cvu_fdiv2.c:30: }
+                            142 ;	genEndFunction
+   003E C9            [10]  143 	ret
+                            144 	.area _CODE
+                            145 	.area _INITIALIZER
+                            146 	.area _CABS (ABS)

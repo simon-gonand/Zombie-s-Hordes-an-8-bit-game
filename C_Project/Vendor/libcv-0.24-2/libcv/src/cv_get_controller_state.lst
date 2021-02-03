@@ -1,0 +1,242 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_get_controller_state
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_get_controller_state
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                     00FC    15 _port0	=	0x00fc
+                     00FF    16 _port1	=	0x00ff
+                     0080    17 _port2	=	0x0080
+                     00C0    18 _port3	=	0x00c0
+                             19 ;--------------------------------------------------------
+                             20 ; ram data
+                             21 ;--------------------------------------------------------
+                             22 	.area _DATA
+                             23 ;--------------------------------------------------------
+                             24 ; ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _INITIALIZED
+                             27 ;--------------------------------------------------------
+                             28 ; absolute external ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _DABS (ABS)
+                             31 ;--------------------------------------------------------
+                             32 ; global & static initialisations
+                             33 ;--------------------------------------------------------
+                             34 	.area _HOME
+                             35 	.area _GSINIT
+                             36 	.area _GSFINAL
+                             37 	.area _GSINIT
+                             38 ;--------------------------------------------------------
+                             39 ; Home
+                             40 ;--------------------------------------------------------
+                             41 	.area _HOME
+                             42 	.area _HOME
+                             43 ;--------------------------------------------------------
+                             44 ; code
+                             45 ;--------------------------------------------------------
+                             46 	.area _CODE
+                             47 ;src/cv_get_controller_state.c:12: void cv_get_controller_state(struct cv_controller_state *state, uint_fast8_t controller)
+                             48 ;	genLabel
+                             49 ;	genFunction
+                             50 ;	---------------------------------
+                             51 ; Function cv_get_controller_state
+                             52 ; ---------------------------------
+                             53 ;	Register assignment might be sub-optimal.
+                             54 ; Stack space usage: 1 bytes.
+   0000                      55 _cv_get_controller_state::
+   0000 CDr00r00      [17]   56 	call	___sdcc_enter_ix
+   0003 3B            [ 6]   57 	dec	sp
+                             58 ;src/cv_get_controller_state.c:16: port2 = 42; // The meaning of life, the universe and everything. Read the keypad.
+                             59 ;	genAssign
+   0004 3E 2A         [ 7]   60 	ld	a, #0x2a
+   0006 D3 80         [11]   61 	out	(_port2), a
+                             62 ;src/cv_get_controller_state.c:18: key = controller ? port1 : port0;
+                             63 ;	genIfx
+                             64 ;	AOP_STK for 
+   0008 DD 7E 06      [19]   65 	ld	a, 6 (ix)
+   000B B7            [ 4]   66 	or	a, a
+   000C 28 04         [12]   67 	jr	Z,00112$
+                             68 ; peephole 163 changed absolute to relative conditional jump.
+                             69 ;	genAssign
+   000E DB FF         [11]   70 	in	a, (_port1)
+                             71 ;	genGoto
+   0010 18 02         [12]   72 	jr	00113$
+                             73 ; peephole 162 changed absolute to relative unconditional jump.
+                             74 ;	genLabel
+   0012                      75 00112$:
+                             76 ;	genAssign
+   0012 DB FC         [11]   77 	in	a, (_port0)
+                             78 ;	genLabel
+   0014                      79 00113$:
+                             80 ;	genAssign
+                             81 ;	AOP_STK for _cv_get_controller_state_sloc0_1_0
+                             82 ;	genMove_o
+   0014 DD 77 FF      [19]   83 	ld	-1 (ix), a
+                             84 ;	genMove_o
+                             85 ;src/cv_get_controller_state.c:19: state->keypad = keytable[key & 0xf];  // Decode key
+                             86 ;	genAssign
+                             87 ;	AOP_STK for 
+                             88 ;fetchPairLong
+   0017 DD 4E 04      [19]   89 	ld	c, 4 (ix)
+   001A DD 46 05      [19]   90 	ld	b, 5 (ix)
+                             91 ;	genAddrOf
+   001D 21r69r00      [10]   92 	ld	hl, #_keytable+0
+                             93 ;	genCast
+                             94 ;	AOP_STK for _cv_get_controller_state_sloc0_1_0
+                             95 ;	genMove_o
+                             96 ;	genMove_o
+                             97 ;	genMove_o
+                             98 ; peephole 1 removed dead load from #0x00 into d.
+                             99 ;	genAnd
+                            100 ; peephole 12 loaded -1 (ix) into a directly instead of going through e.
+   0020 DD 7E FF      [19]  101 	ld	a, -1 (ix)
+   0023 E6 0F         [ 7]  102 	and	a, #0x0f
+   0025 5F            [ 4]  103 	ld	e, a
+   0026 16 00         [ 7]  104 	ld	d, #0x00
+                            105 ;	genPlus
+   0028 19            [11]  106 	add	hl, de
+                            107 ;	genPointerGet
+   0029 7E            [ 7]  108 	ld	a, (hl)
+                            109 ;	genAssign (pointer)
+                            110 ;	isBitvar = 0
+   002A 02            [ 7]  111 	ld	(bc), a
+                            112 ;src/cv_get_controller_state.c:21: port3 = 42; // The meaning of life, the universe and everything. Read the joystick.
+                            113 ;	genAssign
+   002B 3E 2A         [ 7]  114 	ld	a, #0x2a
+   002D D3 C0         [11]  115 	out	(_port3), a
+                            116 ;src/cv_get_controller_state.c:23: joy = ~(controller ? port1 : port0);
+                            117 ;	genIfx
+                            118 ;	AOP_STK for 
+   002F DD 7E 06      [19]  119 	ld	a, 6 (ix)
+   0032 B7            [ 4]  120 	or	a, a
+   0033 28 04         [12]  121 	jr	Z,00114$
+                            122 ; peephole 163 changed absolute to relative conditional jump.
+                            123 ;	genAssign
+   0035 DB FF         [11]  124 	in	a, (_port1)
+                            125 ;	genGoto
+   0037 18 02         [12]  126 	jr	00115$
+                            127 ; peephole 162 changed absolute to relative unconditional jump.
+                            128 ;	genLabel
+   0039                     129 00114$:
+                            130 ;	genAssign
+   0039 DB FC         [11]  131 	in	a, (_port0)
+                            132 ;	genLabel
+   003B                     133 00115$:
+                            134 ;	genCpl
+   003B 2F            [ 4]  135 	cpl
+   003C 6F            [ 4]  136 	ld	l, a
+                            137 ;src/cv_get_controller_state.c:24: if(!(key & 0x40))
+                            138 ;	genAnd
+                            139 ;	AOP_STK for _cv_get_controller_state_sloc0_1_0
+   003D DD CB FF 76   [20]  140 	bit	6, -1 (ix)
+                            141 ; peephole 81 removed jp by using inverse jump logic
+                            142 ; peephole 158 removed unused label 00141$.
+   0041 20 04         [12]  143 	jr	NZ,00102$
+                            144 ; peephole 164 changed absolute to relative conditional jump.
+                            145 ; peephole 82 removed jp by using inverse jump logic
+                            146 ; peephole 158 removed unused label 00142$.
+                            147 ;src/cv_get_controller_state.c:25: joy |= CV_FIRE_1;
+                            148 ;	genOr
+   0043 CB FD         [ 8]  149 	set	7, l
+                            150 ;	genGoto
+   0045 18 02         [12]  151 	jr	00103$
+                            152 ; peephole 162 changed absolute to relative unconditional jump.
+                            153 ;	genLabel
+   0047                     154 00102$:
+                            155 ;src/cv_get_controller_state.c:27: joy &= ~CV_FIRE_1;
+                            156 ;	genAnd
+   0047 CB BD         [ 8]  157 	res	7, l
+                            158 ;	genLabel
+   0049                     159 00103$:
+                            160 ;src/cv_get_controller_state.c:28: if((key & 0xf) == 8)
+                            161 ;	genCmpEq
+   0049 7B            [ 4]  162 	ld	a, e
+   004A D6 08         [ 7]  163 	sub	a, #0x08
+   004C B2            [ 4]  164 	or	a, d
+                            165 ; peephole 81 removed jp by using inverse jump logic
+                            166 ; peephole 158 removed unused label 00143$.
+   004D 20 04         [12]  167 	jr	NZ,00105$
+                            168 ; peephole 164 changed absolute to relative conditional jump.
+                            169 ; peephole 82 removed jp by using inverse jump logic
+                            170 ; peephole 158 removed unused label 00144$.
+                            171 ;src/cv_get_controller_state.c:29: joy |= CV_FIRE_2;
+                            172 ;	genOr
+   004F CB E5         [ 8]  173 	set	4, l
+                            174 ;	genGoto
+   0051 18 02         [12]  175 	jr	00106$
+                            176 ; peephole 162 changed absolute to relative unconditional jump.
+                            177 ;	genLabel
+   0053                     178 00105$:
+                            179 ;src/cv_get_controller_state.c:31: joy &= ~CV_FIRE_2;
+                            180 ;	genAnd
+   0053 CB A5         [ 8]  181 	res	4, l
+                            182 ;	genLabel
+   0055                     183 00106$:
+                            184 ;src/cv_get_controller_state.c:32: if((key & 0xf) == 4)
+                            185 ;	genCmpEq
+   0055 7B            [ 4]  186 	ld	a, e
+   0056 D6 04         [ 7]  187 	sub	a, #0x04
+   0058 B2            [ 4]  188 	or	a, d
+                            189 ; peephole 81 removed jp by using inverse jump logic
+                            190 ; peephole 158 removed unused label 00145$.
+   0059 20 05         [12]  191 	jr	NZ,00108$
+                            192 ; peephole 164 changed absolute to relative conditional jump.
+                            193 ; peephole 82 removed jp by using inverse jump logic
+                            194 ; peephole 158 removed unused label 00146$.
+                            195 ;src/cv_get_controller_state.c:33: joy |= CV_FIRE_3;
+                            196 ;	genOr
+   005B 7D            [ 4]  197 	ld	a, l
+   005C CB EF         [ 8]  198 	set	5, a
+                            199 ;	genGoto
+   005E 18 03         [12]  200 	jr	00109$
+                            201 ; peephole 162 changed absolute to relative unconditional jump.
+                            202 ;	genLabel
+   0060                     203 00108$:
+                            204 ;src/cv_get_controller_state.c:35: joy &= ~CV_FIRE_3;
+                            205 ;	genAnd
+   0060 7D            [ 4]  206 	ld	a, l
+   0061 CB AF         [ 8]  207 	res	5, a
+                            208 ;	genLabel
+   0063                     209 00109$:
+                            210 ;src/cv_get_controller_state.c:37: state->joystick = joy;
+                            211 ;	genPlus
+   0063 03            [ 6]  212 	inc	bc
+                            213 ;	genAssign (pointer)
+                            214 ;	isBitvar = 0
+   0064 02            [ 7]  215 	ld	(bc), a
+                            216 ;	genLabel
+                            217 ; peephole 158 removed unused label 00110$.
+                            218 ;src/cv_get_controller_state.c:38: }
+                            219 ;	genEndFunction
+   0065 33            [ 6]  220 	inc	sp
+   0066 DD E1         [14]  221 	pop	ix
+   0068 C9            [10]  222 	ret
+   0069                     223 _keytable:
+   0069 0F                  224 	.db #0x0f	; 15
+   006A 08                  225 	.db #0x08	; 8
+   006B 04                  226 	.db #0x04	; 4
+   006C 05                  227 	.db #0x05	; 5
+   006D 0F                  228 	.db #0x0f	; 15
+   006E 07                  229 	.db #0x07	; 7
+   006F 0B                  230 	.db #0x0b	; 11
+   0070 02                  231 	.db #0x02	; 2
+   0071 0F                  232 	.db #0x0f	; 15
+   0072 0A                  233 	.db #0x0a	; 10
+   0073 00                  234 	.db #0x00	; 0
+   0074 09                  235 	.db #0x09	; 9
+   0075 03                  236 	.db #0x03	; 3
+   0076 01                  237 	.db #0x01	; 1
+   0077 06                  238 	.db #0x06	; 6
+   0078 0F                  239 	.db #0x0f	; 15
+                            240 	.area _CODE
+                            241 	.area _INITIALIZER
+                            242 	.area _CABS (ABS)

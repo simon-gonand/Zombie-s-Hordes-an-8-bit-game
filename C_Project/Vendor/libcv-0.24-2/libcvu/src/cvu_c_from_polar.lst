@@ -1,0 +1,146 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_c_from_polar
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cvu_cfmul
+                             12 	.globl _cvu_fcos
+                             13 	.globl _cvu_fsin
+                             14 	.globl _cvu_c_from_polar
+                             15 ;--------------------------------------------------------
+                             16 ; special function registers
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+                             22 ;--------------------------------------------------------
+                             23 ; ram data
+                             24 ;--------------------------------------------------------
+                             25 	.area _INITIALIZED
+                             26 ;--------------------------------------------------------
+                             27 ; absolute external ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _DABS (ABS)
+                             30 ;--------------------------------------------------------
+                             31 ; global & static initialisations
+                             32 ;--------------------------------------------------------
+                             33 	.area _HOME
+                             34 	.area _GSINIT
+                             35 	.area _GSFINAL
+                             36 	.area _GSINIT
+                             37 ;--------------------------------------------------------
+                             38 ; Home
+                             39 ;--------------------------------------------------------
+                             40 	.area _HOME
+                             41 	.area _HOME
+                             42 ;--------------------------------------------------------
+                             43 ; code
+                             44 ;--------------------------------------------------------
+                             45 	.area _CODE
+                             46 ;src/cvu_c_from_polar.c:3: void cvu_c_from_polar(struct cvu_c *c, cvu_f phi, cvu_f d)
+                             47 ;	genLabel
+                             48 ;	genFunction
+                             49 ;	---------------------------------
+                             50 ; Function cvu_c_from_polar
+                             51 ; ---------------------------------
+                             52 ;	Register assignment might be sub-optimal.
+                             53 ; Stack space usage: 0 bytes.
+   0000                      54 _cvu_c_from_polar::
+   0000 CDr00r00      [17]   55 	call	___sdcc_enter_ix
+                             56 ;src/cvu_c_from_polar.c:5: c->r = cvu_fcos(phi);
+                             57 ;	genAssign
+                             58 ;	AOP_STK for 
+                             59 ;fetchPairLong
+   0003 DD 4E 04      [19]   60 	ld	c, 4 (ix)
+   0006 DD 46 05      [19]   61 	ld	b, 5 (ix)
+                             62 ;	genIpush
+   0009 C5            [11]   63 	push	bc
+                             64 ;	AOP_STK for 
+                             65 ;fetchPairLong
+   000A DD 6E 06      [19]   66 	ld	l, 6 (ix)
+   000D DD 66 07      [19]   67 	ld	h, 7 (ix)
+   0010 E5            [11]   68 	push	hl
+                             69 ;	genCall
+   0011 CDr00r00      [17]   70 	call	_cvu_fcos
+   0014 F1            [10]   71 	pop	af
+                             72 ;	genMove_o
+                             73 ; peephole 156 used ex to load hl into de.
+   0015 EB            [ 4]   74 	ex	de,hl
+                             75 ;	genMove_o
+   0016 C1            [10]   76 	pop	bc
+                             77 ;	genAssign (pointer)
+                             78 ;	isBitvar = 0
+                             79 ;fetchPairLong
+   0017 69            [ 4]   80 	ld	l, c
+   0018 60            [ 4]   81 	ld	h, b
+   0019 73            [ 7]   82 	ld	(hl), e
+   001A 23            [ 6]   83 	inc	hl
+   001B 72            [ 7]   84 	ld	(hl), d
+                             85 ;src/cvu_c_from_polar.c:6: c->i = cvu_fsin(phi);
+                             86 ;	genPlus
+                             87 ;fetchPairLong
+   001C 69            [ 4]   88 	ld	l, c
+   001D 60            [ 4]   89 	ld	h, b
+   001E 23            [ 6]   90 	inc	hl
+   001F 23            [ 6]   91 	inc	hl
+                             92 ;	genIpush
+   0020 E5            [11]   93 	push	hl
+   0021 C5            [11]   94 	push	bc
+                             95 ;	AOP_STK for 
+                             96 ;fetchPairLong
+   0022 DD 5E 06      [19]   97 	ld	e, 6 (ix)
+   0025 DD 56 07      [19]   98 	ld	d, 7 (ix)
+   0028 D5            [11]   99 	push	de
+                            100 ;	genCall
+   0029 CDr00r00      [17]  101 	call	_cvu_fsin
+   002C F1            [10]  102 	pop	af
+                            103 ;	genMove_o
+                            104 ; peephole 156 used ex to load hl into de.
+   002D EB            [ 4]  105 	ex	de,hl
+                            106 ;	genMove_o
+   002E C1            [10]  107 	pop	bc
+   002F E1            [10]  108 	pop	hl
+                            109 ;	genAssign (pointer)
+                            110 ;	isBitvar = 0
+                            111 ;fetchPairLong
+   0030 73            [ 7]  112 	ld	(hl), e
+   0031 23            [ 6]  113 	inc	hl
+   0032 72            [ 7]  114 	ld	(hl), d
+                            115 ;src/cvu_c_from_polar.c:7: if(d != CVU_I2F(1))
+                            116 ;	genCmpEq
+                            117 ;	AOP_STK for 
+   0033 DD 7E 08      [19]  118 	ld	a, 8 (ix)
+   0036 D6 40         [ 7]  119 	sub	a, #0x40
+   0038 DD B6 09      [19]  120 	or	a, 9 (ix)
+   003B 28 0D         [12]  121 	jr	Z,00103$
+                            122 ; peephole 163 changed absolute to relative conditional jump.
+                            123 ; peephole 81 removed jp by using inverse jump logic
+                            124 ; peephole 158 removed unused label 00110$.
+                            125 ;src/cvu_c_from_polar.c:8: cvu_cfmul(c, d);
+                            126 ;	genIpush
+                            127 ;	AOP_STK for 
+                            128 ;fetchPairLong
+   003D DD 6E 08      [19]  129 	ld	l, 8 (ix)
+   0040 DD 66 09      [19]  130 	ld	h, 9 (ix)
+   0043 E5            [11]  131 	push	hl
+                            132 ;	genIpush
+   0044 C5            [11]  133 	push	bc
+                            134 ;	genCall
+   0045 CDr00r00      [17]  135 	call	_cvu_cfmul
+   0048 F1            [10]  136 	pop	af
+   0049 F1            [10]  137 	pop	af
+                            138 ;	genLabel
+   004A                     139 00103$:
+                            140 ;src/cvu_c_from_polar.c:9: }
+                            141 ;	genEndFunction
+   004A DD E1         [14]  142 	pop	ix
+   004C C9            [10]  143 	ret
+                            144 	.area _CODE
+                            145 	.area _INITIALIZER
+                            146 	.area _CABS (ABS)

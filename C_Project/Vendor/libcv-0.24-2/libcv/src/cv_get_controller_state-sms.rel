@@ -1,0 +1,27 @@
+XL2
+H 9 areas 2 global symbols
+M cv_get_controller_state
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 24 flags 0 addr 0
+S _cv_get_controller_state Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 21 04 00 39 7E B7 20 04 DB DC 18 0C
+R 00 00 00 00
+T 0C 00
+R 00 00 00 00
+T 0C 00 DB DC 07 07 E6 03 4F DB DD 87 87 B1
+R 00 00 00 00
+T 18 00
+R 00 00 00 00
+T 18 00 2F 6F D1 C1 C5 D5 03 7D E6 3F 02 C9
+R 00 00 00 00

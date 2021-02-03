@@ -1,0 +1,75 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_set_vint_handler
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_set_vint_handler
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; ram data
+                             17 ;--------------------------------------------------------
+                             18 	.area _DATA
+                             19 ;--------------------------------------------------------
+                             20 ; ram data
+                             21 ;--------------------------------------------------------
+                             22 	.area _INITIALIZED
+                             23 ;--------------------------------------------------------
+                             24 ; absolute external ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DABS (ABS)
+                             27 ;--------------------------------------------------------
+                             28 ; global & static initialisations
+                             29 ;--------------------------------------------------------
+                             30 	.area _HOME
+                             31 	.area _GSINIT
+                             32 	.area _GSFINAL
+                             33 	.area _GSINIT
+                             34 ;--------------------------------------------------------
+                             35 ; Home
+                             36 ;--------------------------------------------------------
+                             37 	.area _HOME
+                             38 	.area _HOME
+                             39 ;--------------------------------------------------------
+                             40 ; code
+                             41 ;--------------------------------------------------------
+                             42 	.area _CODE
+                             43 ;src/cv_set_vint_handler.c:5: void cv_set_vint_handler(void (*handler)(void))
+                             44 ;	genLabel
+                             45 ;	genFunction
+                             46 ;	---------------------------------
+                             47 ; Function cv_set_vint_handler
+                             48 ; ---------------------------------
+                             49 ;	Register assignment is optimal.
+                             50 ; Stack space usage: 0 bytes.
+   0000                      51 _cv_set_vint_handler::
+                             52 ;src/cv_set_vint_handler.c:9: __endasm;
+                             53 ;	genInline
+                             54 ;	genInline
+   0000 F3            [ 4]   55 	di
+                             56 ;src/cv_set_vint_handler.c:10: cv_vint_handler = handler;
+                             57 ;	genAssign
+                             58 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+   0001 11r00r00      [10]   59 	ld	de, #_cv_vint_handler
+   0004 21 02 00      [10]   60 	ld	hl, #2
+   0007 39            [11]   61 	add	hl, sp
+   0008 ED A0         [16]   62 	ldi
+   000A ED A0         [16]   63 	ldi
+                             64 ;src/cv_set_vint_handler.c:13: __endasm;
+                             65 ;	genInline
+                             66 ;	genInline
+   000C FB            [ 4]   67 	ei
+                             68 ;	genLabel
+                             69 ; peephole 158 removed unused label 00101$.
+                             70 ;src/cv_set_vint_handler.c:14: }
+                             71 ;	genEndFunction
+   000D C9            [10]   72 	ret
+                             73 	.area _CODE
+                             74 	.area _INITIALIZER
+                             75 	.area _CABS (ABS)

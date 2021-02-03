@@ -1,0 +1,166 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cvu_init_music
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _CVU_EMPTY_MUSIC
+                             12 	.globl _CVU_VOLUME_DEFAULT
+                             13 	.globl _cvu_init_music
+                             14 ;--------------------------------------------------------
+                             15 ; special function registers
+                             16 ;--------------------------------------------------------
+                     00BE    17 _cv_graphics_port	=	0x00be
+                             18 ;--------------------------------------------------------
+                             19 ; ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+                             22 ;--------------------------------------------------------
+                             23 ; ram data
+                             24 ;--------------------------------------------------------
+                             25 	.area _INITIALIZED
+                             26 ;--------------------------------------------------------
+                             27 ; absolute external ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _DABS (ABS)
+                             30 ;--------------------------------------------------------
+                             31 ; global & static initialisations
+                             32 ;--------------------------------------------------------
+                             33 	.area _HOME
+                             34 	.area _GSINIT
+                             35 	.area _GSFINAL
+                             36 	.area _GSINIT
+                             37 ;--------------------------------------------------------
+                             38 ; Home
+                             39 ;--------------------------------------------------------
+                             40 	.area _HOME
+                             41 	.area _HOME
+                             42 ;--------------------------------------------------------
+                             43 ; code
+                             44 ;--------------------------------------------------------
+                             45 	.area _CODE
+                             46 ;src/cvu_init_music.c:27: void cvu_init_music(struct cvu_music *music)
+                             47 ;	genLabel
+                             48 ;	genFunction
+                             49 ;	---------------------------------
+                             50 ; Function cvu_init_music
+                             51 ; ---------------------------------
+                             52 ;	Register assignment might be sub-optimal.
+                             53 ; Stack space usage: 0 bytes.
+   0000                      54 _cvu_init_music::
+   0000 CDr00r00      [17]   55 	call	___sdcc_enter_ix
+                             56 ;src/cvu_init_music.c:29: music->channel = CV_SOUNDCHANNEL_0;
+                             57 ;	genAssign
+                             58 ;	AOP_STK for 
+                             59 ;fetchPairLong
+   0003 DD 4E 04      [19]   60 	ld	c, 4 (ix)
+   0006 DD 46 05      [19]   61 	ld	b, 5 (ix)
+                             62 ;	genAssign (pointer)
+                             63 ;	isBitvar = 0
+   0009 AF            [ 4]   64 	xor	a, a
+   000A 02            [ 7]   65 	ld	(bc), a
+                             66 ;src/cvu_init_music.c:30: music->volume = CVU_VOLUME_DEFAULT;
+                             67 ;	genPlus
+                             68 ;fetchPairLong
+   000B 69            [ 4]   69 	ld	l, c
+   000C 60            [ 4]   70 	ld	h, b
+   000D 23            [ 6]   71 	inc	hl
+                             72 ;	genAddrOf
+   000E 11r42r00      [10]   73 	ld	de, #_CVU_VOLUME_DEFAULT+0
+                             74 ;	genCast
+                             75 ;	(locations are the same)
+                             76 ;	genAssign (pointer)
+                             77 ;	isBitvar = 0
+                             78 ;fetchPairLong
+   0011 73            [ 7]   79 	ld	(hl), e
+   0012 23            [ 6]   80 	inc	hl
+   0013 72            [ 7]   81 	ld	(hl), d
+                             82 ;src/cvu_init_music.c:31: music->tuning = CVU_TUNING_ISO16_EQUAL;
+                             83 ;	genPlus
+                             84 ;fetchPairLong
+   0014 69            [ 4]   85 	ld	l, c
+   0015 60            [ 4]   86 	ld	h, b
+   0016 23            [ 6]   87 	inc	hl
+   0017 23            [ 6]   88 	inc	hl
+   0018 23            [ 6]   89 	inc	hl
+                             90 ;	genAddrOf
+   0019 11r00r00      [10]   91 	ld	de, #_CVU_TUNING_ISO16_EQUAL+0
+                             92 ;	genCast
+                             93 ;	(locations are the same)
+                             94 ;	genAssign (pointer)
+                             95 ;	isBitvar = 0
+                             96 ;fetchPairLong
+   001C 73            [ 7]   97 	ld	(hl), e
+   001D 23            [ 6]   98 	inc	hl
+   001E 72            [ 7]   99 	ld	(hl), d
+                            100 ;src/cvu_init_music.c:32: music->sixteenth_notes_per_second = 10;
+                            101 ;	genPlus
+                            102 ;fetchPairLong
+                            103 ;fetchLitPair
+   001F 21 05 00      [10]  104 	ld	hl, #0x0005
+   0022 09            [11]  105 	add	hl, bc
+                            106 ;	genAssign (pointer)
+                            107 ;	isBitvar = 0
+   0023 36 0A         [10]  108 	ld	(hl), #0x0a
+                            109 ;src/cvu_init_music.c:33: music->note_ticks_remaining = 0;
+                            110 ;	genPlus
+                            111 ;fetchPairLong
+                            112 ;fetchLitPair
+   0025 21 08 00      [10]  113 	ld	hl, #0x0008
+   0028 09            [11]  114 	add	hl, bc
+                            115 ;	genAssign (pointer)
+                            116 ;	isBitvar = 0
+                            117 ;fetchPairLong
+   0029 AF            [ 4]  118 	xor	a, a
+   002A 77            [ 7]  119 	ld	(hl), a
+   002B 23            [ 6]  120 	inc	hl
+   002C 77            [ 7]  121 	ld	(hl), a
+                            122 ;src/cvu_init_music.c:34: music->pause_ticks_remaining = 0;
+                            123 ;	genPlus
+                            124 ;fetchPairLong
+                            125 ;fetchLitPair
+   002D 21 0A 00      [10]  126 	ld	hl, #0x000a
+   0030 09            [11]  127 	add	hl, bc
+                            128 ;	genAssign (pointer)
+                            129 ;	isBitvar = 0
+                            130 ;fetchPairLong
+   0031 AF            [ 4]  131 	xor	a, a
+   0032 77            [ 7]  132 	ld	(hl), a
+   0033 23            [ 6]  133 	inc	hl
+   0034 77            [ 7]  134 	ld	(hl), a
+                            135 ;src/cvu_init_music.c:35: music->notes = &CVU_EMPTY_MUSIC;
+                            136 ;	genPlus
+                            137 ;fetchPairLong
+                            138 ;fetchLitPair
+   0035 21 06 00      [10]  139 	ld	hl, #0x0006
+   0038 09            [11]  140 	add	hl, bc
+                            141 ;	genAddrOf
+   0039 01r46r00      [10]  142 	ld	bc, #_CVU_EMPTY_MUSIC+0
+                            143 ;	genCast
+                            144 ;	(locations are the same)
+                            145 ;	genAssign (pointer)
+                            146 ;	isBitvar = 0
+                            147 ;fetchPairLong
+   003C 71            [ 7]  148 	ld	(hl), c
+   003D 23            [ 6]  149 	inc	hl
+   003E 70            [ 7]  150 	ld	(hl), b
+                            151 ;	genLabel
+                            152 ; peephole 158 removed unused label 00101$.
+                            153 ;src/cvu_init_music.c:36: }
+                            154 ;	genEndFunction
+   003F DD E1         [14]  155 	pop	ix
+   0041 C9            [10]  156 	ret
+   0042                     157 _CVU_VOLUME_DEFAULT:
+   0042 14                  158 	.db #0x14	; 20
+   0043 10                  159 	.db #0x10	; 16
+   0044 0C                  160 	.db #0x0c	; 12
+   0045 08                  161 	.db #0x08	; 8
+   0046                     162 _CVU_EMPTY_MUSIC:
+   0046 FF FF               163 	.dw #0xffff
+                            164 	.area _CODE
+                            165 	.area _INITIALIZER
+                            166 	.area _CABS (ABS)

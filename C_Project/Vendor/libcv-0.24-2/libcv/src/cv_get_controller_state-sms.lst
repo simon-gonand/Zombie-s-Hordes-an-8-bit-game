@@ -1,0 +1,117 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (CYGWIN)
+                              4 ;--------------------------------------------------------
+                              5 	.module cv_get_controller_state
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cv_get_controller_state
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                     00DC    15 _port0	=	0x00dc
+                     00DD    16 _port1	=	0x00dd
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _INITIALIZED
+                             25 ;--------------------------------------------------------
+                             26 ; absolute external ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DABS (ABS)
+                             29 ;--------------------------------------------------------
+                             30 ; global & static initialisations
+                             31 ;--------------------------------------------------------
+                             32 	.area _HOME
+                             33 	.area _GSINIT
+                             34 	.area _GSFINAL
+                             35 	.area _GSINIT
+                             36 ;--------------------------------------------------------
+                             37 ; Home
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _HOME
+                             41 ;--------------------------------------------------------
+                             42 ; code
+                             43 ;--------------------------------------------------------
+                             44 	.area _CODE
+                             45 ;src/cv_get_controller_state.c:45: void cv_get_controller_state(struct cv_controller_state *state, uint_fast8_t controller)
+                             46 ;	genLabel
+                             47 ;	genFunction
+                             48 ;	---------------------------------
+                             49 ; Function cv_get_controller_state
+                             50 ; ---------------------------------
+                             51 ;	Register assignment might be sub-optimal.
+                             52 ; Stack space usage: 0 bytes.
+   0000                      53 _cv_get_controller_state::
+                             54 ;src/cv_get_controller_state.c:47: uint8_t joy = ~(!controller ? port0 : ((port0 >> 6) | (port1 << 2)));
+                             55 ;	genIfx
+                             56 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 4, size 1
+                             57 ; peephole 62 used hl instead of iy.
+   0000 21 04 00      [10]   58 	ld	hl, #4+0
+   0003 39            [11]   59 	add	hl, sp
+   0004 7E            [ 7]   60 	ld	a, (hl)
+   0005 B7            [ 4]   61 	or	a, a
+   0006 20 04         [12]   62 	jr	NZ,00103$
+                             63 ; peephole 164 changed absolute to relative conditional jump.
+                             64 ;	genAssign
+   0008 DB DC         [11]   65 	in	a, (_port0)
+                             66 ;	genGoto
+   000A 18 0C         [12]   67 	jr	00104$
+                             68 ; peephole 162 changed absolute to relative unconditional jump.
+                             69 ;	genLabel
+   000C                      70 00103$:
+                             71 ;	genRightShift
+   000C DB DC         [11]   72 	in	a, (_port0)
+   000E 07            [ 4]   73 	rlca
+   000F 07            [ 4]   74 	rlca
+   0010 E6 03         [ 7]   75 	and	a, #0x03
+   0012 4F            [ 4]   76 	ld	c, a
+                             77 ;	genCast
+   0013 DB DD         [11]   78 	in	a, (_port1)
+                             79 ;	genLeftShift
+   0015 87            [ 4]   80 	add	a, a
+   0016 87            [ 4]   81 	add	a, a
+                             82 ;	genCast
+                             83 ;	(locations are the same)
+                             84 ;	genOr
+   0017 B1            [ 4]   85 	or	a, c
+                             86 ;	genLabel
+   0018                      87 00104$:
+                             88 ;	genCpl
+   0018 2F            [ 4]   89 	cpl
+                             90 ;	genAssign
+                             91 ;	genMove_o
+   0019 6F            [ 4]   92 	ld	l, a
+                             93 ;	genMove_o
+                             94 ;src/cv_get_controller_state.c:48: state->joystick = joy & 0x3f;
+                             95 ;	genAssign
+                             96 ;	AOP_EXSTK for , _G.omitFramePtr 1, sym->stack 2, size 2
+                             97 ;fetchPairLong
+   001A D1            [10]   98 	pop	de
+   001B C1            [10]   99 	pop	bc
+   001C C5            [11]  100 	push	bc
+   001D D5            [11]  101 	push	de
+                            102 ;	genPlus
+   001E 03            [ 6]  103 	inc	bc
+                            104 ;	genAnd
+   001F 7D            [ 4]  105 	ld	a, l
+   0020 E6 3F         [ 7]  106 	and	a, #0x3f
+                            107 ;	genAssign (pointer)
+                            108 ;	isBitvar = 0
+   0022 02            [ 7]  109 	ld	(bc), a
+                            110 ;	genLabel
+                            111 ; peephole 158 removed unused label 00101$.
+                            112 ;src/cv_get_controller_state.c:49: }
+                            113 ;	genEndFunction
+   0023 C9            [10]  114 	ret
+                            115 	.area _CODE
+                            116 	.area _INITIALIZER
+                            117 	.area _CABS (ABS)
