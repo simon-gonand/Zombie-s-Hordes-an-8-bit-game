@@ -99,6 +99,7 @@ MAIN_SCREEN:
     CALL CLEARSPRITES
     CALL SPRWRT
 
+    ; SPAWN ZOMBIE SPRITE
     ; Set y position
     LD A, 120
     LD (SPRTBL), A
@@ -120,6 +121,28 @@ MAIN_SCREEN:
     LD (SPRTBL + 3), A
     LD A, 01h
     LD (SPRTBL + 7), A
+
+    ; SPAWN PLAYER SPRITE
+    ; Set y position
+    LD A, 80
+    LD (SPRTBL + 8), A
+    LD (SPRTBL + 12), A ; The sprites has two colors, it is in reality two sprites that are superimposed on each other
+    ; Set x position
+    LD A, 120
+    LD (SPRTBL + 9), A
+    LD (SPRTBL + 13), A
+
+    ; Set pattern
+    LD A, 32
+    LD (SPRTBL + 10), A
+    LD A, 36
+    LD (SPRTBL + 14), A
+    
+    ; Set colour
+    LD A, 04h
+    LD (SPRTBL + 11), A
+    LD A, 0Bh
+    LD (SPRTBL + 15), A
 
     LD HL, VDU_WRITES
     CALL SET_VDU_HOOK
