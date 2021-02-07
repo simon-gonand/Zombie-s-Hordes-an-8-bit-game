@@ -84,6 +84,14 @@ NGAME:
     LD DE, ZOMBIE_FRONT
     LD BC,32*SPRITECOUNT
     CALL LDIRVM
+    
+    CALL LOAD_CHR_SET
+    
+    ; now setup the title screen layout
+    LD HL,VRAM_NAME
+    LD DE,SL_MAP01
+    LD BC,24*32
+    CALL LDIRVM
 
 MAIN_SCREEN:
     CALL DISABLE_NMI
