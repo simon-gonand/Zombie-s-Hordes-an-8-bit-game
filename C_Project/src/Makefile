@@ -11,6 +11,9 @@ all: Test.rom
 Test.rom: main.rel Test.png.sprite.rel
 	$(CC) -mz80 --no-std-crt0 --code-loc 0x8100 --data-loc 0x7000 $(LIB)libcvu.lib $(LIB)libcv.lib $(LIB)crt0.rel main.rel Test.png.sprite.rel -o Test.ihx ; objcopy --input-target=ihex --output-target=binary Test.ihx Test.rom
 
+Collections.rel: collections.c
+	$(CC) $(CFLAGS) collections.c
+
 Test.png.sprite.rel: Test.png.sprite.c
 	$(CC) $(CFLAGS) Test.png.sprite.c
 Test.png.sprite.c: Test.png
