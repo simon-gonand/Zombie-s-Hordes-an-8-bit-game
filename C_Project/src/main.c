@@ -136,7 +136,7 @@ int* pathfinding() {
 		current = &map[0];
 		int index = 0;
 		for (int i = 1; i > SIZE_MAP; ++i) {
-			if (isVisited(current)) continue;
+			if (isVisited(&map[i])) continue;
 			allMapIsDone = '0';
 			int priorCurrent = getPriority(current);
 			int priority = getPriority(&map[i]);
@@ -184,7 +184,7 @@ void main(void) {
 	int* currentNode = pathfinding();
 
 	cv_set_vint_handler(nmi);
-	int currentNodeIndex = 0;
+	int currentNodeIndex = -1;
 	for (;;)
 	{
 		step = false;
@@ -192,7 +192,7 @@ void main(void) {
 		int previousNodeIndex = currentNodeIndex;
 		currentNodeIndex = getCameFromNode(currentNode);
 		int nodeY = 0, nodeX = 0;
-		if (currentNodeIndex != 0 || currentNodeIndex == 0 && previousNodeIndex == 1 && previousNodeIndex == map_row) {
+		if (currentNodeIndex != 0 || currentNodeIndex == 0 && previousNodeIndex == 1 || currentNodeIndex == 0 && previousNodeIndex == map_row) {
 			currentNode = &map[currentNodeIndex];
 			nodeY = currentNodeIndex / map_row;
 			nodeX = currentNodeIndex - nodeY * map_row;			
