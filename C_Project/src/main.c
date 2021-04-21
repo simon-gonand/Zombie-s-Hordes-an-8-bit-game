@@ -1,5 +1,6 @@
 #include "cv.h"
 #include "cvu.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -135,7 +136,8 @@ int* pathfinding() {
 		allMapIsDone = '1';
 		current = &map[0];
 		int index = 0;
-		for (int i = 1; i > SIZE_MAP; ++i) {
+		
+		for (int i = 1; i < SIZE_MAP; ++i) {
 			if (isVisited(&map[i])) continue;
 			allMapIsDone = '0';
 			int priorCurrent = getPriority(current);
@@ -143,6 +145,7 @@ int* pathfinding() {
 			if (priorCurrent > priority && priority != 0 || priorCurrent == 0 || isVisited(current)) {
 				current = &map[i];
 				index = i;
+				
 			}
 		}
 		if (nodeIsGoal(&index) || allMapIsDone == '1') break;
@@ -185,18 +188,20 @@ void main(void) {
 
 	cv_set_vint_handler(nmi);
 	int currentNodeIndex = -1;
+	int nodeY = 0, nodeX = 0;
 	for (;;)
 	{
 		step = false;
 		while (!step);	// Wait until the NMI handler sets step to true.
 		int previousNodeIndex = currentNodeIndex;
 		currentNodeIndex = getCameFromNode(currentNode);
-		int nodeY = 0, nodeX = 0;
+		
 		if (currentNodeIndex != 0 || currentNodeIndex == 0 && previousNodeIndex == 1 || currentNodeIndex == 0 && previousNodeIndex == map_row) {
 			currentNode = &map[currentNodeIndex];
 			nodeY = currentNodeIndex / map_row;
-			nodeX = currentNodeIndex - nodeY * map_row;			
+			nodeX = currentNodeIndex - nodeY * map_row;		
 		}
+
 		cvu_set_sprite_x(&s[0], nodeX * 10);
 		cvu_set_sprite_y(&s[0], nodeY * 10);
 		cvu_set_sprite(SPRITES, 0, &s[0]);	// Update the cursor on the screen.
