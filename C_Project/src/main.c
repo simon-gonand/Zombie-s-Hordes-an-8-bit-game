@@ -197,10 +197,8 @@ void main(void) {
 			nodeY = currentNodeIndex / map_row;
 			nodeX = currentNodeIndex - nodeY * map_row;			
 		}
-		nodeX *= 10;
-		nodeY *= 10;
-		cvu_set_sprite_x(&s[0], nodeX);
-		cvu_set_sprite_y(&s[0], nodeY);
+		cvu_set_sprite_x(&s[0], nodeX * 10);
+		cvu_set_sprite_y(&s[0], nodeY * 10);
 		cvu_set_sprite(SPRITES, 0, &s[0]);	// Update the cursor on the screen.
 		cvu_set_sprite(SPRITES, 1, &s[1]);	// Update the cursor on the screen.
 	}
