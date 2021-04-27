@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 /* VRAM map
    0x0000 - 0x17ff character pattern table
@@ -23,20 +24,20 @@ const cv_vmemp SPRITE_PATTERNS = 0x3800;
 
 volatile bool step;	// Has to be volatile since it's modified in the NMI handler.
 
-extern uint8_t sprite[1][];
-struct cvu_sprite s[2];
+extern uint8_t sprite[2][];
+struct cvu_sprite s[6];
 
 int map[SIZE_MAP] = { 0 };
-
-int INIT_POSX, INIT_POSY = 0;
-int GOAL_POSX, GOAL_POSY = 0;
+int w = 0;
 
 void nmi(void) {
 	step = true;
 }
 
-void clearMap() {
+void setMapValues() {
 	memset(map, 0, SIZE_MAP * sizeof(*map));
+	for (int i = 2; i < 6; ++i)
+		map[(s[i].y / 10) * map_row + (s[i].x / 10)] |= 1 << 6;
 }
 
 void printCrosses() {
@@ -52,19 +53,37 @@ void printCrosses() {
 	cv_set_sprite_magnification(false);
 	cv_set_sprite_big(true);	// 16x16 pixel sprites.
 
-	cvu_set_sprite_x(&s[0], INIT_POSX);
-	cvu_set_sprite_y(&s[0], INIT_POSY);
+	cvu_set_sprite_x(&s[0], 0);
+	cvu_set_sprite_y(&s[0], 0);
 	cvu_set_sprite_color(&s[0], CV_COLOR_BLUE);
 	s[0].name = 0; // Use sprite pattern number 0.
 
-	GOAL_POSX = 14;
-	GOAL_POSY = 10;
-	cvu_set_sprite_x(&s[1], GOAL_POSX * 10);
-	cvu_set_sprite_y(&s[1], GOAL_POSY * 10);
+	cvu_set_sprite_x(&s[1], 14 * 10);
+	cvu_set_sprite_y(&s[1], 10 * 10);
 	cvu_set_sprite_color(&s[1], CV_COLOR_WHITE);
 	s[1].name = 0; // Use sprite pattern number 0.
 
-	cvu_memtovmemcpy(SPRITE_PATTERNS, sprite, 0x20);	// Copy sprite pattern number 0 to graphics memory.
+	cvu_set_sprite_x(&s[2], 10 * 10);
+	cvu_set_sprite_y(&s[2], 0 * 10);
+	cvu_set_sprite_color(&s[2], CV_COLOR_WHITE);
+	s[2].name = 4; // Use sprite pattern number 0.
+
+	cvu_set_sprite_x(&s[3], 10 * 10);
+	cvu_set_sprite_y(&s[3], 1 * 10);
+	cvu_set_sprite_color(&s[3], CV_COLOR_WHITE);
+	s[3].name = 4; // Use sprite pattern number 0.
+
+	cvu_set_sprite_x(&s[4], 10 * 10);
+	cvu_set_sprite_y(&s[4], 2 * 10);
+	cvu_set_sprite_color(&s[4], CV_COLOR_WHITE);
+	s[4].name = 4; // Use sprite pattern number 0.
+
+	cvu_set_sprite_x(&s[5], 10 * 10);
+	cvu_set_sprite_y(&s[5], 3 * 10);
+	cvu_set_sprite_color(&s[5], CV_COLOR_WHITE);
+	s[5].name = 4; // Use sprite pattern number 0.
+
+	cvu_memtovmemcpy(SPRITE_PATTERNS, sprite, 0x41);	// Copy sprite pattern number 0 to graphics memory.
 
 	
 }
@@ -88,7 +107,7 @@ int getPriority(int* value) {
 int nodeIsGoal(int* index) {
 	int nodeY = *index / map_row;
 	int nodeX = *index - nodeY * map_row;
-	if (nodeX == INIT_POSX && nodeY == INIT_POSY) return 1;
+	if (nodeX == (s[0].x/10) && nodeY == (s[0].y/10)) return 1;
 	return 0;
 }
 
@@ -117,7 +136,7 @@ void setBitsCameFromNode(int* result, int* value) {
 int heuristic(int index) {
 	int nodeY = index / map_row;
 	int nodeX = index - nodeY * map_row;
-	int heuristicResult = abs(INIT_POSX - nodeX) + abs(INIT_POSY - nodeY);
+	int heuristicResult = abs((s[0].x/10) - nodeX) + abs((s[0].y/10) - nodeY);
 	if (heuristicResult > MAX_PRIOR)
 		heuristicResult = MAX_PRIOR;
 	int currentHeurisitic = getPriority(&map[index]);
@@ -129,8 +148,8 @@ int heuristic(int index) {
 }
 
 int* pathfinding() {
-	map[GOAL_POSY * map_row + GOAL_POSX] |= 1 << 0;
-	int* current = &map[GOAL_POSY * map_row + GOAL_POSX];
+	map[(s[1].y/10) * map_row + (s[1].x/10)] |= 1 << 0;
+	int* current = &map[(s[1].y/10) * map_row + (s[1].x/10)];
 	char allMapIsDone = '0';
 	for (;;) {
 		allMapIsDone = '1';
@@ -178,9 +197,9 @@ int* pathfinding() {
 
 void main(void) {
 	cv_set_screen_active(false); // Switch screen off in order to make some modification to the screen
-	clearMap();
 
 	printCrosses();
+	setMapValues();
 
 	cv_set_screen_active(true);	// Switch screen on.
 
@@ -189,6 +208,8 @@ void main(void) {
 	cv_set_vint_handler(nmi);
 	int currentNodeIndex = -1;
 	int nodeY = 0, nodeX = 0;
+	int tick = 0;
+	int speed = 5;
 	for (;;)
 	{
 		step = false;
@@ -196,15 +217,21 @@ void main(void) {
 		int previousNodeIndex = currentNodeIndex;
 		currentNodeIndex = getCameFromNode(currentNode);
 		
-		if (currentNodeIndex != 0 || currentNodeIndex == 0 && previousNodeIndex == 1 || currentNodeIndex == 0 && previousNodeIndex == map_row) {
+		if ((currentNodeIndex != 0 || (currentNodeIndex == 0 && previousNodeIndex == 1) || (currentNodeIndex == 0 && previousNodeIndex == map_row)) && tick % speed == 0) {
 			currentNode = &map[currentNodeIndex];
 			nodeY = currentNodeIndex / map_row;
 			nodeX = currentNodeIndex - nodeY * map_row;		
+			cvu_set_sprite_x(&s[0], nodeX * 10);
+			cvu_set_sprite_y(&s[0], nodeY * 10);
 		}
+		
+		for (int i = 0; i < sizeof(s) / sizeof(s[0]); ++i)
+			cvu_set_sprite(SPRITES, i, &s[i]);	// Update the cursor on the screen.
 
-		cvu_set_sprite_x(&s[0], nodeX * 10);
-		cvu_set_sprite_y(&s[0], nodeY * 10);
-		cvu_set_sprite(SPRITES, 0, &s[0]);	// Update the cursor on the screen.
-		cvu_set_sprite(SPRITES, 1, &s[1]);	// Update the cursor on the screen.
+		if (tick >= INT_MAX)
+			tick = 0;
+		else
+			++tick;
+
 	}
 }
